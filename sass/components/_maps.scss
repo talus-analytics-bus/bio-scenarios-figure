@@ -1,0 +1,22 @@
+.states,
+.counties {
+	fill: none;
+	stroke: white;
+	stroke-linejoin: round;
+}
+.state,
+.county {
+	fill: #ccc;
+}
+
+
+/* --- Map Legends --- */
+.legend-bar {
+}
+.legend-text {
+	text-anchor: middle;
+}
+.legend-title {
+	font-size: 1.1em;
+	text-anchor: middle;
+}
