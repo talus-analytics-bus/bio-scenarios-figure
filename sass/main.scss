@@ -33,7 +33,11 @@ body { font-family: 'Open Sans', sans-serif; }
 }
 .node {
 	fill: steelblue;
-	@include opacity(0.9);
+	@include opacity(0.8);
+
+	&:hover {
+		@include opacity(1);
+	}
 }
 .link {
 	display: none;
@@ -41,5 +45,10 @@ body { font-family: 'Open Sans', sans-serif; }
   stroke-width: 1px;
 }
 .ribbon {
-	@include opacity(0.5);
+	@include opacity(0.2);
+
+	&:hover,
+	&.active {
+		@include opacity(0.9);
+	}
 }

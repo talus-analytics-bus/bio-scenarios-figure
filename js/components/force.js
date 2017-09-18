@@ -1,7 +1,7 @@
 (() => {
 	App.buildForceDiagram = (selector, nodeData, edgeData, param = {}) => {
 		const margin = { top: 20, right: 20, bottom: 20, left: 20 };
-		const outerRadius = 200;
+		const outerRadius = 250;
 		const innerRadius = outerRadius - 15;
 		const width = 2 * outerRadius;
 		const height = 2 * outerRadius;
@@ -10,7 +10,10 @@
 			.attr('width', width + margin.left + margin.right)
 			.attr('height', height + margin.top + margin.bottom)
 			.append('g')
-				.attr('transform', `translate(${margin.left}, ${margin.top})`);
+				.attr('transform', `translate(${outerRadius + margin.left}, ${outerRadius + margin.top})`);
+		const ribbonG = chart.append('g');
+		const chordG = chart.append('g');
+		const nodeG = chart.append('g');
 
 
 		/* --------- Chord Part --------- */
@@ -20,6 +23,7 @@
 		const arc = d3.arc()
 			.innerRadius(innerRadius)
 			.outerRadius(outerRadius);
+		const chordColorScale = d3.scaleOrdinal(['#082b84', '#ff6d00']);
 
 		const matrix = [
 			[11975,  5871, 8916, 2868],
@@ -28,53 +32,61 @@
 			[ 1013,   990,  940, 6907],
 		];
 
-		const chordG = chart.append('g')
-			.attr('transform', `translate(${outerRadius}, ${outerRadius})`)
-			.datum(chord(matrix));
+		chordG.datum(chord(matrix));
 		const chordGroups = chordG.append('g')
 			.attr('class', 'groups')
 			.selectAll('g')
 				.data(d => d.groups)
 				.enter().append('g');
 		chordGroups.append('path')
-			.style('fill', 'steelblue')
+			.style('fill', (d, i) => chordColorScale(i))
 			.attr('d', arc);
 
-		console.log(chordG.data());
 
 		/* --------- Force Part --------- */
 		const simulation = d3.forceSimulation()
 			.velocityDecay(param.velocityDecay || 0.2)
 			.force('link', d3.forceLink().id(d => d.id))
-			.force('charge', d3.forceManyBody().strength(-1.5))
+			.force('charge', d3.forceManyBody().strength(-3))
 			.force('center', d3.forceCenter(0, 0));
 
 		// establish scales
 		const radiusScale = d3.scaleLinear()
 			.domain([0, 10])
-			.range([5, 20]);
+			.range([5, 22]);
 		const colorScale = d3.scaleLinear()
 			.domain([0, 50])
 			.range(['#082b84', '#c91414']);
 
-		// prepare data (nodes and edges)
-
-
 		// draw nodes and links
-		const link = chordG.append('g')
+		const link = nodeG.append('g')
 			.attr('class', 'links')
 			.selectAll('.link')
 				.data(edgeData)
 				.enter().append('line')
 					.attr('class', 'link');
-		const node = chordG.append('g')
+		const node = nodeG.append('g')
 			.attr('class', 'nodes')
 			.selectAll('.node')
 				.data(nodeData)
 				.enter().append('circle')
 					.attr('class', 'node')
 					.attr('r', d => radiusScale(d.extremity))
-					.style('fill', (d, i) => colorScale(i));
+					.style('fill', (d, i) => colorScale(i))
+					.each(function addTooltip(d) {
+						$(this).tooltipster({
+							trigger: 'hover',
+							content: d.id,
+						});
+					})
+					.on('mouseover', (d) => {
+						d3.selectAll('.ribbon')
+							.filter(dd => dd.id === d.id)
+							.classed('active', true);
+					})
+					.on('mouseout', (d) => {
+						d3.selectAll('.ribbon').classed('active', false);
+					});
 
 		// start simulation
 		const numTicks = 50;
@@ -122,7 +134,7 @@
 				};
 			});
 
-		chordG.append('g')
+		ribbonG.append('g')
 			.attr('class', 'ribbons')
 			.selectAll('.ribbon')
 				.data(nodeData)
