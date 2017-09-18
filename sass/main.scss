@@ -26,3 +26,17 @@ body { font-family: 'Open Sans', sans-serif; }
 	margin-top: 51px;
 	min-height: 100px;
 }
+.network-map {
+	margin: 20px 0;
+	border: $border;
+	text-align: center;
+}
+.node {
+	fill: steelblue;
+	@include opacity(0.9);
+}
+.link {
+	display: none;
+  stroke: #555;
+  stroke-width: 1px;
+}
