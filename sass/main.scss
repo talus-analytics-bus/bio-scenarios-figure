@@ -40,3 +40,6 @@ body { font-family: 'Open Sans', sans-serif; }
   stroke: #555;
   stroke-width: 1px;
 }
+.ribbon {
+	@include opacity(0.5);
+}

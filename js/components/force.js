@@ -20,8 +20,6 @@
 		const arc = d3.arc()
 			.innerRadius(innerRadius)
 			.outerRadius(outerRadius);
-		const ribbon = d3.ribbon()
-			.radius(innerRadius);
 
 		const matrix = [
 			[11975,  5871, 8916, 2868],
@@ -42,22 +40,14 @@
 			.style('fill', 'steelblue')
 			.attr('d', arc);
 
-		chordG.append('g')
-			.attr('class', 'ribbons')
-			.selectAll('path')
-				.data(d => d)
-				.enter().append('path')
-					.attr('d', ribbon)
-					.style('fill', 'lightsteelblue')
-					.style('stroke', 'rgba(0,0,0,0.5)');
-
+		console.log(chordG.data());
 
 		/* --------- Force Part --------- */
 		const simulation = d3.forceSimulation()
 			.velocityDecay(param.velocityDecay || 0.2)
 			.force('link', d3.forceLink().id(d => d.id))
-			.force('charge', d3.forceManyBody().strength(-2))
-			.force('center', d3.forceCenter(width / 2, height / 2));
+			.force('charge', d3.forceManyBody().strength(-1.5))
+			.force('center', d3.forceCenter(0, 0));
 
 		// establish scales
 		const radiusScale = d3.scaleLinear()
@@ -71,13 +61,13 @@
 
 
 		// draw nodes and links
-		const link = chart.append('g')
+		const link = chordG.append('g')
 			.attr('class', 'links')
 			.selectAll('.link')
 				.data(edgeData)
 				.enter().append('line')
 					.attr('class', 'link');
-		const node = chart.append('g')
+		const node = chordG.append('g')
 			.attr('class', 'nodes')
 			.selectAll('.node')
 				.data(nodeData)
@@ -87,20 +77,80 @@
 					.style('fill', (d, i) => colorScale(i));
 
 		// start simulation
-		const numTicks = 100;
+		const numTicks = 50;
 		let t = 0;
 		simulation
 			.nodes(nodeData)
 			.on('tick', () => {
-				link.attr('x1', d => d.source.x)
-					.attr('y1', d => d.source.y)
-					.attr('x2', d => d.target.x)
-					.attr('y2', d => d.target.y);
-				node.attr('cx', d => d.x)
-					.attr('cy', d => d.y);
+				link
+					.attr('x1', d => getConfinedX(d.source.x, d.source.y))
+					.attr('y1', d => getConfinedY(d.source.x, d.source.y))
+					.attr('x2', d => getConfinedX(d.target.x, d.target.y))
+					.attr('y2', d => getConfinedY(d.target.x, d.target.y));
+				node
+					.attr('cx', d => getConfinedX(d.x, d.y))
+					.attr('cy', d => getConfinedY(d.x, d.y));
+
+				d3.selectAll('.ribbon')
+					.attr('d', ribbon);
+
+				// stop simulation if number of ticks has been exceeded
 				t++;
-				//if (t === numTicks) simulation.stop();
+				if (t === numTicks) simulation.stop();
 			});
 		simulation.force('link').links(edgeData);
+
+		// draw ribbons between nodes and chords
+		const ribbon = d3.ribbon()
+			.source(d => {
+				const x = getConfinedX(d.x, d.y);
+				const y = getConfinedY(d.x, d.y);
+				const dist = Math.sqrt(x * x + y * y);
+				const angle = (Math.PI / 2) - Math.atan2(-y, x);
+				return {
+					startAngle: angle,
+					endAngle: angle,
+					radius: dist,
+				};
+			})
+			.target(d => {
+				const angle = 2 * Math.PI * Math.random();
+				return {
+					startAngle: angle,
+					endAngle: angle + 0.1,
+					radius: innerRadius,
+				};
+			});
+
+		chordG.append('g')
+			.attr('class', 'ribbons')
+			.selectAll('.ribbon')
+				.data(nodeData)
+				.enter().append('path')
+					.attr('class', 'ribbon')
+					.attr('d', ribbon)
+					.style('fill', 'lightsteelblue')
+					.style('stroke', 'rgba(0,0,0,0.5)');
+
+
+		function getConfinedX(x, y) {
+			const x1 = x - outerRadius;
+			const y1 = y - outerRadius;
+			const dist = Math.sqrt(x1 * x1 + y1 * y1);
+			const confinedRadius = innerRadius - 30;
+			if (dist < confinedRadius) return x;
+			if (x1 > 0) return x - 10;
+			return x + 10;
+		}
+
+		function getConfinedY(x, y) {
+			const x1 = x - outerRadius;
+			const y1 = y - outerRadius;
+			const dist = Math.sqrt(x1 * x1 + y1 * y1);
+			const confinedRadius = innerRadius - 30;
+			if (dist < confinedRadius) return y;
+			if (y1 > 0) return y - 10;
+			return y + 10;
+		}
 	};
 })();
