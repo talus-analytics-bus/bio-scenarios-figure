@@ -11,7 +11,7 @@ app.get('/', function(req, res) {
 // if hash, send to requested resource
 app.get(/^(.+)$/, function(req, res) {
 	res.sendFile(path.join(__dirname, '/', req.params[0]));
-});	
+});
 
 // Start the HTTP Server
 server.listen(process.env.PORT || 8888, function() {
