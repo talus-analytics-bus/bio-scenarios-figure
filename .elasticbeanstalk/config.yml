@@ -1,13 +1,17 @@
 branch-defaults:
   master:
-    environment: null
+    environment: bio-scenarios-figure-dev
     group_suffix: null
   validation-edits:
     environment: bio-scenarios-figure-dev
+environment-defaults:
+  bio-scenarios-figure-dev:
+    branch: null
+    repository: null
 global:
   application_name: bio-scenarios-figure
   branch: null
-  default_ec2_keyname: aws-eb
+  default_ec2_keyname: null
   default_platform: Node.js
   default_region: us-west-1
   include_git_submodules: true

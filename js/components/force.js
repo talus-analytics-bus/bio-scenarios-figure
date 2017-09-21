@@ -160,15 +160,15 @@
 							minWidth: 300,
 							content: contentContainer.html(),
 						})
-					});
-					/*.on('mouseover', function onMouseover(d) {
-						d3.selectAll('.ribbon').style('opacity', (rd) => {
-							return rd.data.id === d.data.id ? 0.8 : 0.1;
-						});
+					})
+					.on('mouseover', function onMouseover(d) {
+						d3.selectAll('.ribbon')
+							.filter(r => d.data.id === r.source.data.id)
+							.style('fill', nodeColor);
 					})
 					.on('mouseout', function onMouseout() {
-						d3.selectAll('.ribbon').style('opacity', 0.5);
-					});*/
+						d3.selectAll('.ribbon').style('fill', 'none');
+					});
 
 			// make ribbon data
 			const ribbonData = [];
@@ -213,7 +213,7 @@
 					.attr('class', 'ribbon')
 					.attr('d', ribbon)
 					.style('fill', 'none')
-					.style('opacity', 0.01);
+					.style('opacity', 0.25);
 		}
 
 		// create node data
