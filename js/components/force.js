@@ -31,10 +31,22 @@
 
 		const chordColorScale = d3.scaleOrdinal()
 			.domain(d3.range(12))
-			.range(['#EADAF0', '#D6B7E1', '#C293D1', '#A35EBA',
-					'#B7C2E1', '#EDEFF7', '#3963bd', '#bde4fc',
-					'#F4EDF7', '#DFC8E8', '#4B2559', '#2D1636',
-                    '#4C64B2', '#3D508F', '#35467D', '#263258']);
+			.range(['#EADAF0',
+                '#D6B7E1',
+                '#C293D1',
+                '#A35EBA',
+                '#DFC8E8',
+                '#F4EDF7',
+                '#B7C2E1',
+                '#EDEFF7',
+                '#bde4fc',
+                '#3963bd',
+                '#4C64B2',
+                '#4B2559',
+                '#3D508F',
+                '#35467D',
+                '#272c58',
+                '#2D1636',]);
 
 		const matrix = [
 			[200, 6295, 893, 91, 1820, 4245, 1176, 1399, 1157, 7586, 1616, 1870],
