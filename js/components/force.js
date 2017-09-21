@@ -31,10 +31,10 @@
 
 		const chordColorScale = d3.scaleOrdinal()
 			.domain(d3.range(12))
-			.range(['#e6f5ff', '#ccebff', '#b3e0ff', '#66c2ff',
-					'#748FA1', '#637B8A', '#313D45', '#C0DCED',
-					'#C0EDCE', '#A6E6BA', '#84B894', '#53735D',
-					'#F2E3D2', '#EBD2B7', '#A18B74', '#736353']);
+			.range(['#EADAF0', '#D6B7E1', '#C293D1', '#A35EBA',
+					'#B7C2E1', '#EDEFF7', '#3963bd', '#bde4fc',
+					'#F4EDF7', '#DFC8E8', '#4B2559', '#2D1636',
+                    '#4C64B2', '#3D508F', '#35467D', '#263258']);
 
 		const matrix = [
 			[200, 6295, 893, 91, 1820, 4245, 1176, 1399, 1157, 7586, 1616, 1870],
@@ -80,8 +80,9 @@
                 .velocityDecay(param.velocityDecay || 0.2)
                 .force('link', d3.forceLink().id(d => d.id))
                 .force('charge', d3.forceManyBody().strength(-3))
-                .force('center', d3.forceCenter(forceCenterX, forceCenterY))
-                .force('x', d3.forceX(forceCenterX));
+                .force("collide", d3.forceCollide(12))
+                .force('center', d3.forceCenter(forceCenterX, forceCenterY));
+                //.force('x', d3.forceX(forceCenterX));
                 //.force('y', d3.forceX(forceCenterY));
 
             // establish scales
@@ -208,9 +209,9 @@
 
 
         // start the forcing here
-        forceNodes(nodeData, edgeData[0], 120, 20, "#082B84");
-        forceNodes(nodeData, edgeData[1], 20, 60, "#C91414");
-        forceNodes(nodeData, edgeData[2], -70, -20, "#552257");
+        forceNodes(nodeData[0], edgeData[0], 120, 20, "#082B84");
+        forceNodes(nodeData[1], edgeData[1], 0, 60, "#C91414");
+        forceNodes(nodeData[2], edgeData[2], -80, -80, "#552257");
 
 	};
 })();
