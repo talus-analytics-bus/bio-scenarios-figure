@@ -1,7 +1,7 @@
 [
   {
     "category": "human",
-    "nodes": [
+    "children": [
       {
         "id": "Scenario 1",
         "location": 1,
@@ -48,7 +48,7 @@
   },
   {
     "category": "animal",
-    "nodes": [
+    "children": [
       {
         "id": "Scenario 8",
         "location": 1,
@@ -95,7 +95,7 @@
   },
   {
     "category": "zoonotic",
-    "nodes": [
+    "children": [
       {
         "id": "Scenario 15",
         "location": 3,

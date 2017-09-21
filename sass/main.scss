@@ -39,6 +39,9 @@ body { font-family: 'Open Sans', sans-serif; }
 		@include opacity(1);
 	}
 }
+.node.node--root {
+	fill: none;
+}
 .link {
 	display: none;
   stroke: #555;
@@ -51,4 +54,7 @@ body { font-family: 'Open Sans', sans-serif; }
 	&.active {
 		@include opacity(0.9);
 	}
+}
+.tooltipster-content {
+	font-size: 1em !important;
 }
