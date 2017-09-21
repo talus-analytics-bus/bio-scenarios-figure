@@ -1,5 +1,8 @@
 (() => {
-	App.buildForceDiagram = (selector, nodeData, edgeData, param = {}) => {
+	//App.buildForceDiagram = (selector, nodeData, edgeData, nodeDataJson, param = {}) => {
+    App.buildForceDiagram = (selector, nodeData, edgeData, param = {}) => {
+
+
 		const margin = { top: 20, right: 20, bottom: 20, left: 20 };
 		const outerRadius = 250;
 		const innerRadius = outerRadius - 15;
@@ -72,106 +75,115 @@
 
 
 		/* --------- Force Part --------- */
-		const simulation = d3.forceSimulation()
-			.velocityDecay(param.velocityDecay || 0.2)
-			.force('link', d3.forceLink().id(d => d.id))
-			.force('charge', d3.forceManyBody().strength(-3))
-			.force('center', d3.forceCenter(0, 0));
+		function forceNodes(nodeData, edgeData, forceCenterX, forceCenterY, nodeColor) {
+            const simulation = d3.forceSimulation()
+                .velocityDecay(param.velocityDecay || 0.2)
+                .force('link', d3.forceLink().id(d => d.id))
+                .force('charge', d3.forceManyBody().strength(-3))
+                .force('center', d3.forceCenter(forceCenterX, forceCenterY))
+                .force('x', d3.forceX(forceCenterX));
+                //.force('y', d3.forceX(forceCenterY));
 
-		// establish scales
-		const radiusScale = d3.scaleLinear()
-			.domain([0, 10])
-			.range([5, 22]);
-		const colorScale = d3.scaleLinear()
-			.domain([0, 50])
-			.range(['#082b84', '#c91414']);
+            // establish scales
+            const radiusScale = d3.scaleLinear()
+                .domain([0, 10])
+                .range([5, 22]);
+            const colorScale = d3.scaleLinear()
+                .domain([0, 50])
+                .range(['#082b84', '#c91414']);
 
-		// draw nodes and links
-		const link = nodeG.append('g')
-			.attr('class', 'links')
-			.selectAll('.link')
-				.data(edgeData)
-				.enter().append('line')
-					.attr('class', 'link');
 
-		const node = nodeG.append('g')
-			.attr('class', 'nodes')
-			.selectAll('.node')
-				.data(nodeData)
-				.enter().append('circle')
-					.attr('class', 'node')
-					.attr('r', d => radiusScale(d.extremity))
-					.style('fill', (d, i) => colorScale(i))
-					.each(function addTooltip(d) {
-						$(this).tooltipster({
-							trigger: 'hover',
-							content: d.id,
-						});
-					})
-					.on('mouseover', (d) => {
-						d3.selectAll('.ribbon')
-							.filter(dd => dd.id === d.id)
-							.classed('active', true);
-					})
-					.on('mouseout', (d) => {
-						d3.selectAll('.ribbon').classed('active', false);
-					});
+            // draw nodes and links
+            const link = nodeG.append('g')
+                .attr('class', 'links')
+                .selectAll('.link')
+                .data(edgeData.nodes)
+                //.data(edgeData)
+                .enter().append('line')
+                .attr('class', 'link');
 
-		// start simulation
-		const numTicks = 50;
-		let t = 0;
-		simulation
-			.nodes(nodeData)
-			.on('tick', () => {
-				link
-					.attr('x1', d => getConfinedX(d.source.x, d.source.y))
-					.attr('y1', d => getConfinedY(d.source.x, d.source.y))
-					.attr('x2', d => getConfinedX(d.target.x, d.target.y))
-					.attr('y2', d => getConfinedY(d.target.x, d.target.y));
-				node
-					.attr('cx', d => getConfinedX(d.x, d.y))
-					.attr('cy', d => getConfinedY(d.x, d.y));
+            const node = nodeG.append('g')
+                .attr('class', 'nodes')
+                .selectAll('.node')
+                .data(nodeData.nodes)
+                .enter().append('circle')
+                .attr('class', 'node')
+                .attr('r', d => radiusScale(d.size))
+                //.style('fill', (d, i) => colorScale(i))
+                .style('fill', nodeColor)
 
-				d3.selectAll('.ribbon')
-					.attr('d', ribbon);
+                .each(function addTooltip(d) {
+                    $(this).tooltipster({
+                        trigger: 'hover',
+                        content: d.id + ":<br>"+ d.label,
+                    });
+                })
+                .on('mouseover', (d) => {
+                    d3.selectAll('.ribbon')
+                        .filter(dd => dd.id === d.id)
+                        .classed('active', true);
+                })
+                .on('mouseout', (d) => {
+                    d3.selectAll('.ribbon').classed('active', false);
+                });
 
-				// stop simulation if number of ticks has been exceeded
-				t++;
-				if (t === numTicks) simulation.stop();
-			});
-		simulation.force('link').links(edgeData);
+            // start simulation
+            const numTicks = 50;
+            let t = 0;
+            simulation
+                .nodes(nodeData.nodes)
+                .on('tick', () => {
+                    link
+                        .attr('x1', d => getConfinedX(d.source.x, d.source.y))
+                        .attr('y1', d => getConfinedY(d.source.x, d.source.y))
+                        .attr('x2', d => getConfinedX(d.target.x, d.target.y))
+                        .attr('y2', d => getConfinedY(d.target.x, d.target.y));
+                    node
+                        .attr('cx', d => getConfinedX(d.x, d.y))
+                        .attr('cy', d => getConfinedY(d.x, d.y));
 
-		// draw ribbons between nodes and chords
-		const ribbon = d3.ribbon()
-			.source(d => {
-				const x = getConfinedX(d.x, d.y);
-				const y = getConfinedY(d.x, d.y);
-				const dist = Math.sqrt(x * x + y * y);
-				const angle = (Math.PI / 2) - Math.atan2(-y, x);
-				return {
-					startAngle: angle,
-					endAngle: angle,
-					radius: dist,
-				};
-			})
-			.target(d => {
-				const angle = 2 * Math.PI * Math.random();
-				return {
-					startAngle: angle,
-					endAngle: angle + 0.1,
-					radius: innerRadius,
-				};
-			});
+                    d3.selectAll('.ribbon')
+                        .attr('d', ribbon);
 
-		ribbonG.append('g')
-			.attr('class', 'ribbons')
-			.selectAll('.ribbon')
-				.data(nodeData)
-				.enter().append('path')
-					.attr('class', 'ribbon')
-					.attr('d', ribbon)
-					.style('fill', 'lightsteelblue')
-					.style('stroke', 'rgba(0,0,0,0.5)');
+                    // stop simulation if number of ticks has been exceeded
+                    t++;
+                    if (t === numTicks) simulation.stop();
+                });
+            simulation.force('link').links(edgeData.nodes);
+
+
+            // draw ribbons between nodes and chords
+            const ribbon = d3.ribbon()
+                .source(d => {
+                    const x = getConfinedX(d.x, d.y);
+                    const y = getConfinedY(d.x, d.y);
+                    const dist = Math.sqrt(x * x + y * y);
+                    const angle = (Math.PI / 2) - Math.atan2(-y, x);
+                    return {
+                        startAngle: angle,
+                        endAngle: angle,
+                        radius: dist,
+                    };
+                })
+                .target(d => {
+                    const angle = 2 * Math.PI * Math.random();
+                    return {
+                        startAngle: angle,
+                        endAngle: angle + 0.1,
+                        radius: innerRadius,
+                    };
+                });
+
+            ribbonG.append('g')
+                .attr('class', 'ribbons')
+                .selectAll('.ribbon')
+                .data(nodeData.nodes)
+                .enter().append('path')
+                .attr('class', 'ribbon')
+                .attr('d', ribbon)
+                .style('fill', 'lightsteelblue')
+                .style('stroke', 'rgba(0,0,0,0.5)');
+        }
 
 
 		function getConfinedX(x, y) {
@@ -193,5 +205,12 @@
 			if (y1 > 0) return y - 10;
 			return y + 10;
 		}
+
+
+        // start the forcing here
+        forceNodes(nodeData, edgeData[0], 120, 20, "#082B84");
+        forceNodes(nodeData, edgeData[1], 20, 60, "#C91414");
+        forceNodes(nodeData, edgeData[2], -70, -20, "#552257");
+
 	};
 })();

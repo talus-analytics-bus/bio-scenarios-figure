@@ -1,0 +1,143 @@
+[
+  {
+    "category": "human",
+    "nodes": [
+      {
+        "id": 1,
+        "source": "Scenario 1",
+        "target": "Scenario 2",
+        "value": 62
+      },
+      {
+        "id": 2,
+        "source": "Scenario 2",
+        "target": "Scenario 3",
+        "value": 22
+      },
+      {
+        "id": 3,
+        "source": "Scenario 3",
+        "target": "Scenario 5",
+        "value": 31
+      },
+      {
+        "id": 4,
+        "source": "Scenario 4",
+        "target": "Scenario 5",
+        "value": 12
+      },
+      {
+        "id": 5,
+        "source": "Scenario 5",
+        "target": "Scenario 4",
+        "value": 42
+      },
+      {
+        "id": 6,
+        "source": "Scenario 6",
+        "target": "Scenario 7",
+        "value": 4
+      },
+      {
+        "id": 7,
+        "source": "Scenario 7",
+        "target": "Scenario 1",
+        "value": 77
+      }
+    ]
+  },
+  {
+    "category": "animal",
+    "nodes": [
+      {
+        "id": 8,
+        "source": "Scenario 8",
+        "target": "Scenario 12",
+        "value": 12
+      },
+      {
+        "id": 9,
+        "source": "Scenario 9",
+        "target": "Scenario 10",
+        "value": 32
+      },
+      {
+        "id": 10,
+        "source": "Scenario 10",
+        "target": "Scenario 14",
+        "value": 41
+      },
+      {
+        "id": 11,
+        "source": "Scenario 11",
+        "target": "Scenario 8",
+        "value": 22
+      },
+      {
+        "id": 12,
+        "source": "Scenario 12",
+        "target": "Scenario 13",
+        "value": 32
+      },
+      {
+        "id": 13,
+        "source": "Scenario 13",
+        "target": "Scenario 9",
+        "value": 14
+      },
+      {
+        "id": 14,
+        "source": "Scenario 14",
+        "target": "Scenario 11",
+        "value": 57
+      }
+    ]
+  },
+  {
+    "category": "zoonotic",
+    "nodes": [
+      {
+        "id": 15,
+        "source": "Scenario 15",
+        "target": "Scenario 16",
+        "value": 32
+      },
+      {
+        "id": 16,
+        "source": "Scenario 16",
+        "target": "Scenario 21",
+        "value": 12
+      },
+      {
+        "id": 17,
+        "source": "Scenario 17",
+        "target": "Scenario 18",
+        "value": 14
+      },
+      {
+        "id": 18,
+        "source": "Scenario 18",
+        "target": "Scenario 15",
+        "value": 18
+      },
+      {
+        "id": 19,
+        "source": "Scenario 19",
+        "target": "Scenario 20",
+        "value": 19
+      },
+      {
+        "id": 20,
+        "source": "Scenario 20",
+        "target": "Scenario 17",
+        "value": 22
+      },
+      {
+        "id": 21,
+        "source": "Scenario 21",
+        "target": "Scenario 20",
+        "value": 47
+      }
+    ]
+  }
+]
