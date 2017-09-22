@@ -264,7 +264,7 @@
 					})
 					.on('mouseout', function onMouseout() {
 						d3.selectAll('.ribbon').style('opacity', 0.1);
-						d3.selectAll('.node').style('opacity', 0.8);
+						d3.selectAll('.node').style('opacity', 0.9);
 					});
 
 			// make ribbon data
