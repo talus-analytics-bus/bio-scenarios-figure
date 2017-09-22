@@ -57,7 +57,6 @@
 						node.links.push({
 							parameter,
 							value,
-							index: j,
 							numValues: data[j].values.length,
 						});
 					});
@@ -76,6 +75,24 @@
 		loopIndexAndAdd(0, data[0].values.length);
 
 		const numNodes = nodeData.children.length;
+
+		// look through node data and add index for arc
+		data.forEach((d) => {
+			d.values.forEach((v, i) => {
+				let arcIndexNum = 0;
+				const numForArc = nodeData.children.filter((node) => {
+					return node.links.find(l => l.parameter === d.name && l.value === v);
+				}).length;
+				nodeData.children.forEach((node) => {
+					const link = node.links.find(l => l.parameter === d.name && l.value === v);
+					if (link) {
+						link.numValues = numForArc;
+						link.index = arcIndexNum;
+						arcIndexNum++;
+					}
+				});
+			});
+		});
 
 
 		// create arc data
@@ -273,8 +290,8 @@
 						.data()[0];
 
 					const arcWidth = arc.theta1 - arc.theta0;
-					const totalLinks = numNodes / d.target.numValues;
-					const linkNum = d.source.data.nodeNum % totalLinks;
+					const totalLinks = d.target.numValues;
+					const linkNum = d.target.index;
 					let startAngle = arc.theta0 + (linkNum / totalLinks) * arcWidth;
 					let endAngle = arc.theta0 + ((linkNum + 1) / totalLinks) * arcWidth;
 
