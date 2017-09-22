@@ -48,18 +48,19 @@ body { font-family: 'Open Sans', sans-serif; }
   stroke-width: 1px;
 }
 .arc {
+	stroke: rgba(255,255,255,0.5);
 	@include opacity(0.9);
 	&:hover {
-		stroke: rgba(0,0,0,0.5);
+		stroke: rgba(255,255,255,1);
 		@include opacity(1);
 	}
 }
 .ribbon {
-	@include opacity(0.2);
+	@include opacity(0.3);
 
 	&:hover,
 	&.active {
-		@include opacity(0.9);
+		@include opacity(0.5);
 	}
 }
 .tooltipster-content {

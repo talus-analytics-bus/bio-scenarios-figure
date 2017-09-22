@@ -54,10 +54,20 @@
 					ia.forEach((valueIndex, j) => {
 						const parameter = data[j].name;
 						const value = data[j].values[valueIndex];
-						node.links.push({ parameter, value });
+						node.links.push({
+							parameter,
+							value,
+							index: j,
+							numValues: data[j].values.length,
+						});
 					});
-					nodeData.children.push(node);
-					nodeNum++;
+
+					// randomize pushing
+					const randNum = Math.random();
+					if (randNum < 0.2) {
+						nodeData.children.push(node);
+						nodeNum++;
+					}
 				} else {
 					loopIndexAndAdd(indexToLoop + 1, data[indexToLoop + 1].values.length);
 				}
@@ -110,10 +120,10 @@
 
 		// greys
 		const arcColors2 = ['#bdbdbd', '#636363'];
-		const arcColors3 = ['#ccc', '#969696', '#525252'];
-		const arcColors4 = ['#ccc', '#969696', '#636363', '#292929'];
-		const arcColors5 = ['#d9d9d9', '#bdbdbd', '#969696', '#636363', '#292929'];
-		const arcColors6 = ['#d9d9d9', '#bdbdbd', '#969696', '#737373', '#525252', '#292929'];
+		const arcColors3 = ['#bbb', '#969696', '#525252'];
+		const arcColors4 = ['#bbb', '#969696', '#636363', '#393939'];
+		const arcColors5 = ['#d9d9d9', '#bdbdbd', '#969696', '#636363', '#393939'];
+		const arcColors6 = ['#d9d9d9', '#bdbdbd', '#969696', '#737373', '#525252', '#393939'];
 
 		// blues
 		/*const arcColors2 = ['lightsteelblue', 'steelblue'];
@@ -135,7 +145,8 @@
 				.attr('class', 'arc')
 				.attr('d', arc)
 				.style('fill', (d) => {
-					return arcColorScales[d.numValues](d.index);
+					//return arcColorScales[d.numValues](d.index);
+					return 'steelblue';
 				})
 				.each(function addTooltip(d) {
 					$(this).tooltipster({
@@ -151,17 +162,19 @@
 				.attr('x', d => (outerRadius + 5) * Math.sin(d.avgTheta))
 				.attr('y', d => (outerRadius + 5) * -Math.cos(d.avgTheta))
 				.style('text-anchor', (d) => {
-					if (d.avgTheta > (Math.PI / 8) && d.avgTheta < (7 * Math.PI / 8)) return 'start';
-					if (d.avgTheta > (9 * Math.PI / 8) && d.avgTheta < (15 * Math.PI / 8)) return 'end';
+					if (d.avgTheta > 0 && d.avgTheta < Math.PI) return 'start';
+					if (d.avgTheta > Math.PI && d.avgTheta < 2 * Math.PI) return 'end';
 					return 'middle';
 				})
 				.text(d => d.name);
 
 
 		/* --------- Force Part --------- */
-		function createNodePack(nodeData, scenarioType, center, nodeColor) {
+		const colorScale = d3.scaleLinear().range(['#c91414', '#082b84']);
+
+		function createNodePack(nodeData, center) {
 			// start drawing the node pack
-			const size = 170;
+			const size = 180;
 			const pack = d3.pack()
 				.size([size, size])
 				.padding(2);
@@ -191,7 +204,7 @@
 				})
 				.attr('r', d => d.r)
 				.filter(d => d.parent)
-					.style('fill', nodeColor)
+					.style('fill', d => calcNodeColor(d))
 					.style('filter', 'url(#glow)')
 					.each(function(d) {
 						const contentContainer = d3.select(document.createElement('div'));
@@ -199,9 +212,6 @@
 						const contentTitle = content.append('div')
 							.attr('class', 'tooltip-title')
 							.text(d.data.id);
-						content.append('div')
-							.attr('class', 'tooltip-line')
-							.html(`<b>Type:</b> ${scenarioType}`);
 						/*content.append('div')
 							.attr('class', 'tooltip-line')
 							.html(`<b>Extremity:</b> ${d.data.size} out of 10`);*/
@@ -221,8 +231,8 @@
 					.on('mouseover', function onMouseover(d) {
 						d3.selectAll('.ribbon').style('opacity', 0);
 						d3.selectAll('.ribbon')
-							.filter(r => scenarioType === r.type && d.data.id === r.source.data.id)
-							.style('opacity', 1);
+							.filter(r => d.data.id === r.source.data.id)
+							.style('opacity', 0.5);
 						d3.selectAll('.node').style('opacity', 0.1);
 						d3.select(this).style('opacity', 1);
 					})
@@ -236,7 +246,6 @@
 			nodePackData.filter(d => d.parent).forEach((d) => {
 				d.data.links.forEach((label) => {
 					ribbonData.push({
-						type: scenarioType,
 						source: Object.assign({}, d),
 						target: label,
 					});
@@ -264,15 +273,10 @@
 						.data()[0];
 
 					const arcWidth = arc.theta1 - arc.theta0;
-					let startAngle = arc.theta0 + (d.source.data.nodeNum / (3 * numNodes)) * arcWidth;
-					let endAngle = arc.theta0 + ((d.source.data.nodeNum + 1) / (3 * numNodes)) * arcWidth;
-					if (d.type === 'Animal') {
-						startAngle += arcWidth / 3;
-						endAngle += arcWidth / 3;
-					} else if (d.type === 'Zoonotic') {
-						startAngle += 2 * arcWidth / 3;
-						endAngle += 2 * arcWidth / 3;
-					}
+					const totalLinks = numNodes / d.target.numValues;
+					const linkNum = d.source.data.nodeNum % totalLinks;
+					let startAngle = arc.theta0 + (linkNum / totalLinks) * arcWidth;
+					let endAngle = arc.theta0 + ((linkNum + 1) / totalLinks) * arcWidth;
 
 					return {
 						startAngle,
@@ -286,13 +290,30 @@
 				.enter().append('path')
 					.attr('class', 'ribbon')
 					.attr('d', ribbon)
+					.style('fill', d => calcNodeColor(d.source))
 					.style('opacity', 0.1);
+		}
+
+		function calcNodeColor(d) {
+			const type = d.data.links[0].value;
+			if (type === 'Human') return colorScale(0.33 * Math.random());
+			else if (type === 'Animal') return colorScale(0.67 + 0.33 * Math.random());
+			else return colorScale(0.33 + 0.34 * Math.random());
 		}
 
 
 		// create packs
-		createNodePack(nodeData, 'Animal', [120, -20], "#082B84");  // blue
-		createNodePack(nodeData, 'Human', [-20, 120], "#C91414");  // red
-		createNodePack(nodeData, 'Zoonotic', [-80, -80], "#552257");  // purple
+		const nodeData1 = Object.assign({}, nodeData);
+		nodeData1.children = nodeData.children.filter(d => d.links[0].value === 'Human');
+		createNodePack(nodeData1, [120, -20]);
+
+		const nodeData2 = Object.assign({}, nodeData);
+		nodeData2.children = nodeData.children.filter(d => d.links[0].value === 'Animal');
+		createNodePack(nodeData2, [-20, 120]);
+
+		const nodeData3 = Object.assign({}, nodeData);
+		nodeData3.children = nodeData.children.filter(d => d.links[0].value === 'Zoonotic');
+		createNodePack(nodeData3, [-80, -80]);
+
 	};
 })();
