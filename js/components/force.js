@@ -78,11 +78,14 @@
 
 		// look through node data and add index for arc
 		data.forEach((d) => {
+			d.numNodesForValue = [];
 			d.values.forEach((v, i) => {
 				let arcIndexNum = 0;
 				const numForArc = nodeData.children.filter((node) => {
 					return node.links.find(l => l.parameter === d.name && l.value === v);
 				}).length;
+				d.numNodesForValue.push(numForArc);
+
 				nodeData.children.forEach((node) => {
 					const link = node.links.find(l => l.parameter === d.name && l.value === v);
 					if (link) {
@@ -108,15 +111,21 @@
 			let dtheta = totalTheta - 2 * arcPadding;
 			if (dtheta < 0) dtheta = 0;
 
+			const totalNodesForArc = d3.sum(d.numNodesForValue);
+			let runningNodes = 0;
+
 			d.values.forEach((v, i) => {
 				const theta0 = runningTheta + arcPadding;
+				const t0 = theta0 + dtheta * (runningNodes / totalNodesForArc);
+				runningNodes += d.numNodesForValue[i];
+				const t1 = theta0 + dtheta * (runningNodes / totalNodesForArc);
 				arcData.push({
 					parameter: d.name,
 					value: v,
 					numValues: d.values.length,
 					index: i,
-					theta0: theta0 + (i * dtheta / d.values.length),
-					theta1: theta0 + ((i + 1) * dtheta / d.values.length),
+					theta0: t0,
+					theta1: t1,
 				});
 			});
 
@@ -222,7 +231,7 @@
 				.attr('r', d => d.r)
 				.filter(d => d.parent)
 					.style('fill', d => calcNodeColor(d))
-					.style('filter', 'url(#glow)')
+					//.style('filter', 'url(#glow)')
 					.each(function(d) {
 						const contentContainer = d3.select(document.createElement('div'));
 						const content = contentContainer.append('div');
@@ -246,11 +255,11 @@
 						})
 					})
 					.on('mouseover', function onMouseover(d) {
-						d3.selectAll('.ribbon').style('opacity', 0);
+						d3.selectAll('.ribbon').style('opacity', 0.01);
+						d3.selectAll('.node').style('opacity', 0.2);
 						d3.selectAll('.ribbon')
 							.filter(r => d.data.id === r.source.data.id)
 							.style('opacity', 0.5);
-						d3.selectAll('.node').style('opacity', 0.1);
 						d3.select(this).style('opacity', 1);
 					})
 					.on('mouseout', function onMouseout() {
@@ -277,8 +286,8 @@
 					const dist = Math.sqrt(x * x + y * y);
 					const angle = (Math.PI / 2) - Math.atan2(-y, x);
 					return {
-						startAngle: angle,
-						endAngle: angle,
+						startAngle: angle - 0.01,
+						endAngle: angle + 0.01,
 						radius: dist,
 					};
 				})
