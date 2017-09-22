@@ -288,7 +288,7 @@
 					return {
 						startAngle: angle - 0.01,
 						endAngle: angle + 0.01,
-						radius: dist,
+						radius: dist - d.source.r,
 					};
 				})
 				.target((d) => {
