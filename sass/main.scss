@@ -26,7 +26,7 @@ body { font-family: 'Open Sans', sans-serif; }
 	margin-top: 51px;
 	min-height: 100px;
 }
-.network-map {
+.figure-container {
 	margin: 20px 0;
 	border: $border;
 	text-align: center;
@@ -72,4 +72,13 @@ body { font-family: 'Open Sans', sans-serif; }
 }
 .tooltip-line {
 	margin: 2px 0 0 15px;
+}
+
+.filters-container {
+	margin: 5px 0;
+	padding: 10px 10px 20px;
+	border-bottom: $border;
+}
+.dropdown-box {
+	text-align: left;
 }

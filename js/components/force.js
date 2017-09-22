@@ -199,15 +199,12 @@
 						const contentTitle = content.append('div')
 							.attr('class', 'tooltip-title')
 							.text(d.data.id);
-						let textClass = 'text-success';
-						if (d.data.size >= 8) textClass = 'text-danger';
-						else if (d.data.size >= 5) textClass = 'text-warning';
 						content.append('div')
 							.attr('class', 'tooltip-line')
 							.html(`<b>Type:</b> ${scenarioType}`);
-						content.append('div')
+						/*content.append('div')
 							.attr('class', 'tooltip-line')
-							.html(`<b>Extremity:</b> <b class="${textClass}">${d.data.size} out of 10</b>`);
+							.html(`<b>Extremity:</b> ${d.data.size} out of 10`);*/
 						d.data.links.forEach((l) => {
 							content.append('div')
 								.attr('class', 'tooltip-line')
@@ -266,15 +263,15 @@
 						})
 						.data()[0];
 
-					const dtheta = arc.theta1 - arc.theta0;
-					let startAngle = arc.theta0 + (d.source.data.nodeNum / numNodes) * dtheta;
-					let endAngle = arc.theta0 + ((d.source.data.nodeNum + 1) / numNodes) * dtheta;
+					const arcWidth = arc.theta1 - arc.theta0;
+					let startAngle = arc.theta0 + (d.source.data.nodeNum / (3 * numNodes)) * arcWidth;
+					let endAngle = arc.theta0 + ((d.source.data.nodeNum + 1) / (3 * numNodes)) * arcWidth;
 					if (d.type === 'Animal') {
-						startAngle += dtheta / 3;
-						endAngle += dtheta / 3;
+						startAngle += arcWidth / 3;
+						endAngle += arcWidth / 3;
 					} else if (d.type === 'Zoonotic') {
-						startAngle += 2 * dtheta / 3;
-						endAngle += 2 * dtheta / 3;
+						startAngle += 2 * arcWidth / 3;
+						endAngle += 2 * arcWidth / 3;
 					}
 
 					return {
