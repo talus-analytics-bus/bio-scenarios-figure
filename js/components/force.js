@@ -49,6 +49,7 @@
 				arcData.push({
 					parameter: d.name,
 					value: v,
+					numValues: d.values.length,
 					index: i,
 					theta0: theta0 + (i * dtheta / d.values.length),
 					theta1: theta0 + ((i + 1) * dtheta / d.values.length),
@@ -70,16 +71,26 @@
 			.startAngle(d => d.theta0)
 			.endAngle(d => d.theta1);
 
-		const arcColorScale = d3.scaleOrdinal()
-			.range(['#f7fbff', '#e1e8f1', '#cbd6e4', '#b5c3d6', '#a0b1c9', '#8a9ebb',
-				'#748cae', '#5e79a0', '#496793', '#335485', '#1d4278', '#08306b'].reverse());
+		const arcColors2 = ['#bdbdbd', '#636363'];
+		const arcColors3 = ['#ccc', '#969696', '#525252'];
+		const arcColors4 = ['#ccc', '#969696', '#636363', '#292929'];
+		const arcColors5 = ['#d9d9d9', '#bdbdbd', '#969696', '#636363', '#292929'];
+		const arcColors6 = ['#d9d9d9', '#bdbdbd', '#969696', '#737373', '#525252', '#292929'];
+		const arcColorScales = {};
+		arcColorScales[2] = d3.scaleOrdinal().range(arcColors2);
+		arcColorScales[3] = d3.scaleOrdinal().range(arcColors3);
+		arcColorScales[4] = d3.scaleOrdinal().range(arcColors4);
+		arcColorScales[5] = d3.scaleOrdinal().range(arcColors5);
+		arcColorScales[6] = d3.scaleOrdinal().range(arcColors6);
 
 		arcG.selectAll('.arc')
 			.data(arcData)
 			.enter().append('path')
 				.attr('class', 'arc')
 				.attr('d', arc)
-				.style('fill', d => arcColorScale(d.index))
+				.style('fill', (d) => {
+					return arcColorScales[d.numValues](d.index);
+				})
 				.each(function addTooltip(d) {
 					$(this).tooltipster({
 						trigger: 'hover',
@@ -102,9 +113,9 @@
 
 
 		/* --------- Force Part --------- */
-		function createNodePack(nodeData, center, nodeColor) {
+		function createNodePack(nodeData, scenarioType, center, nodeColor) {
 			// start drawing the node pack
-			const size = 300;
+			const size = 170;
 			const pack = d3.pack()
 				.size([size, size])
 				.padding(2);
@@ -145,6 +156,9 @@
 						let textClass = 'text-success';
 						if (d.data.size >= 8) textClass = 'text-danger';
 						else if (d.data.size >= 5) textClass = 'text-warning';
+						content.append('div')
+							.attr('class', 'tooltip-line')
+							.html(`<b>Type:</b> ${scenarioType}`);
 						content.append('div')
 							.attr('class', 'tooltip-line')
 							.html(`<b>Extremity:</b> <b class="${textClass}">${d.data.size} out of 10</b>`);
@@ -249,9 +263,8 @@
 		loopIndexAndAdd(0, data[0].values.length);
 
 		// create packs
-		/*createNodePack(nodeData, [120, 0], "#082B84");
-		createNodePack(nodeData, [-20, 100], "#C91414");
-		createNodePack(nodeData, [-80, -80], "#552257");*/
-		createNodePack(nodeData, [0, 0], '#c91414');
+		createNodePack(nodeData, 'Animal', [120, -20], "#082B84");  // blue
+		createNodePack(nodeData, 'Human', [-20, 120], "#C91414");  // red
+		createNodePack(nodeData, 'Zoonotic', [-80, -80], "#552257");  // purple
 	};
 })();

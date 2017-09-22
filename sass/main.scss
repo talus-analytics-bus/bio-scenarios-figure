@@ -47,6 +47,13 @@ body { font-family: 'Open Sans', sans-serif; }
   stroke: #555;
   stroke-width: 1px;
 }
+.arc {
+	@include opacity(0.9);
+	&:hover {
+		stroke: rgba(0,0,0,0.5);
+		@include opacity(1);
+	}
+}
 .ribbon {
 	@include opacity(0.2);
 
