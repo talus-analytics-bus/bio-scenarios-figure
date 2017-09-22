@@ -169,7 +169,7 @@
 						});
 
 						$(this).tooltipster({
-							trigger: 'hover',
+							trigger: 'click',
 							contentAsHTML: true,
 							minWidth: 300,
 							content: contentContainer.html(),
@@ -177,7 +177,7 @@
 					})
 					.on('mouseover', function onMouseover(d) {
 						d3.selectAll('.ribbon')
-							.filter(r => d.data.id === r.source.data.id)
+							.filter(r => scenarioType === r.type && d.data.id === r.source.data.id)
 							.style('fill', nodeColor);
 					})
 					.on('mouseout', function onMouseout() {
@@ -189,6 +189,7 @@
 			nodePackData.filter(d => d.parent).forEach((d) => {
 				d.data.links.forEach((label) => {
 					ribbonData.push({
+						type: scenarioType,
 						source: Object.assign({}, d),
 						target: label,
 					});
