@@ -32,6 +32,43 @@
 
 
 		/* --------- Data Section --------- */
+		// create node data
+		const nodeData = {
+			name: 'background',
+			children: []
+		};
+		const indexArray = data.map(d => 0);
+		let nodeNum = 0;
+
+		function loopIndexAndAdd(indexToLoop, numTimes) {
+			for (let i = 0; i < numTimes; i++) {
+				indexArray[indexToLoop] = i;
+				if (indexToLoop === indexArray.length - 1) {
+					const node = {
+						id: `Scenario ${nodeNum}`,
+						nodeNum,
+						size: Math.ceil(10 * Math.random()),
+						links: [],
+					};
+					const ia = indexArray.slice(0);
+					ia.forEach((valueIndex, j) => {
+						const parameter = data[j].name;
+						const value = data[j].values[valueIndex];
+						node.links.push({ parameter, value });
+					});
+					nodeData.children.push(node);
+					nodeNum++;
+				} else {
+					loopIndexAndAdd(indexToLoop + 1, data[indexToLoop + 1].values.length);
+				}
+			}
+		}
+		loopIndexAndAdd(0, data[0].values.length);
+
+		const numNodes = nodeData.children.length;
+
+
+		// create arc data
 		// calculate sum of values of all parameters
 		const numTotalValues = d3.sum(data, d => d.values.length);
 
@@ -71,11 +108,20 @@
 			.startAngle(d => d.theta0)
 			.endAngle(d => d.theta1);
 
+		// greys
 		const arcColors2 = ['#bdbdbd', '#636363'];
 		const arcColors3 = ['#ccc', '#969696', '#525252'];
 		const arcColors4 = ['#ccc', '#969696', '#636363', '#292929'];
 		const arcColors5 = ['#d9d9d9', '#bdbdbd', '#969696', '#636363', '#292929'];
 		const arcColors6 = ['#d9d9d9', '#bdbdbd', '#969696', '#737373', '#525252', '#292929'];
+
+		// blues
+		/*const arcColors2 = ['lightsteelblue', 'steelblue'];
+		const arcColors3 = ['#deebf7','#9ecae1','#3182bd'];
+		const arcColors4 = ['#eff3ff','#bdd7e7','#6baed6','#2171b5'];
+		const arcColors5 = ['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'];
+		const arcColors6 = ['#eff3ff','#c6dbef','#9ecae1','#6baed6','#3182bd','#08519c'];*/
+
 		const arcColorScales = {};
 		arcColorScales[2] = d3.scaleOrdinal().range(arcColors2);
 		arcColorScales[3] = d3.scaleOrdinal().range(arcColors3);
@@ -176,12 +222,16 @@
 						})
 					})
 					.on('mouseover', function onMouseover(d) {
+						d3.selectAll('.ribbon').style('opacity', 0);
 						d3.selectAll('.ribbon')
 							.filter(r => scenarioType === r.type && d.data.id === r.source.data.id)
-							.style('fill', nodeColor);
+							.style('opacity', 1);
+						d3.selectAll('.node').style('opacity', 0.1);
+						d3.select(this).style('opacity', 1);
 					})
 					.on('mouseout', function onMouseout() {
-						d3.selectAll('.ribbon').style('fill', 'none');
+						d3.selectAll('.ribbon').style('opacity', 0.1);
+						d3.selectAll('.node').style('opacity', 0.8);
 					});
 
 			// make ribbon data
@@ -215,9 +265,21 @@
 							return a.parameter === d.target.parameter && a.value === d.target.value;
 						})
 						.data()[0];
+
+					const dtheta = arc.theta1 - arc.theta0;
+					let startAngle = arc.theta0 + (d.source.data.nodeNum / numNodes) * dtheta;
+					let endAngle = arc.theta0 + ((d.source.data.nodeNum + 1) / numNodes) * dtheta;
+					if (d.type === 'Animal') {
+						startAngle += dtheta / 3;
+						endAngle += dtheta / 3;
+					} else if (d.type === 'Zoonotic') {
+						startAngle += 2 * dtheta / 3;
+						endAngle += 2 * dtheta / 3;
+					}
+
 					return {
-						startAngle: arc.theta0,
-						endAngle: arc.theta1,
+						startAngle,
+						endAngle,
 						radius: innerRadius,
 					};
 				});
@@ -227,41 +289,9 @@
 				.enter().append('path')
 					.attr('class', 'ribbon')
 					.attr('d', ribbon)
-					.style('fill', 'none')
-					.style('opacity', 0.25);
+					.style('opacity', 0.1);
 		}
 
-		// create node data
-		const nodeData = {
-			name: 'background',
-			children: []
-		};
-		const indexArray = data.map(d => 0);
-		let nodeNum = 0;
-
-		function loopIndexAndAdd(indexToLoop, numTimes) {
-			for (let i = 0; i < numTimes; i++) {
-				indexArray[indexToLoop] = i;
-				if (indexToLoop === indexArray.length - 1) {
-					const node = {
-						id: `Scenario ${nodeNum}`,
-						size: Math.ceil(10 * Math.random()),
-						links: [],
-					};
-					const ia = indexArray.slice(0);
-					ia.forEach((valueIndex, j) => {
-						const parameter = data[j].name;
-						const value = data[j].values[valueIndex];
-						node.links.push({ parameter, value });
-					});
-					nodeData.children.push(node);
-					nodeNum++;
-				} else {
-					loopIndexAndAdd(indexToLoop + 1, data[indexToLoop + 1].values.length);
-				}
-			}
-		}
-		loopIndexAndAdd(0, data[0].values.length);
 
 		// create packs
 		createNodePack(nodeData, 'Animal', [120, -20], "#082B84");  // blue
