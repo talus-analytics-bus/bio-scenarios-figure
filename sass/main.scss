@@ -24,9 +24,11 @@
 body { font-family: 'Open Sans', sans-serif; }
 #page-content {
 	min-height: 100px;
+	margin-top: -20px;
 }
 .figure-container {
-	margin: 10px 0;
+	position: relative;
+	margin: 20px 0;
 	border: $border;
 	text-align: center;
 	background: url('../img/space.jpg');
