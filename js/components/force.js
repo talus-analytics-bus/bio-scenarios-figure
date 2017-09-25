@@ -1,7 +1,7 @@
 (() => {
 	App.buildForceDiagram = (selector, data, param = {}) => {
-		const margin = { top: 50, right: 150, bottom: 50, left: 150 };
-		const outerRadius = 250;
+		const margin = { top: 30, right: 150, bottom: 30, left: 150 };
+		const outerRadius = 350;
 		const innerRadius = outerRadius - 20;
 		const width = 2 * outerRadius;
 		const height = 2 * outerRadius;
@@ -77,7 +77,10 @@
 
 					// randomize pushing
 					const randNum = Math.random();
-					if (randNum < 0.2) {
+					let threshold = 0.2;
+					if (data.length === 6) threshold = 0.05;
+					if (data.length === 7) threshold = 0.01;
+					if (randNum < threshold) {
 						nodeData.children.push(node);
 						nodeNum++;
 					}
@@ -143,9 +146,9 @@
 				});
 			});
 
-			d.theta0 = runningTheta;
+			d.theta0 = runningTheta + arcPadding;
 			runningTheta += totalTheta;
-			d.theta1 = runningTheta;
+			d.theta1 = runningTheta - arcPadding;
 			d.avgTheta = (d.theta1 + d.theta0) / 2;
 		});
 
@@ -158,21 +161,61 @@
 			.startAngle(d => d.theta0)
 			.endAngle(d => d.theta1);
 
-		arcG.selectAll('.arc')
+		const arcGroups = arcG.selectAll('.arc')
 			.data(arcData)
+			.enter().append('g')
+				.attr('class', 'arc');
+		arcGroups.append('path')
+			.attr('d', arc)
+			.style('fill', 'url(#arc-gradient)')
+			//.style('filter', 'url(#glow)')
+			.each(function addTooltip(d) {
+				$(this).tooltipster({
+					trigger: 'hover',
+					contentAsHTML: true,
+					content: `<b>${d.parameter}:</b> ${d.value}`,
+				});
+			});
+
+		// add labels to arcs
+		arcG.selectAll('.arc-label-path')
+			.data(data)
 			.enter().append('path')
-				.attr('class', 'arc')
+				.attr('id', (d, i) => `arc-path-${i}`)
 				.attr('d', arc)
-				.style('fill', 'url(#arc-gradient)')
-				//.style('filter', 'url(#glow)')
-				.each(function addTooltip(d) {
-					$(this).tooltipster({
-						trigger: 'hover',
-						contentAsHTML: true,
-						content: `<b>${d.parameter}:</b> ${d.value}`,
-					});
+				.style('fill', 'none')
+				.each(function(d) {
+					const firstArcSection = /(^.+?)L/;
+					let newArc = firstArcSection.exec(d3.select(this).attr('d'))[1];
+					newArc = newArc.replace(/,/g , " ");
+
+					// flip if bottom half of circle
+					if (d.theta1 > Math.PI / 2 && d.theta0 < 3 * Math.PI / 2) {
+						const startLoc = /M(.*?)A/;
+						const middleLoc = /A(.*?)0 0 1/;
+						const endLoc = /0 0 1 (.*?)$/;
+						const newStart = endLoc.exec(newArc)[1];
+						const newEnd = startLoc.exec(newArc)[1];
+						const middleSec = middleLoc.exec(newArc)[1];
+						newArc = `M${newStart}A${middleSec}0 0 0 ${newEnd}`;
+					}
+
+					d3.select(this).attr('d', newArc);
 				});
 		arcG.selectAll('.arc-label')
+			.data(data)
+			.enter().append('text')
+				.attr('class', 'arc-label')
+				.attr('dy', (d) => {
+					if (d.theta1 > Math.PI / 2 && d.theta0 < 3 * Math.PI / 2) return 16;
+					return -6;
+				})
+				.append('textPath')
+					.attr('startOffset', '50%')
+					.attr('xlink:href', (d, i) => `#arc-path-${i}`)
+					.text(d => d.name);
+
+		/*arcG.selectAll('.arc-label')
 			.data(data)
 			.enter().append('text')
 				.attr('class', 'arc-label')
@@ -183,15 +226,15 @@
 					if (d.avgTheta > Math.PI && d.avgTheta < 2 * Math.PI) return 'end';
 					return 'middle';
 				})
-				.text(d => d.name);
+				.text(d => d.name);*/
 
 
 		/* --------- Force Part --------- */
-
 		// add node gradient fills
 		const colors = ['#c91414', '#b01622', '#981930', '#801c3e', '#681f4c',
 			'#50225a', '#382568', '#202876', '#082b84'];
 
+		const colorScale = d3.scaleLinear().range(['#c91414', '#082b84']);
 		const ribbonColorScale = d3.scaleThreshold()
 			.domain(d3.range(1, colors.length - 1))
 			.range(colors);
@@ -229,6 +272,7 @@
 		function createNodePack(nodeData, center) {
 			// start drawing the node pack
 			const size = 180;
+			const nodeOpacity = 0.7;
 			const pack = d3.pack()
 				.size([size, size])
 				.padding(2);
@@ -260,8 +304,10 @@
 			nodesG.append('circle')
 				.attr('r', d => d.r)
 				.filter(d => d.parent)
-					.style('fill', d => `url(#node-gradient-${calcNodeColorNum(d)})`)
+					.style('fill', d => d.color = calcNodeColor(d))
+					//.style('fill', d => `url(#node-gradient-${calcNodeColorNum(d)})`)
 					//.style('filter', 'url(#glow)')
+					.style('opacity', nodeOpacity)
 					.each(function(d) {
 						const contentContainer = d3.select(document.createElement('div'));
 						const content = contentContainer.append('div');
@@ -294,7 +340,7 @@
 					})
 					.on('mouseout', function onMouseout() {
 						d3.selectAll('.ribbon').style('opacity', 0.1);
-						d3.selectAll('.node').style('opacity', 0.9);
+						d3.selectAll('.node').style('opacity', nodeOpacity);
 					});
 
 			/*nodesG.append('circle')
@@ -322,8 +368,8 @@
 					const dist = Math.sqrt(x * x + y * y);
 					const angle = (Math.PI / 2) - Math.atan2(-y, x);
 					return {
-						startAngle: angle - 0.01,
-						endAngle: angle + 0.01,
+						startAngle: angle - 0.02,
+						endAngle: angle + 0.02,
 						radius: dist - d.source.r,
 					};
 				})
@@ -352,9 +398,8 @@
 				.enter().append('path')
 					.attr('class', 'ribbon')
 					.attr('d', ribbon)
-					.style('fill', (d) => {
-						return ribbonColorScale(d.source.colorNum);
-					})
+					.style('fill', d => d.source.color)
+					//.style('fill', d => ribbonColorScale(d.source.colorNum))
 					.style('opacity', 0.1);
 		}
 
@@ -371,19 +416,26 @@
 			return d.colorNum = num;
 		}
 
+		function calcNodeColor(d) {
+			const type = d.data.links[0].value;
+			if (type === 'Human') return colorScale(0.33 * Math.random());
+			else if (type === 'Animal') return colorScale(0.67 + 0.33 * Math.random());
+			else return colorScale(0.33 + 0.34 * Math.random());
+		}
+
 
 		// create packs
 		const nodeData1 = Object.assign({}, nodeData);
-		nodeData1.children = nodeData.children.filter(d => d.links[0].value === 'Human');
-		createNodePack(nodeData1, [120, -20]);
+		nodeData1.children = nodeData.children.filter(d => d.links[0].value === 'Animal');
+		createNodePack(nodeData1, [100, -20]);
 
 		const nodeData2 = Object.assign({}, nodeData);
-		nodeData2.children = nodeData.children.filter(d => d.links[0].value === 'Animal');
-		createNodePack(nodeData2, [-20, 120]);
+		nodeData2.children = nodeData.children.filter(d => d.links[0].value === 'Zoonotic');
+		createNodePack(nodeData2, [-20, 100]);
 
 		const nodeData3 = Object.assign({}, nodeData);
-		nodeData3.children = nodeData.children.filter(d => d.links[0].value === 'Zoonotic');
-		createNodePack(nodeData3, [-80, -80]);
+		nodeData3.children = nodeData.children.filter(d => d.links[0].value === 'Human');
+		createNodePack(nodeData3, [-70, -70]);
 
 	};
 })();

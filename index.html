@@ -17,7 +17,7 @@
 	<link href="css/main.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<nav class="navbar navbar-default navbar-fixed-top">
+	<nav class="navbar navbar-default">
 		<div class="container">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
@@ -38,7 +38,11 @@
 	</nav>
 	<div id="page-content"></div>
 	<div id="footer">
-		<span>Built by</span>
+		<img
+			alt="Georgetown University"
+			class="logo-georgetown"
+			src="img/logo-georgetown.png"
+		/>
 		<img src="img/talus-logo.png" />
 	</div>
 
@@ -46,8 +50,8 @@
 	<!-- ----------- TEMPLATES ------------- -->
 	<script id="home-template" type="text/x-handlebars-template">
 		<div class="container">
-			<h3>Figure</h3>
 			<div class="figure-container">
+				<div class="figure-container-veil"></div>
 				<div class="filters-container">
 					<div class="dropdown-row">
 						<div class="dropdown-box">
@@ -93,7 +97,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="network-map"></svg>
+				<div class="network-map"></div>
 			</div>
 		</div>
 	</script>

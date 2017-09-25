@@ -21,9 +21,21 @@
 				name: 'Medical Countermeasures',
 				values: ['Antivirals', 'Antibiotics', 'Vaccine', 'Post-exposure Prophylaxis'],
 			},
-			/*{
+			{
 				name: 'Outbreak Location',
 				values: ['Permissive', 'Non-permissive', 'Unstable', 'State controlled with access', 'State controlled without access'],
+			},
+			{
+				name: 'Response Level',
+				values: ['Local', 'Intermediate', 'National', 'Regional', 'Global'],
+			},
+			/*{
+				name: 'Diagnostics',
+				values: ['Point of Care', 'BSL1', 'BSL2', 'BSL3', 'BSL4'],
+			},
+			{
+				name: 'Morbidity',
+				values: ['Low', 'Medium', 'Severe', 'Short-term', 'Long-term'],
 			},*/
 		];
 
