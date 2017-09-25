@@ -36,11 +36,12 @@ body { font-family: 'Open Sans', sans-serif; }
 }
 .figure-container-veil {
 	position: absolute;
-	top: 0;
+	top: 90px;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(255,255,255,0);
+	background-color: transparent;
+	/*@include gradient(rgba(255,255,255,0.02), rgba(255,255,255,0.15));*/
 	z-index: 100;
 }
 .network-map {
@@ -98,5 +99,7 @@ body { font-family: 'Open Sans', sans-serif; }
 }
 .arc-label {
 	text-anchor: middle;
+	font-weight: 600;
+	font-size: 1.3em;
 	/*fill: white;*/
 }

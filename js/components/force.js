@@ -207,8 +207,8 @@
 			.enter().append('text')
 				.attr('class', 'arc-label')
 				.attr('dy', (d) => {
-					if (d.theta1 > Math.PI / 2 && d.theta0 < 3 * Math.PI / 2) return 16;
-					return -6;
+					if (d.theta1 > Math.PI / 2 && d.theta0 < 3 * Math.PI / 2) return 20;
+					return -8;
 				})
 				.append('textPath')
 					.attr('startOffset', '50%')
