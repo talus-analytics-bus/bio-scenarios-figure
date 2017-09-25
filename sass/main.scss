@@ -65,9 +65,11 @@ body { font-family: 'Open Sans', sans-serif; }
 	z-index: 1000;
 }
 .filters-container {
+	position: relative;
 	padding: 15px 10px 20px;
 	border-bottom: $border;
 	background-color: #f0f0f0;
+	z-index: 10000;
 }
 .dropdown-box {
 	text-align: left;
