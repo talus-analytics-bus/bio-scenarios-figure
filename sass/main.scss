@@ -24,11 +24,27 @@
 body { font-family: 'Open Sans', sans-serif; }
 #page-content {
 	min-height: 100px;
-	margin-top: -20px;
+}
+.navbar {
+	margin-bottom: 0;
+}
+.home-container {
+	border-left: $light-border;
+	border-right: $light-border;
+	text-align: left;
+	width: 100%;
+	max-width: 1150px;
+	padding: 10px 50px 20px;
+}
+.description {
+	display: inline-block;
+	text-align: left;
+	max-width: 800px;
 }
 .figure-container {
 	position: relative;
-	margin: 20px 0;
+	margin: 30px 0;
+	padding-bottom: 20px;
 	border: $border;
 	text-align: center;
 	background: url('../img/space.jpg');
@@ -55,6 +71,7 @@ body { font-family: 'Open Sans', sans-serif; }
 }
 .dropdown-box {
 	text-align: left;
+	width: 200px;
 }
 
 

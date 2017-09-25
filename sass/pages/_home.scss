@@ -6,9 +6,3 @@
 	background-position: 0 60%;
 	background-size: cover;
 }
-.home-container {
-	width: 100%;
-	max-width: 750px;
-	padding: 60px 50px 100px;
-	@include gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.9));
-}

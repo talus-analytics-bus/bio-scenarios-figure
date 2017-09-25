@@ -1,6 +1,6 @@
 (() => {
 	App.buildForceDiagram = (selector, data, param = {}) => {
-		const margin = { top: 30, right: 150, bottom: 30, left: 150 };
+		const margin = { top: 30, right: 20, bottom: 30, left: 20 };
 		const outerRadius = 350;
 		const innerRadius = outerRadius - 20;
 		const width = 2 * outerRadius;
