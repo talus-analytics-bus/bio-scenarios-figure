@@ -25,6 +25,20 @@
 		feMerge.append("feMergeNode")
 			.attr("in","SourceGraphic");
 
+		// add arc gradient
+		const arcGrad = defs.append('linearGradient')
+			.attr('id', 'arc-gradient')
+			.attr('x1', '0%')
+			.attr('x2', '0%')
+			.attr('y1', '0%')
+			.attr('y2', '100%');
+		arcGrad.append('stop')
+			.attr('stop-color', 'lightsteelblue')
+			.attr('offset', '0%');
+		arcGrad.append('stop')
+			.attr('stop-color', 'steelblue')
+			.attr('offset', '100%');
+
 		// add different groups
 		const ribbonG = chart.append('g');
 		const arcG = chart.append('g');
@@ -144,36 +158,13 @@
 			.startAngle(d => d.theta0)
 			.endAngle(d => d.theta1);
 
-		// greys
-		const arcColors2 = ['#bdbdbd', '#636363'];
-		const arcColors3 = ['#bbb', '#969696', '#525252'];
-		const arcColors4 = ['#bbb', '#969696', '#636363', '#393939'];
-		const arcColors5 = ['#d9d9d9', '#bdbdbd', '#969696', '#636363', '#393939'];
-		const arcColors6 = ['#d9d9d9', '#bdbdbd', '#969696', '#737373', '#525252', '#393939'];
-
-		// blues
-		/*const arcColors2 = ['lightsteelblue', 'steelblue'];
-		const arcColors3 = ['#deebf7','#9ecae1','#3182bd'];
-		const arcColors4 = ['#eff3ff','#bdd7e7','#6baed6','#2171b5'];
-		const arcColors5 = ['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'];
-		const arcColors6 = ['#eff3ff','#c6dbef','#9ecae1','#6baed6','#3182bd','#08519c'];*/
-
-		const arcColorScales = {};
-		arcColorScales[2] = d3.scaleOrdinal().range(arcColors2);
-		arcColorScales[3] = d3.scaleOrdinal().range(arcColors3);
-		arcColorScales[4] = d3.scaleOrdinal().range(arcColors4);
-		arcColorScales[5] = d3.scaleOrdinal().range(arcColors5);
-		arcColorScales[6] = d3.scaleOrdinal().range(arcColors6);
-
 		arcG.selectAll('.arc')
 			.data(arcData)
 			.enter().append('path')
 				.attr('class', 'arc')
 				.attr('d', arc)
-				.style('fill', (d) => {
-					//return arcColorScales[d.numValues](d.index);
-					return 'steelblue';
-				})
+				.style('fill', 'url(#arc-gradient)')
+				//.style('filter', 'url(#glow)')
 				.each(function addTooltip(d) {
 					$(this).tooltipster({
 						trigger: 'hover',
@@ -196,7 +187,44 @@
 
 
 		/* --------- Force Part --------- */
-		const colorScale = d3.scaleLinear().range(['#c91414', '#082b84']);
+
+		// add node gradient fills
+		const colors = ['#c91414', '#b01622', '#981930', '#801c3e', '#681f4c',
+			'#50225a', '#382568', '#202876', '#082b84'];
+
+		const ribbonColorScale = d3.scaleThreshold()
+			.domain(d3.range(1, colors.length - 1))
+			.range(colors);
+
+		colors.forEach((c, i) => {
+			const color = d3.color(c);
+			const grad = defs.append('linearGradient')
+				.attr('id', `node-gradient-${i}`)
+				.attr('x1', '0%')
+				.attr('x2', '0%')
+				.attr('y1', '0%')
+				.attr('y2', '100%');
+			grad.append('stop')
+				.attr('stop-color', color.brighter(1.5))
+				.attr('offset', '0%');
+			grad.append('stop')
+				.attr('stop-color', color.darker(1.5))
+				.attr('offset', '100%');
+
+			const grad2 = defs.append('linearGradient')
+				.attr('id', `shadow-gradient-${i}`)
+				.attr('x1', '0%')
+				.attr('x2', '0%')
+				.attr('y1', '0%')
+				.attr('y2', '100%');
+			grad2.append('stop')
+				.attr('stop-color', color.brighter(1))
+				.attr('offset', '0%');
+			grad2.append('stop')
+				.attr('stop-color', color.brighter(1))
+				.attr('offset', '100%');
+		});
+
 
 		function createNodePack(nodeData, center) {
 			// start drawing the node pack
@@ -224,13 +252,15 @@
 					.attr('transform', d => `translate(${d.x}, ${d.y})`)
 					.each(function(d) { d.node = this; });
 
-			nodes.append('circle')
+			const nodesG = nodes.append('g')
 				.attr("class", (d) => {
 					return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root";
-				})
+				});
+
+			nodesG.append('circle')
 				.attr('r', d => d.r)
 				.filter(d => d.parent)
-					.style('fill', d => calcNodeColor(d))
+					.style('fill', d => `url(#node-gradient-${calcNodeColorNum(d)})`)
 					//.style('filter', 'url(#glow)')
 					.each(function(d) {
 						const contentContainer = d3.select(document.createElement('div'));
@@ -260,12 +290,18 @@
 						d3.selectAll('.ribbon')
 							.filter(r => d.data.id === r.source.data.id)
 							.style('opacity', 0.5);
-						d3.select(this).style('opacity', 1);
+						d3.select(this.parentNode).style('opacity', 1);
 					})
 					.on('mouseout', function onMouseout() {
 						d3.selectAll('.ribbon').style('opacity', 0.1);
 						d3.selectAll('.node').style('opacity', 0.9);
 					});
+
+			/*nodesG.append('circle')
+				.attr('r', d => d.r + 1)
+				.filter(d => d.parent)
+					.style('opacity', 0.5)
+					.style('fill', d => `url(#shadow-gradient-${calcNodeColorNum(d)})`);*/
 
 			// make ribbon data
 			const ribbonData = [];
@@ -316,15 +352,23 @@
 				.enter().append('path')
 					.attr('class', 'ribbon')
 					.attr('d', ribbon)
-					.style('fill', d => calcNodeColor(d.source))
+					.style('fill', (d) => {
+						return ribbonColorScale(d.source.colorNum);
+					})
 					.style('opacity', 0.1);
 		}
 
-		function calcNodeColor(d) {
+		function calcNodeColorNum(d) {
 			const type = d.data.links[0].value;
-			if (type === 'Human') return colorScale(0.33 * Math.random());
-			else if (type === 'Animal') return colorScale(0.67 + 0.33 * Math.random());
-			else return colorScale(0.33 + 0.34 * Math.random());
+			let num = -1;
+			if (type === 'Human') {
+				num = Math.floor(3 * Math.random());
+			} else if (type === 'Animal') {
+				num = Math.floor(6 + 3 * Math.random());
+			} else {
+				num = Math.floor(3 + 3 * Math.random());
+			}
+			return d.colorNum = num;
 		}
 
 
