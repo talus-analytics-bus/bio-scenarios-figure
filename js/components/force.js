@@ -269,9 +269,9 @@
 		});
 
 
-		function createNodePack(nodeData, center) {
+		function createNodePack(nodeData, center, param = {}) {
 			// start drawing the node pack
-			const size = 180;
+			const size = param.size || 180;
 			const nodeOpacity = 0.7;
 			const pack = d3.pack()
 				.size([size, size])
@@ -425,7 +425,9 @@
 
 
 		// create packs
-		const nodeData1 = Object.assign({}, nodeData);
+		createNodePack(nodeData, [0, 0], { size: 280 });
+
+		/*const nodeData1 = Object.assign({}, nodeData);
 		nodeData1.children = nodeData.children.filter(d => d.links[0].value === 'Animal');
 		createNodePack(nodeData1, [100, -20]);
 
@@ -435,7 +437,6 @@
 
 		const nodeData3 = Object.assign({}, nodeData);
 		nodeData3.children = nodeData.children.filter(d => d.links[0].value === 'Human');
-		createNodePack(nodeData3, [-70, -70]);
-
+		createNodePack(nodeData3, [-70, -70]);*/
 	};
 })();
