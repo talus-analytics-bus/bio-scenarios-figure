@@ -7,7 +7,7 @@
 			},
 			{
 				name: 'Spread Modality',
-				values: ['Contagious', 'Non-contagious'],
+				values: ['Communicable', 'Non-communicable'],
 			},
 			{
 				name: 'Route of Transmission',
