@@ -104,5 +104,52 @@
 					return isSelected ? 'inline' : 'none';
 				});
 		}
+
+		// create map legend
+		const barHeight = 18;
+		const barWidth = 400;
+		const legendContainer = d3.select('.network-map-legend').append('svg')
+			.attr('width', barWidth + 80)
+			.attr('height', barHeight + 75)
+		const legend = legendContainer.append('g')
+			.attr('transform', `translate(${40}, 40)`);
+
+		const defs = legendContainer.append('defs');
+		const legendGrad = defs.append('linearGradient')
+			.attr('id', 'legend-gradient')
+			.attr('x1', '0%')
+			.attr('x2', '100%')
+			.attr('y1', '0%')
+			.attr('y2', '0%');
+		legendGrad.append('stop')
+			.attr('stop-color', '#c91414')
+			.attr('offset', '0%');
+		legendGrad.append('stop')
+			.attr('stop-color', '#082b84')
+			.attr('offset', '100%');
+
+		legend.append('rect')
+			.attr('class', 'legend-bar')
+			.attr('width', barWidth)
+			.attr('height', barHeight)
+			.style('opacity', 0.75)
+			.style('fill', 'url(#legend-gradient)');
+		legend.append('text')
+			.attr('class', 'legend-text')
+			.attr('y', barHeight + 12)
+			.attr('dy', '.35em')
+			.text('Human');
+		legend.append('text')
+			.attr('class', 'legend-text')
+			.attr('x', barWidth / 2)
+			.attr('y', barHeight + 12)
+			.attr('dy', '.35em')
+			.text('Zoonotic');
+		legend.append('text')
+			.attr('class', 'legend-text')
+			.attr('x', barWidth)
+			.attr('y', barHeight + 12)
+			.attr('dy', '.35em')
+			.text('Animal');
 	};
 })();
