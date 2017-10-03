@@ -7,7 +7,7 @@
 			},
 			{
 				name: 'Route of Transmission',
-				values: ['Airborne', 'Waterborne', 'Foodborne', 'Bloodborne'],
+				values: ['Airborne', 'Waterborne', 'Foodborne', 'Bloodborne', 'Vector-borne'],
 			},
 			{
 				name: 'Origin',
@@ -15,7 +15,7 @@
 			},
 			{
 				name: 'Medical Countermeasures',
-				values: ['Antivirals', 'Antibiotics', 'Vaccine', 'Post-exposure Prophylaxis'],
+				values: ['Antivirals', 'Antibiotics', 'Vaccine', 'Post-exposure Prophylaxis', 'None'],
 			},
 			{
 				name: 'Outbreak Location',
@@ -42,7 +42,7 @@
 			},
 			{
 				name: 'Populations Affected',
-				values: ['All', 'Pregnant Women', 'Children', 'Elderly', 'Able-Bodied', 'Targeted'],
+				values: ['All', 'Pregnant Women', 'Children', 'Elderly', 'Targeted'],
 			},
 			{
 				name: 'Personal Protective Equipment',
@@ -80,7 +80,7 @@
 					if (values.includes(d.value)) isSelected = true;
 				});
 
-				return isSelected ? 'steelblue' : '#bbb';
+				return isSelected ? 'url(#arc-gradient)' : 'url(#arc-gradient-empty)';
 			});
 
 			d3.selectAll('.node')

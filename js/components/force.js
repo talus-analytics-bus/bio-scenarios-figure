@@ -39,6 +39,19 @@
 			.attr('stop-color', 'steelblue')
 			.attr('offset', '100%');
 
+		const arcGradEmpty = defs.append('linearGradient')
+			.attr('id', 'arc-gradient-empty')
+			.attr('x1', '0%')
+			.attr('x2', '0%')
+			.attr('y1', '0%')
+			.attr('y2', '100%');
+		arcGradEmpty.append('stop')
+			.attr('stop-color', '#bbb')
+			.attr('offset', '0%');
+		arcGradEmpty.append('stop')
+			.attr('stop-color', '#999')
+			.attr('offset', '100%');
+
 		// add different groups
 		const ribbonG = chart.append('g');
 		const arcG = chart.append('g');
@@ -53,6 +66,7 @@
 		};
 		const indexArray = data.map(d => 0);
 		let nodeNum = 0;
+		let numBigNodes = 0;
 
 		function loopIndexAndAdd(indexToLoop, numTimes) {
 			for (let i = 0; i < numTimes; i++) {
@@ -61,7 +75,6 @@
 					const node = {
 						id: `Scenario ${nodeNum}`,
 						nodeNum,
-						size: Math.ceil(10 * Math.random()),
 						links: [],
 						extraLinks: [],
 					};
@@ -71,6 +84,10 @@
 					if (randNum2 < 1/11) node.type = 'Animal';
 					else if (randNum2 < 5/11) node.type = 'Zoonotic';
 					else node.type = 'Human';
+
+					// set relative node size
+					if (node.type === 'Animal') node.size = Math.pow(10, 0.5 + 1.5 * Math.random());
+					else node.size = Math.pow(10, 0.5 + 2.5 * Math.random());
 
 					// populate links array for each node
 					const ia = indexArray.slice(0);
@@ -89,7 +106,12 @@
 					extraData.forEach((d) => {
 						const numValues = d.values.length;
 						const randInd = Math.floor(numValues * Math.random());
-						const value = d.values[randInd];
+						let value = d.values[randInd];
+						if (d.name === 'Stakeholders') {
+							value = 'Medical and Public Health, Logistics';
+							if (node.Origin !== 'Natural') value += ', Law Enforcement';
+							if (node.Origin === 'Deliberate') d.value += ', Security/Military';
+						}
 						node.extraLinks.push({
 							parameter: d.name,
 							value,
@@ -100,7 +122,13 @@
 
 					// if in blacklist, don't push
 					let pushIt = true;
-					if (node.type === 'Zoonotic' && node['Spread Modality'] === 'Non-communicable') pushIt = false;
+					if (node['Spread Modality'] === 'Non-communicable') {
+						if (node.type === 'Zoonotic') pushIt = false;
+						if (node['Policy Measures'] === 'International') pushIt = false;
+						if (node.Diagnostics === 'BSL3' || node.Diagnostics === 'BSL4') pushIt = false;
+						if (node['Route of Transmission'] === 'Bloodborne') pushIt = false;
+					}
+					if (node['Route of Transmission'] === 'Bloodborne' && node.Origin === 'Accidental') pushIt = false;
 					if (node['Populations Affected'] === 'Targeted' && node['Origin'] === 'Natural') pushIt = false;
 					if (node['Stakeholders'] === 'Law Enforcement' && node['Origin'] === 'Natural') pushIt = false;
 					if (node['Route of Transmission'] === 'Waterborne' && node['Personal Protective Equipment'] === 'Containment Suit') pushIt = false;
@@ -113,7 +141,12 @@
 
 					// randomize pushing
 					const randNum = Math.random();
-					if (randNum < 0.03 && pushIt) {
+					if (randNum < 0.015 && pushIt) {
+						if (numBigNodes < 3 && node.type !== 'Animal') {
+							node.size = 5000 + 5000 * Math.random();
+							numBigNodes++;
+						}
+
 						nodeData.children.push(node);
 					}
 				} else {
@@ -154,7 +187,7 @@
 
 		// assign start and end angle to arcs
 		const arcData = [];
-		const arcPadding = 0.05;
+		const arcPadding = 0.04;
 		let runningTheta = 0;
 		data.forEach((d) => {
 			const totalTheta = 2 * Math.PI * (d.values.length / numTotalValues);
@@ -197,10 +230,11 @@
 		const arcGroups = arcG.selectAll('.arc')
 			.data(arcData)
 			.enter().append('g')
-				.attr('class', 'arc');
+				.attr('class', 'arc')
+				//.style('fill', 'steelblue')
+				.style('fill', 'url(#arc-gradient)');
 		arcGroups.append('path')
 			.attr('d', arc)
-			.style('fill', 'url(#arc-gradient)')
 			//.style('filter', 'url(#glow)')
 			.each(function addTooltip(d) {
 				$(this).tooltipster({
@@ -223,7 +257,7 @@
 					newArc = newArc.replace(/,/g , " ");
 
 					// flip if bottom half of circle
-					if (d.theta1 > Math.PI / 2 && d.theta0 < 3 * Math.PI / 2) {
+					if (d.theta1 > Math.PI / 2 && d.theta0 < 5 * Math.PI / 4) {
 						const startLoc = /M(.*?)A/;
 						const middleLoc = /A(.*?)0 0 1/;
 						const endLoc = /0 0 1 (.*?)$/;
@@ -240,7 +274,7 @@
 			.enter().append('text')
 				.attr('class', 'arc-label')
 				.attr('dy', (d) => {
-					if (d.theta1 > Math.PI / 2 && d.theta0 < 3 * Math.PI / 2) return 20;
+					if (d.theta1 > Math.PI / 2 && d.theta0 < 5 * Math.PI / 4) return 20;
 					return -8;
 				})
 				.append('textPath')
@@ -292,7 +326,7 @@
 		function createNodePack(nodeData, center, param = {}) {
 			// start drawing the node pack
 			const size = param.size || 180;
-			const nodeOpacity = 0.7;
+			const nodeOpacity = 0.75;
 			const pack = d3.pack()
 				.size([size, size])
 				.padding(2);

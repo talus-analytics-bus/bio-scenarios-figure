@@ -49,7 +49,7 @@ body { font-family: 'Open Sans', sans-serif; }
 	border: $border;
 	text-align: center;
 	background: url('../img/space.jpg');
-	@include gradient(#fff, #bbb);
+	@include gradient(#fff, #e0e0e0);
 }
 .figure-container-veil {
 	position: absolute;
@@ -126,6 +126,6 @@ body { font-family: 'Open Sans', sans-serif; }
 .arc-label {
 	text-anchor: middle;
 	font-weight: 600;
-	font-size: 1.3em;
+	font-size: 1.2em;
 	/*fill: white;*/
 }
