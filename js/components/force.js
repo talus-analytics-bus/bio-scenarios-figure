@@ -64,6 +64,14 @@
 						size: Math.ceil(10 * Math.random()),
 						links: [],
 					};
+
+					// set type for node (animal, zoonotic, human)
+					const randNum2 = Math.random();
+					if (randNum2 < 1/11) node.type = 'Animal';
+					else if (randNum2 < 5/11) node.type = 'Zoonotic';
+					else node.type = 'Human';
+
+					// populate links array for each node
 					const ia = indexArray.slice(0);
 					ia.forEach((valueIndex, j) => {
 						const parameter = data[j].name;
@@ -215,19 +223,6 @@
 					.attr('xlink:href', (d, i) => `#arc-path-${i}`)
 					.text(d => d.name);
 
-		/*arcG.selectAll('.arc-label')
-			.data(data)
-			.enter().append('text')
-				.attr('class', 'arc-label')
-				.attr('x', d => (outerRadius + 5) * Math.sin(d.avgTheta))
-				.attr('y', d => (outerRadius + 5) * -Math.cos(d.avgTheta))
-				.style('text-anchor', (d) => {
-					if (d.avgTheta > 0 && d.avgTheta < Math.PI) return 'start';
-					if (d.avgTheta > Math.PI && d.avgTheta < 2 * Math.PI) return 'end';
-					return 'middle';
-				})
-				.text(d => d.name);*/
-
 
 		/* --------- Force Part --------- */
 		// add node gradient fills
@@ -314,9 +309,9 @@
 						const contentTitle = content.append('div')
 							.attr('class', 'tooltip-title')
 							.text(d.data.id);
-						/*content.append('div')
+						content.append('div')
 							.attr('class', 'tooltip-line')
-							.html(`<b>Extremity:</b> ${d.data.size} out of 10`);*/
+							.html(`<b>Type:</b> ${d.data.type}`);
 						d.data.links.forEach((l) => {
 							content.append('div')
 								.attr('class', 'tooltip-line')
@@ -399,12 +394,11 @@
 					.attr('class', 'ribbon')
 					.attr('d', ribbon)
 					.style('fill', d => d.source.color)
-					//.style('fill', d => ribbonColorScale(d.source.colorNum))
 					.style('opacity', 0.1);
 		}
 
 		function calcNodeColorNum(d) {
-			const type = d.data.links[0].value;
+			const type = d.data.type;
 			let num = -1;
 			if (type === 'Human') {
 				num = Math.floor(3 * Math.random());
@@ -417,7 +411,7 @@
 		}
 
 		function calcNodeColor(d) {
-			const type = d.data.links[0].value;
+			const type = d.data.type;
 			if (type === 'Human') return colorScale(0.33 * Math.random());
 			else if (type === 'Animal') return colorScale(0.67 + 0.33 * Math.random());
 			else return colorScale(0.33 + 0.34 * Math.random());

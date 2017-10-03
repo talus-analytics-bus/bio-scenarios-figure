@@ -1,10 +1,10 @@
 (() => {
 	App.initHome = () => {
 		const data = [
-			{
+			/*{
 				name: 'Type',
 				values: ['Human', 'Animal', 'Zoonotic'],
-			},
+			},*/
 			{
 				name: 'Spread Modality',
 				values: ['Communicable', 'Non-communicable'],
@@ -28,6 +28,10 @@
 			{
 				name: 'Response Level',
 				values: ['Local', 'Intermediate', 'National', 'Regional', 'Global'],
+			},
+			{
+				name: 'Policy Measures',
+				values: ['National', 'International', 'None'],
 			},
 			/*{
 				name: 'Diagnostics',
