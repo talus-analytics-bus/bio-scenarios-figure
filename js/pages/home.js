@@ -42,7 +42,7 @@
 			},
 			{
 				name: 'Populations Affected',
-				values: ['All', 'Pregnant Women', 'Children', 'Elderly', 'Able-Bodied', 'Targeted (work done by some state programs to target race)'],
+				values: ['All', 'Pregnant Women', 'Children', 'Elderly', 'Able-Bodied', 'Targeted'],
 			},
 			{
 				name: 'Personal Protective Equipment',

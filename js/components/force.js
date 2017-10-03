@@ -82,6 +82,7 @@
 							value,
 							numValues: data[j].values.length,
 						});
+						node[parameter] = value;
 					});
 
 					// populate extra links (only shown in tooltip)
@@ -94,16 +95,26 @@
 							value,
 							numValues,
 						});
+						node[d.name] = value;
 					});
+
+					// if in blacklist, don't push
+					let pushIt = true;
+					if (node.type === 'Zoonotic' && node['Spread Modality'] === 'Non-communicable') pushIt = false;
+					if (node['Populations Affected'] === 'Targeted' && node['Origin'] === 'Natural') pushIt = false;
+					if (node['Stakeholders'] === 'Law Enforcement' && node['Origin'] === 'Natural') pushIt = false;
+					if (node['Route of Transmission'] === 'Waterborne' && node['Personal Protective Equipment'] === 'Containment Suit') pushIt = false;
+					if (node['Route of Transmission'] === 'Waterborne' && node['Personal Protective Equipment'] === 'Respirator') pushIt = false;
+					if (node['Route of Transmission'] === 'Foodborne' && node['Personal Protective Equipment'] === 'Containment Suit') pushIt = false;
+					if (node['Route of Transmission'] === 'Foodborne' && node['Personal Protective Equipment'] === 'Respirator') pushIt = false;
+					if (node['Outbreak Location'] === 'State controlled without access' && node['Stakeholders'] === 'Trade') pushIt = false;
+
+					if (pushIt) nodeNum++;
 
 					// randomize pushing
 					const randNum = Math.random();
-					let threshold = 0.2;
-					if (data.length === 6) threshold = 0.05;
-					if (data.length === 7) threshold = 0.01;
-					if (randNum < threshold) {
+					if (randNum < 0.03 && pushIt) {
 						nodeData.children.push(node);
-						nodeNum++;
 					}
 				} else {
 					loopIndexAndAdd(indexToLoop + 1, data[indexToLoop + 1].values.length);
@@ -112,6 +123,7 @@
 		}
 		loopIndexAndAdd(0, data[0].values.length);
 
+		console.log('# of Possibilities: ', nodeNum);
 		const numNodes = nodeData.children.length;
 
 		// look through node data and add index for arc
