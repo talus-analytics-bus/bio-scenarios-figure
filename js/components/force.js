@@ -1,6 +1,6 @@
 (() => {
-	App.buildForceDiagram = (selector, data, param = {}) => {
-		const margin = { top: 30, right: 20, bottom: 30, left: 20 };
+	App.buildForceDiagram = (selector, data, extraData, param = {}) => {
+		const margin = { top: 40, right: 20, bottom: 20, left: 20 };
 		const outerRadius = 350;
 		const innerRadius = outerRadius - 20;
 		const width = 2 * outerRadius;
@@ -63,6 +63,7 @@
 						nodeNum,
 						size: Math.ceil(10 * Math.random()),
 						links: [],
+						extraLinks: [],
 					};
 
 					// set type for node (animal, zoonotic, human)
@@ -80,6 +81,18 @@
 							parameter,
 							value,
 							numValues: data[j].values.length,
+						});
+					});
+
+					// populate extra links (only shown in tooltip)
+					extraData.forEach((d) => {
+						const numValues = d.values.length;
+						const randInd = Math.floor(numValues * Math.random());
+						const value = d.values[randInd];
+						node.extraLinks.push({
+							parameter: d.name,
+							value,
+							numValues,
 						});
 					});
 
@@ -317,11 +330,16 @@
 								.attr('class', 'tooltip-line')
 								.html(`<b>${l.parameter}:</b> ${l.value}`);
 						});
+						d.data.extraLinks.forEach((l) => {
+							content.append('div')
+								.attr('class', 'tooltip-line')
+								.html(`<b>${l.parameter}:</b> ${l.value}`);
+						});
 
 						$(this).tooltipster({
 							trigger: 'click',
 							contentAsHTML: true,
-							minWidth: 300,
+							minWidth: 350,
 							content: contentContainer.html(),
 						})
 					})

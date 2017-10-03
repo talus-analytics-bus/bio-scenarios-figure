@@ -1,10 +1,6 @@
 (() => {
 	App.initHome = () => {
 		const data = [
-			/*{
-				name: 'Type',
-				values: ['Human', 'Animal', 'Zoonotic'],
-			},*/
 			{
 				name: 'Spread Modality',
 				values: ['Communicable', 'Non-communicable'],
@@ -33,17 +29,36 @@
 				name: 'Policy Measures',
 				values: ['National', 'International', 'None'],
 			},
-			/*{
+		];
+
+		const extraData = [
+			{
 				name: 'Diagnostics',
 				values: ['Point of Care', 'BSL1', 'BSL2', 'BSL3', 'BSL4'],
 			},
 			{
 				name: 'Morbidity',
 				values: ['Low', 'Medium', 'Severe', 'Short-term', 'Long-term'],
-			},*/
+			},
+			{
+				name: 'Populations Affected',
+				values: ['All', 'Pregnant Women', 'Children', 'Elderly', 'Able-Bodied', 'Targeted (work done by some state programs to target race)'],
+			},
+			{
+				name: 'Personal Protective Equipment',
+				values: ['Mask, Gloves, Gown', 'Respirator', 'Containment Suit'],
+			},
+			{
+				name: 'Fatality Rates',
+				values: ['Very Low', 'Low', 'Medium', 'High', 'Very High'],
+			},
+			{
+				name: 'Stakeholders',
+				values: ['Medical and Public Health', 'Law Enforcement', 'Logistics', 'Security/Military', 'Trade'],
+			}
 		];
 
-		App.buildForceDiagram('.network-map', data);
+		App.buildForceDiagram('.network-map', data, extraData);
 
 
 		// populate dropdowns
