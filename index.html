@@ -63,10 +63,10 @@
 				<div class="filters-container">
 					<div class="dropdown-row">
 						<div class="dropdown-box">
-							<div class="dropdown-label">Spread</div>
+							<div class="dropdown-label">Spread Modality</div>
 							<select class="type-select form-control" name="Spread Modality" multiple="multiple">
-								<option value="Contagious" selected>Contagious</option>
-								<option value="Non-contagious" selected>Non-contagious</option>
+								<option value="Communicable" selected>Communicable</option>
+								<option value="Non-communicable" selected>Non-communicable</option>
 							</select>
 						</div>
 						<div class="dropdown-box">
@@ -79,6 +79,14 @@
 							</select>
 						</div>
 						<div class="dropdown-box">
+							<div class="dropdown-label">Origin</div>
+							<select class="type-select form-control" name="Origin" multiple="multiple">
+								<option value="Natural" selected>Natural</option>
+								<option value="Accidental" selected>Accidental</option>
+								<option value="Deliberate" selected>Deliberate</option>
+							</select>
+						</div>
+						<div class="dropdown-box">
 							<div class="dropdown-label">Medical Countermeasures</div>
 							<select class="type-select form-control" name="Medical Countermeasures" multiple="multiple">
 								<option value="Antivirals" selected>Antivirals</option>
@@ -88,11 +96,25 @@
 							</select>
 						</div>
 						<div class="dropdown-box">
-							<div class="dropdown-label">Origin</div>
-							<select class="type-select form-control" name="Origin" multiple="multiple">
-								<option value="Natural" selected>Natural</option>
-								<option value="Accidental" selected>Accidental</option>
-								<option value="Deliberate" selected>Deliberate</option>
+							<div class="dropdown-label">Outbreak Location</div>
+							<select class="type-select form-control" name="Outbreak Location" multiple="multiple">
+								<option value="Permissive" selected>Permissive</option>
+								<option value="Non-permissive" selected>Non-permissive</option>
+								<option value="Unstable" selected>Unstable</option>
+								<option value="State controlled with access" selected>State controlled with access</option>
+								<option value="State controlled without access" selected>State controlled without access</option>
+							</select>
+						</div>
+					</div>
+					<div class="dropdown-row">
+						<div class="dropdown-box">
+							<div class="dropdown-label">Response Level</div>
+							<select class="type-select form-control" name="Response Level" multiple="multiple">
+								<option value="Local" selected>Local</option>
+								<option value="Intermediate" selected>Intermediate</option>
+								<option value="National" selected>National</option>
+								<option value="Regional" selected>Regional</option>
+								<option value="Global" selected>Global</option>
 							</select>
 						</div>
 						<div class="dropdown-box">

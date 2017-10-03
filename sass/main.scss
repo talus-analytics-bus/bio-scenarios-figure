@@ -72,6 +72,12 @@ body { font-family: 'Open Sans', sans-serif; }
 	background-color: #f0f0f0;
 	z-index: 10000;
 }
+.dropdown-row {
+	text-align: left;
+}
+.dropdown-row:nth-child(n+2) {
+	margin-top: 20px;
+}
 .dropdown-box {
 	text-align: left;
 	width: 200px;

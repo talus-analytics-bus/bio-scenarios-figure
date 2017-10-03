@@ -452,15 +452,15 @@
 		createNodePack(nodeData, [0, 0], { size: 280 });
 
 		/*const nodeData1 = Object.assign({}, nodeData);
-		nodeData1.children = nodeData.children.filter(d => d.links[0].value === 'Animal');
+		nodeData1.children = nodeData.children.filter(d => d.type === 'Animal');
 		createNodePack(nodeData1, [100, -20]);
 
 		const nodeData2 = Object.assign({}, nodeData);
-		nodeData2.children = nodeData.children.filter(d => d.links[0].value === 'Zoonotic');
+		nodeData2.children = nodeData.children.filter(d => d.type === 'Zoonotic');
 		createNodePack(nodeData2, [-20, 100]);
 
 		const nodeData3 = Object.assign({}, nodeData);
-		nodeData3.children = nodeData.children.filter(d => d.links[0].value === 'Human');
+		nodeData3.children = nodeData.children.filter(d => d.type === 'Human');
 		createNodePack(nodeData3, [-70, -70]);*/
 	};
 })();
