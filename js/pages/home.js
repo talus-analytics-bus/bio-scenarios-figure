@@ -183,7 +183,7 @@
 			.attr('y', 10)
 			.attr('dy', '.35em')
 			.style('text-anchor', 'end')
-			.text('Extreme');
+			.text('Fatalities');
 		circleLegend.append('text')
 			.attr('class', 'legend-text')
 			.attr('x', 170)
@@ -197,6 +197,6 @@
 			.attr('y', 10)
 			.attr('dy', '.35em')
 			.style('text-anchor', 'start')
-			.text('Extreme');
+			.text('Fatalities');
 	};
 })();
