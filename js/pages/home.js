@@ -106,13 +106,13 @@
 		}
 
 		// create map legend
-		const barHeight = 18;
-		const barWidth = 400;
+		const barHeight = 16;
+		const barWidth = 300;
 		const legendContainer = d3.select('.network-map-legend').append('svg')
-			.attr('width', barWidth + 80)
+			.attr('width', 800)
 			.attr('height', barHeight + 75)
 		const legend = legendContainer.append('g')
-			.attr('transform', `translate(${40}, 40)`);
+			.attr('transform', `translate(40, 40)`);
 
 		const defs = legendContainer.append('defs');
 		const legendGrad = defs.append('linearGradient')
@@ -151,5 +151,51 @@
 			.attr('y', barHeight + 12)
 			.attr('dy', '.35em')
 			.text('Animal');
+
+		const circleLegend = legend.append('g')
+			.attr('transform', `translate(${barWidth + 200}, ${barHeight})`);
+		circleLegend.append('circle')
+			.attr('r', 5)
+			.attr('fill', '#681f4c');
+		circleLegend.append('circle')
+			.attr('cx', 130)
+			.attr('r', 20)
+			.attr('fill', '#681f4c');
+		circleLegend.append('circle')
+			.attr('cx', 40)
+			.attr('r', 10)
+			.attr('fill', '#681f4c');
+		circleLegend.append('circle')
+			.attr('cx', 80)
+			.attr('r', 15)
+			.attr('fill', '#681f4c');
+		circleLegend.append('text')
+			.attr('class', 'legend-text')
+			.attr('x', -30)
+			.attr('y', -9)
+			.attr('dy', '.35em')
+			.style('text-anchor', 'end')
+			.text('Less');
+		circleLegend.append('text')
+			.attr('class', 'legend-text')
+			.attr('x', -30)
+			.attr('y', 10)
+			.attr('dy', '.35em')
+			.style('text-anchor', 'end')
+			.text('Extreme');
+		circleLegend.append('text')
+			.attr('class', 'legend-text')
+			.attr('x', 170)
+			.attr('y', -9)
+			.attr('dy', '.35em')
+			.style('text-anchor', 'start')
+			.text('More');
+		circleLegend.append('text')
+			.attr('class', 'legend-text')
+			.attr('x', 170)
+			.attr('y', 10)
+			.attr('dy', '.35em')
+			.style('text-anchor', 'start')
+			.text('Extreme');
 	};
 })();
