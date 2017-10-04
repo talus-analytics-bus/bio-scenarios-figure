@@ -327,7 +327,7 @@
 		function createNodePack(nodeData, center, param = {}) {
 			// start drawing the node pack
 			const size = param.size || 180;
-			const nodeOpacity = 0.75;
+			const nodeOpacity = 0.7;
 			const pack = d3.pack()
 				.size([size, size])
 				.padding(2);
@@ -392,15 +392,15 @@
 					})
 					.on('mouseover', function onMouseover(d) {
 						d3.selectAll('.ribbon').style('opacity', 0.01);
-						d3.selectAll('.node').style('opacity', 0.2);
+						d3.selectAll('.node circle').style('opacity', 0.2);
 						d3.selectAll('.ribbon')
 							.filter(r => d.data.id === r.source.data.id)
 							.style('opacity', 0.5);
-						d3.select(this.parentNode).style('opacity', 1);
+						d3.select(this).style('opacity', 1);
 					})
 					.on('mouseout', function onMouseout() {
 						d3.selectAll('.ribbon').style('opacity', 0.1);
-						d3.selectAll('.node').style('opacity', nodeOpacity);
+						d3.selectAll('.node circle').style('opacity', nodeOpacity);
 					});
 
 			/*nodesG.append('circle')
@@ -430,8 +430,8 @@
 					return {
 						startAngle: angle - 0.02,
 						endAngle: angle + 0.02,
-						radius: (dist - d.source.r < 20) ? dist + d.source.r : dist - d.source.r,
-						//radius: dist,
+						//radius: (dist - d.source.r < 20) ? dist + d.source.r : dist - d.source.r,
+						radius: dist,
 					};
 				})
 				.target((d) => {

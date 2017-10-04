@@ -52,10 +52,10 @@
 				name: 'Fatality Rates',
 				values: ['Very Low', 'Low', 'Medium', 'High', 'Very High'],
 			},
-			{
+			/*{
 				name: 'Stakeholders',
 				values: ['Medical and Public Health', 'Law Enforcement', 'Logistics', 'Security/Military', 'Trade'],
-			}
+			}*/
 		];
 
 		App.buildForceDiagram('.network-map', data, extraData);
