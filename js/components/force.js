@@ -127,6 +127,7 @@
 						if (node['Policy Measures'] === 'International') pushIt = false;
 						if (node.Diagnostics === 'BSL3' || node.Diagnostics === 'BSL4') pushIt = false;
 						if (node['Route of Transmission'] === 'Bloodborne') pushIt = false;
+						if (node['Route of Transmission'] === 'Vector-borne') pushIt = false;
 					}
 					if (node['Route of Transmission'] === 'Bloodborne' && node.Origin === 'Accidental') pushIt = false;
 					if (node['Populations Affected'] === 'Targeted' && node['Origin'] === 'Natural') pushIt = false;
