@@ -503,6 +503,6 @@
 		chart.append('text')
 			.attr('class', 'no-scenario-text')
 			.style('text-anchor', 'middle')
-			.text('No scenarios currently fit the filters chosen.');
+			.text('Scenario not shown.');
 	};
 })();
