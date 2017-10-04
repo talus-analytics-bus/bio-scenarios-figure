@@ -1,5 +1,5 @@
 (() => {
-	App.buildForceDiagram = (selector, data, extraData, param = {}) => {
+	App.buildForceDiagram = (selector, initData, extraData, param = {}) => {
 		const margin = { top: 40, right: 20, bottom: 20, left: 20 };
 		const outerRadius = 350;
 		const innerRadius = outerRadius - 20;
@@ -60,137 +60,150 @@
 
 		/* --------- Data Section --------- */
 		// create node data
-		const nodeData = {
-			name: 'background',
-			children: []
-		};
-		const indexArray = data.map(d => 0);
-		let nodeNum = 0;
-		let numBigNodes = 0;
+		function getNodeData(data, numNodes, blacklist = {}) {
+			console.log(data);
+			const nodeData = {
+				name: 'background',
+				children: []
+			};
+			const indexArray = data.map(d => 0);
+			let nodeNum = 0;
+			let numBigNodes = 0;
 
-		function loopIndexAndAdd(indexToLoop, numTimes) {
-			for (let i = 0; i < numTimes; i++) {
-				indexArray[indexToLoop] = i;
-				if (indexToLoop === indexArray.length - 1) {
-					const node = {
-						id: `Scenario ${nodeNum}`,
-						nodeNum,
-						links: [],
-						extraLinks: [],
-					};
+			function loopIndexAndAdd(indexToLoop, numTimes) {
+				for (let i = 0; i < numTimes; i++) {
+					indexArray[indexToLoop] = i;
+					if (indexToLoop === indexArray.length - 1) {
+						const node = {
+							id: `Scenario ${nodeNum}`,
+							nodeNum,
+							links: [],
+							extraLinks: [],
+						};
 
-					// set type for node (animal, zoonotic, human)
-					const randNum2 = Math.random();
-					if (randNum2 < 1/11) node.type = 'Animal';
-					else if (randNum2 < 5/11) node.type = 'Zoonotic';
-					else node.type = 'Human';
+						// set type for node (animal, zoonotic, human)
+						const randNum2 = Math.random();
+						if (randNum2 < 1/11) node.type = 'Animal';
+						else if (randNum2 < 5/11) node.type = 'Zoonotic';
+						else node.type = 'Human';
 
-					// set relative node size
-					if (node.type === 'Animal') node.size = Math.pow(10, 0.5 + 1.5 * Math.random());
-					else node.size = Math.pow(10, 0.5 + 2.5 * Math.random());
+						// set relative node size
+						if (node.type === 'Animal') node.size = Math.pow(10, 0.5 + 1.5 * Math.random());
+						else node.size = Math.pow(10, 0.5 + 2.5 * Math.random());
 
-					// populate links array for each node
-					const ia = indexArray.slice(0);
-					ia.forEach((valueIndex, j) => {
-						const parameter = data[j].name;
-						const value = data[j].values[valueIndex];
-						node.links.push({
-							parameter,
-							value,
-							numValues: data[j].values.length,
+						// populate links array for each node
+						const ia = indexArray.slice(0);
+						ia.forEach((valueIndex, j) => {
+							const parameter = data[j].name;
+							const value = data[j].values[valueIndex];
+							node.links.push({
+								parameter,
+								value,
+								numValues: data[j].values.length,
+							});
+							node[parameter] = value;
 						});
-						node[parameter] = value;
-					});
 
-					// populate extra links (only shown in tooltip)
-					extraData.forEach((d) => {
-						const numValues = d.values.length;
-						const randInd = Math.floor(numValues * Math.random());
-						let value = d.values[randInd];
-						if (d.name === 'Stakeholders') {
-							value = 'Medical and Public Health, Logistics';
-							if (node.Origin !== 'Natural') value += ', Law Enforcement';
-							if (node.Origin === 'Deliberate') d.value += ', Security/Military';
-						}
-						node.extraLinks.push({
-							parameter: d.name,
-							value,
-							numValues,
+						// populate extra links (only shown in tooltip)
+						extraData.forEach((d) => {
+							const numValues = d.values.length;
+							const randInd = Math.floor(numValues * Math.random());
+							let value = d.values[randInd];
+							if (d.name === 'Stakeholders') {
+								value = 'Medical and Public Health, Logistics';
+								if (node.Origin !== 'Natural') value += ', Law Enforcement';
+								if (node.Origin === 'Deliberate') d.value += ', Security/Military';
+							}
+							node.extraLinks.push({
+								parameter: d.name,
+								value,
+								numValues,
+							});
+							node[d.name] = value;
 						});
-						node[d.name] = value;
-					});
 
-					// if in blacklist, don't push
-					let pushIt = true;
-					if (node['Spread Modality'] === 'Non-communicable') {
-						if (node.type === 'Zoonotic') pushIt = false;
-						if (node['Policy Measures'] === 'International') pushIt = false;
-						if (node.Diagnostics === 'BSL3' || node.Diagnostics === 'BSL4') pushIt = false;
-						if (node['Route of Transmission'] === 'Bloodborne') pushIt = false;
-						if (node['Route of Transmission'] === 'Vector-borne') pushIt = false;
-					}
-					if (node['Route of Transmission'] === 'Bloodborne' && node.Origin === 'Accidental') pushIt = false;
-					if (node['Populations Affected'] === 'Targeted' && node['Origin'] === 'Natural') pushIt = false;
-					if (node['Stakeholders'] === 'Law Enforcement' && node['Origin'] === 'Natural') pushIt = false;
-					if (node['Route of Transmission'] === 'Waterborne' && node['Personal Protective Equipment'] === 'Containment Suit') pushIt = false;
-					if (node['Route of Transmission'] === 'Waterborne' && node['Personal Protective Equipment'] === 'Respirator') pushIt = false;
-					if (node['Route of Transmission'] === 'Foodborne' && node['Personal Protective Equipment'] === 'Containment Suit') pushIt = false;
-					if (node['Route of Transmission'] === 'Foodborne' && node['Personal Protective Equipment'] === 'Respirator') pushIt = false;
-					if (node['Outbreak Location'] === 'State controlled without access' && node['Stakeholders'] === 'Trade') pushIt = false;
+						// if in blacklist, don't push
+						let pushIt = true;
+						if (node['Spread Modality'] === 'Non-communicable') {
+							if (node.type === 'Zoonotic') pushIt = false;
+							if (node['Policy Measures'] === 'International') pushIt = false;
+							if (node.Diagnostics === 'BSL3' || node.Diagnostics === 'BSL4') pushIt = false;
+							if (node['Route of Transmission'] === 'Bloodborne') pushIt = false;
+							if (node['Route of Transmission'] === 'Vector-borne') pushIt = false;
+						}
+						if (node['Route of Transmission'] === 'Bloodborne' && node.Origin === 'Accidental') pushIt = false;
+						if (node['Populations Affected'] === 'Targeted' && node['Origin'] === 'Natural') pushIt = false;
+						if (node['Stakeholders'] === 'Law Enforcement' && node['Origin'] === 'Natural') pushIt = false;
+						if (node['Route of Transmission'] === 'Waterborne' && node['Personal Protective Equipment'] === 'Containment Suit') pushIt = false;
+						if (node['Route of Transmission'] === 'Waterborne' && node['Personal Protective Equipment'] === 'Respirator') pushIt = false;
+						if (node['Route of Transmission'] === 'Foodborne' && node['Personal Protective Equipment'] === 'Containment Suit') pushIt = false;
+						if (node['Route of Transmission'] === 'Foodborne' && node['Personal Protective Equipment'] === 'Respirator') pushIt = false;
+						if (node['Outbreak Location'] === 'State controlled without access' && node['Stakeholders'] === 'Trade') pushIt = false;
 
-					if (pushIt) nodeNum++;
-
-					// randomize pushing
-					const randNum = Math.random();
-					if (randNum < 0.015 && pushIt) {
-						if (numBigNodes < 3 && node.type !== 'Animal') {
-							node.size = 5000 + 5000 * Math.random();
-							numBigNodes++;
+						// check provided blacklist
+						for (let param in blacklist) {
+							if (blacklist[param].includes(node[param])) {
+								pushIt = false;
+								break;
+							}
 						}
 
-						nodeData.children.push(node);
+						if (pushIt) {
+							// set some sizes to be huge
+							if (numBigNodes < 3 && node.type !== 'Animal' && Math.random() < 0.01) {
+								node.size = 5000 + 5000 * Math.random();
+								numBigNodes++;
+							}
+
+							nodeData.children.push(node);
+							nodeNum++;
+						}
+					} else {
+						loopIndexAndAdd(indexToLoop + 1, data[indexToLoop + 1].values.length);
 					}
-				} else {
-					loopIndexAndAdd(indexToLoop + 1, data[indexToLoop + 1].values.length);
 				}
 			}
-		}
-		loopIndexAndAdd(0, data[0].values.length);
+			loopIndexAndAdd(0, data[0].values.length);
 
-		console.log('# of Possibilities: ', nodeNum);
-		const numNodes = nodeData.children.length;
+			nodeData.children = App.getRandomFromArray(nodeData.children, numNodes);
 
-		// look through node data and add index for arc
-		data.forEach((d) => {
-			d.numNodesForValue = [];
-			d.values.forEach((v, i) => {
-				let arcIndexNum = 0;
-				const numForArc = nodeData.children.filter((node) => {
-					return node.links.find(l => l.parameter === d.name && l.value === v);
-				}).length;
-				d.numNodesForValue.push(numForArc);
+			// look through node data and add index for arc
+			data.forEach((d) => {
+				d.numNodesForValue = [];
+				d.values.forEach((v, i) => {
+					let arcIndexNum = 0;
+					const numForArc = nodeData.children.filter((node) => {
+						return node.links.find(l => l.parameter === d.name && l.value === v);
+					}).length;
+					d.numNodesForValue.push(numForArc);
 
-				nodeData.children.forEach((node) => {
-					const link = node.links.find(l => l.parameter === d.name && l.value === v);
-					if (link) {
-						link.numValues = numForArc;
-						link.index = arcIndexNum;
-						arcIndexNum++;
-					}
+					nodeData.children.forEach((node) => {
+						const link = node.links.find(l => l.parameter === d.name && l.value === v);
+						if (link) {
+							link.numValues = numForArc;
+							link.index = arcIndexNum;
+							arcIndexNum++;
+						}
+					});
 				});
 			});
-		});
+
+
+			return nodeData;
+		}
+
+		const nodeData = getNodeData(initData, 50);
 
 
 		// create arc data
 		// calculate sum of values of all parameters
-		const numTotalValues = d3.sum(data, d => d.values.length);
+		const numTotalValues = d3.sum(initData, d => d.values.length);
 
 		// assign start and end angle to arcs
 		const arcData = [];
 		const arcPadding = 0.04;
 		let runningTheta = 0;
-		data.forEach((d) => {
+		initData.forEach((d) => {
 			const totalTheta = 2 * Math.PI * (d.values.length / numTotalValues);
 			let dtheta = totalTheta - 2 * arcPadding;
 			if (dtheta < 0) dtheta = 0;
@@ -231,7 +244,7 @@
 		const arcGroups = arcG.selectAll('.arc')
 			.data(arcData)
 			.enter().append('g')
-				.attr('class', 'arc')
+				.attr('class', 'arc active')
 				//.style('fill', 'steelblue')
 				.style('fill', 'url(#arc-gradient)');
 		arcGroups.append('path')
@@ -247,7 +260,7 @@
 
 		// add labels to arcs
 		arcG.selectAll('.arc-label-path')
-			.data(data)
+			.data(initData)
 			.enter().append('path')
 				.attr('id', (d, i) => `arc-path-${i}`)
 				.attr('d', arc)
@@ -271,7 +284,7 @@
 					d3.select(this).attr('d', newArc);
 				});
 		arcG.selectAll('.arc-label')
-			.data(data)
+			.data(initData)
 			.enter().append('text')
 				.attr('class', 'arc-label')
 				.attr('dy', (d) => {
@@ -324,9 +337,11 @@
 		});
 
 
-		function createNodePack(nodeData, center, param = {}) {
+		function createNodePack(nodeData) {
+			const center = [0, 0];
+
 			// start drawing the node pack
-			const size = param.size || 180;
+			const size = 280;
 			const nodeOpacity = 0.7;
 			const pack = d3.pack()
 				.size([size, size])
@@ -343,6 +358,7 @@
 			const nodePackData = pack(root).descendants();
 
 			const nodeContainer = nodeG.append('g')
+				.attr('class', 'node-g-container')
 				.attr('transform', `translate(${offsetX}, ${offsetY})`);
 
 			const nodes = nodeContainer.selectAll('g')
@@ -454,13 +470,15 @@
 					};
 				});
 
-			ribbonG.append('g').selectAll('.ribbon')
-				.data(ribbonData)
-				.enter().append('path')
-					.attr('class', 'ribbon')
-					.attr('d', ribbon)
-					.style('fill', d => d.source.color)
-					.style('opacity', 0.1);
+			ribbonG.append('g')
+				.attr('class', 'ribbon-g-container')
+				.selectAll('.ribbon')
+					.data(ribbonData)
+					.enter().append('path')
+						.attr('class', 'ribbon')
+						.attr('d', ribbon)
+						.style('fill', d => d.source.color)
+						.style('opacity', 0.1);
 		}
 
 		function calcNodeColorNum(d) {
@@ -485,24 +503,17 @@
 
 
 		// create packs
-		createNodePack(nodeData, [0, 0], { size: 280 });
-
-		/*const nodeData1 = Object.assign({}, nodeData);
-		nodeData1.children = nodeData.children.filter(d => d.type === 'Animal');
-		createNodePack(nodeData1, [100, -20]);
-
-		const nodeData2 = Object.assign({}, nodeData);
-		nodeData2.children = nodeData.children.filter(d => d.type === 'Zoonotic');
-		createNodePack(nodeData2, [-20, 100]);
-
-		const nodeData3 = Object.assign({}, nodeData);
-		nodeData3.children = nodeData.children.filter(d => d.type === 'Human');
-		createNodePack(nodeData3, [-70, -70]);*/
+		createNodePack(nodeData);
 
 
 		chart.append('text')
 			.attr('class', 'no-scenario-text')
 			.style('text-anchor', 'middle')
-			.text('Scenario not shown.');
+			.text('No scenarios fit the above filters.');
+
+		return {
+			getNodeData,
+			createNodePack,
+		}
 	};
 })();

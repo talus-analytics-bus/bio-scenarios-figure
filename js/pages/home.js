@@ -58,7 +58,7 @@
 			}
 		];
 
-		App.buildForceDiagram('.network-map', data, extraData);
+		const chart = App.buildForceDiagram('.network-map', data, extraData);
 
 
 		// populate dropdowns
@@ -70,43 +70,51 @@
 			onDeselectAll: updateDisplay,
 		});
 
+		let threshold = 0.015;
+
 		function updateDisplay() {
-			d3.selectAll('.arc').style('fill', (d) => {
+			NProgress.start();
+			d3.selectAll('.arc').style('fill', function(d) {
 				let isSelected = false;
 
 				d3.selectAll('select').each(function() {
 					const parameter = $(this).attr('name');
 					const values = $(this).val();
-					if (values.includes(d.value)) isSelected = true;
+					if (d.parameter === parameter && values.includes(d.value)) isSelected = true;
 				});
 
+				isSelected ? $(this).addClass('active') : $(this).removeClass('active');
 				return isSelected ? 'url(#arc-gradient)' : 'url(#arc-gradient-empty)';
 			});
 
-			let numNodesShowing = 0;
-			d3.selectAll('.node')
-				.filter(d => d.parent)
-				.style('display', (d) => {
-					let isSelected = true;
-
-					d3.selectAll('select').each(function() {
-						const parameter = $(this).attr('name');
-						const values = $(this).val();
-						const obj = d.data.links.find(l => l.parameter === parameter);
-						if (!values.includes(obj.value)) isSelected = false;
-					});
-
-					// toggle ribbons first
-					d3.selectAll('.ribbon')
-						.filter(r => r.source.data.id === d.data.id)
-						.style('display', isSelected ? 'inline' : 'none');
-
-					if (isSelected) numNodesShowing++;
-					return isSelected ? 'inline' : 'none';
+			// build blacklist
+			const blacklist = {};
+			d3.selectAll('select').each(function() {
+				const parameter = $(this).attr('name');
+				const unselectedVals = [];
+				$(this).find('option:not(:selected)').each(function() {
+					unselectedVals.push($(this).val());
 				});
+				if (unselectedVals.length) blacklist[parameter] = unselectedVals;
+			});
 
-			$('.no-scenario-text').css('display', numNodesShowing > 0 ? 'none' : 'inline');
+			// update nodes
+			d3.selectAll('.node-g-container, .ribbon-g-container').remove();
+			const nodeData = chart.getNodeData(data, 50, blacklist);
+			chart.createNodePack(nodeData);
+
+			const numNodesShowing = $('.node').length;
+			$('.no-scenario-text').css('display', numNodesShowing > 1 ? 'none' : 'inline');
+
+			NProgress.done();
 		}
+
+		// arc click toggles parameter
+		d3.selectAll('.arc').on('click', function(d) {
+			const verb = $(this).hasClass('active') ? 'deselect' : 'select';
+			$(`select[name="${d.parameter}"]`).multiselect(verb, d.value);
+			updateDisplay();
+		});
 
 		// create map legend
 		const barHeight = 16;
@@ -179,7 +187,7 @@
 			.attr('y', -9)
 			.attr('dy', '.35em')
 			.style('text-anchor', 'end')
-			.text('Less');
+			.text('Fewer');
 		circleLegend.append('text')
 			.attr('class', 'legend-text')
 			.attr('x', -23)
