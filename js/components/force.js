@@ -498,5 +498,11 @@
 		const nodeData3 = Object.assign({}, nodeData);
 		nodeData3.children = nodeData.children.filter(d => d.type === 'Human');
 		createNodePack(nodeData3, [-70, -70]);*/
+
+
+		chart.append('text')
+			.attr('class', 'no-scenario-text')
+			.style('text-anchor', 'middle')
+			.text('No scenarios currently fit the filters chosen.');
 	};
 })();

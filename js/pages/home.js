@@ -83,6 +83,7 @@
 				return isSelected ? 'url(#arc-gradient)' : 'url(#arc-gradient-empty)';
 			});
 
+			let numNodesShowing = 0;
 			d3.selectAll('.node')
 				.filter(d => d.parent)
 				.style('display', (d) => {
@@ -100,9 +101,11 @@
 						.filter(r => r.source.data.id === d.data.id)
 						.style('display', isSelected ? 'inline' : 'none');
 
-
+					if (isSelected) numNodesShowing++;
 					return isSelected ? 'inline' : 'none';
 				});
+
+			$('.no-scenario-text').css('display', numNodesShowing > 0 ? 'none' : 'inline');
 		}
 
 		// create map legend
