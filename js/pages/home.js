@@ -155,6 +155,7 @@
 		const circleLegend = legend.append('g')
 			.attr('transform', `translate(${barWidth + 200}, ${barHeight})`);
 		circleLegend.append('circle')
+			.attr('cx', 5)
 			.attr('r', 5)
 			.attr('fill', '#681f4c');
 		circleLegend.append('circle')
@@ -171,14 +172,14 @@
 			.attr('fill', '#681f4c');
 		circleLegend.append('text')
 			.attr('class', 'legend-text')
-			.attr('x', -30)
+			.attr('x', -23)
 			.attr('y', -9)
 			.attr('dy', '.35em')
 			.style('text-anchor', 'end')
 			.text('Less');
 		circleLegend.append('text')
 			.attr('class', 'legend-text')
-			.attr('x', -30)
+			.attr('x', -23)
 			.attr('y', 10)
 			.attr('dy', '.35em')
 			.style('text-anchor', 'end')
