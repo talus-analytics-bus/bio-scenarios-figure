@@ -429,7 +429,8 @@
 					return {
 						startAngle: angle - 0.02,
 						endAngle: angle + 0.02,
-						radius: (dist < d.source.r) ? 0 : dist - d.source.r,
+						radius: (dist - d.source.r < 20) ? dist + d.source.r : dist - d.source.r,
+						//radius: dist,
 					};
 				})
 				.target((d) => {
