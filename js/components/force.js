@@ -112,7 +112,7 @@
 							if (d.name === 'Stakeholders') {
 								value = 'Medical and Public Health, Logistics';
 								if (node.Origin !== 'Natural') value += ', Law Enforcement';
-								if (node.Origin === 'Deliberate') d.value += ', Security/Military';
+								if (node.Origin === 'Deliberate') value += ', Security/Military';
 							}
 							node.extraLinks.push({
 								parameter: d.name,
