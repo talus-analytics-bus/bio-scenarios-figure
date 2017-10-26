@@ -139,6 +139,11 @@
 			updateDisplay();
 		});
 
+		$('.show-more-filters-button').click(() => {
+			$('.extra-dropdown-row').slideDown();
+			$('.show-more-filters-button').slideUp();
+		});
+
 		// create map legend
 		const barHeight = 16;
 		const barWidth = 300;

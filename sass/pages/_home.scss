@@ -58,20 +58,40 @@
 }
 .filters-container {
 	position: relative;
-	padding: 15px 10px 20px;
+	padding: 15px 10px 0;
 	border-top: $border;
-	background-color: #f0f0f0;
 	z-index: 10000;
+	@include gradient(#f0f0f0, #e0e0e0);
 
-	.dropdown-row {
-		text-align: left;
-	}
 	.dropdown-row:nth-child(n+2) {
 		margin-top: 20px;
 	}
+	.dropdown-row.extra-dropdown-row {
+		display: none;
+		margin-top: 10px;
+		padding-bottom: 20px;
+	}
 	.dropdown-box {
-		text-align: left;
+		text-align: center;
 		width: 200px;
+	}
+	.show-more-filters-button {
+		margin: 20px -10px 0;
+		padding: 1px 0;
+		border-top: $light-border;
+		background-color: #f9f9f9;
+		cursor: pointer;
+
+		&:hover {
+			background-color: #f0f0f0;
+		}
+	}
+	img {
+		position: relative;
+		top: -1px;
+		width: 10px;
+		height: 8px;
+		margin: 0 10px;
 	}
 }
 
