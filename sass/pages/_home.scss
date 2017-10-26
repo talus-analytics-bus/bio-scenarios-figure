@@ -35,12 +35,25 @@
 	text-align: center;
 }
 .figure-content {
+	position: relative;
 	padding-bottom: 20px;
 	@include gradient(#fff, #e0e0e0);
 
 	.network-map {
 		position: relative;
 		z-index: 1000;
+	}
+	.shuffle-button {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		z-index: 10000;
+	}
+	.reset-button {
+		position: absolute;
+		top: 61px;
+		right: 20px;
+		z-index: 10000;
 	}
 }
 .filters-container {

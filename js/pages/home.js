@@ -10,7 +10,7 @@
 				values: ['Airborne', 'Waterborne', 'Foodborne', 'Bloodborne', 'Vector-borne'],
 			},
 			{
-				name: 'Origin',
+				name: 'Event Origin',
 				values: ['Natural', 'Accidental', 'Deliberate'],
 			},
 			{
@@ -37,19 +37,19 @@
 				values: ['Point of Care', 'BSL1', 'BSL2', 'BSL3', 'BSL4'],
 			},
 			{
-				name: 'Morbidity',
+				name: 'Morbidity Rate',
 				values: ['Low', 'Medium', 'Severe', 'Short-term', 'Long-term'],
 			},
 			{
-				name: 'Populations Affected',
-				values: ['All', 'Pregnant Women', 'Children', 'Elderly', 'Targeted'],
+				name: 'Population Affected',
+				values: ['All', 'Pregnant Women', 'Children', 'Elderly', 'Targeted Attack2'],
 			},
 			{
 				name: 'Personal Protective Equipment',
 				values: ['Mask, Gloves, Gown', 'Respirator', 'Containment Suit'],
 			},
 			{
-				name: 'Fatality Rates',
+				name: 'Fatality Rate',
 				values: ['Very Low', 'Low', 'Medium', 'High', 'Very High'],
 			},
 			{
@@ -116,10 +116,22 @@
 			if (isActive && $select.val().length === 1) {
 				$select.multiselect('selectAll', false);
 			} else {
-				$select.multiselect('deselectAll', false);
-				$select.multiselect('select', d.value);
+				$select
+					.multiselect('deselectAll', false)
+					.multiselect('select', d.value);
 			}
 			$select.multiselect('refresh');
+			updateDisplay();
+		});
+
+		// shuffle button
+		$('.shuffle-button').click(updateDisplay);
+
+		// reset button
+		$('.reset-button').click(() => {
+			$('select')
+				.multiselect('selectAll', false)
+				.multiselect('refresh');
 			updateDisplay();
 		});
 
