@@ -14,6 +14,13 @@
 	max-width: 1150px;
 	padding: 10px 50px 20px;
 }
+img {
+	position: relative;
+	top: -1px;
+	width: 10px;
+	height: 8px;
+	margin: 0 10px;
+}
 
 
 /* --- Text Part --- */
@@ -24,6 +31,21 @@
 .description {
 	margin-top: 15px;
 	p { margin-top: 15px; }
+}
+.extra-description {
+	display: none;
+}
+.show-more-description-button {
+	margin: 20px -10px 0;
+	padding: 1px 0;
+	border: $light-border;
+	background-color: #f9f9f9;
+	text-align: center;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #f0f0f0;
+	}
 }
 
 
@@ -85,13 +107,6 @@
 		&:hover {
 			background-color: #f0f0f0;
 		}
-	}
-	img {
-		position: relative;
-		top: -1px;
-		width: 10px;
-		height: 8px;
-		margin: 0 10px;
 	}
 }
 
