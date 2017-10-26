@@ -111,8 +111,15 @@
 
 		// arc click toggles parameter
 		d3.selectAll('.arc').on('click', function(d) {
-			const verb = $(this).hasClass('active') ? 'deselect' : 'select';
-			$(`select[name="${d.parameter}"]`).multiselect(verb, d.value);
+			const $select = $(`select[name="${d.parameter}"]`);
+			const isActive = $(this).hasClass('active');
+			if (isActive && $select.val().length === 1) {
+				$select.multiselect('selectAll', false);
+			} else {
+				$select.multiselect('deselectAll', false);
+				$select.multiselect('select', d.value);
+			}
+			$select.multiselect('refresh');
 			updateDisplay();
 		});
 
