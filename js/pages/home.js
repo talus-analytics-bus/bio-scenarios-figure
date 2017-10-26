@@ -123,7 +123,7 @@
 			.attr('width', 800)
 			.attr('height', barHeight + 75)
 		const legend = legendContainer.append('g')
-			.attr('transform', `translate(40, 40)`);
+			.attr('transform', `translate(40, 45)`);
 
 		const defs = legendContainer.append('defs');
 		const legendGrad = defs.append('linearGradient')
@@ -209,5 +209,11 @@
 			.attr('dy', '.35em')
 			.style('text-anchor', 'start')
 			.text('Fatalities');
+		circleLegend.append('text')
+			.attr('class', 'legend-text')
+			.attr('x', 72)
+			.attr('y', -32)
+			.style('text-anchor', 'middle')
+			.text('Biological Event');
 	};
 })();

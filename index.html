@@ -51,18 +51,27 @@
 	<!-- ----------- TEMPLATES ------------- -->
 	<script id="home-template" type="text/x-handlebars-template">
 		<div class="home-container container">
-			<div>
-				<h3>Complexity of Biological Events</h3>
-				<div class="description">
-					Preparing for and responding to biological events is complicated by the fact that no two events are the same. To demonstrate this complexity, we generated a series of approximately 22 million notional events based on 12 major dimensions across which events vary (see Background for additional details).
-					<br>
-					<br>
-					This network diagram shows a subset (2%) of these notional events, each represented by a circular node in the center sized in proportion to the number of fatalities. Nodes are colored on a spectrum from red to blue with events of greater impact animal health in shades of blue, human health red, and zoonotic agents in shades of purple. Each event is connected to a series of characteristics around the outer circle. Click an event to see a full list of event characteristics and relevant stakeholders. Apply filters to see only events with specific characteristics.
-
+			<div class="center">
+				<div class="text-container">
+					<h3>Complexity of Biological Events</h3>
+					<div class="description">
+						<p>
+							Preparing for and responding to biological events is complicated by the fact that no two events are the same. To demonstrate this complexity, we generated a series of approximately 22 million notional events based on 12 major dimensions across which events vary (see Background for additional details).
+						</p>
+						<p>
+							This network diagram shows a subset (2%) of these notional events, each represented by a circular node in the center sized in proportion to the number of fatalities. Nodes are colored on a spectrum from red to blue with events of greater impact animal health in shades of blue, human health red, and zoonotic agents in shades of purple. Each event is connected to a series of characteristics around the outer circle. Click an event to see a full list of event characteristics and relevant stakeholders. Apply filters to see only events with specific characteristics.
+						</p>
+					</div>
 				</div>
 			</div>
 			<div class="figure-container">
-				<div class="figure-container-veil"></div>
+				<div class="figure-content">
+					<div class="network-map"></div>
+					<div class="network-map-legend"></div>
+					<div class="disclaimer">
+						Only up to 50 scenarios are shown at a time.
+					</div>
+				</div>
 				<div class="filters-container">
 					<div class="dropdown-row">
 						<div class="dropdown-box">
@@ -180,22 +189,7 @@
 								<option value="Very High" selected>Very High</option>
 							</select>
 						</div>
-						<!--<div class="dropdown-box">
-							<div class="dropdown-label">Stakeholders</div>
-							<select class="type-select form-control" name="Stakeholders" multiple="multiple">
-								<option value="Medical and Public Health" selected>Medical and Public Health</option>
-								<option value="Law Enforcement" selected>Law Enforcement</option>
-								<option value="Logistics" selected>Logistics</option>
-								<option value="Security/Military" selected>Security/Military</option>
-								<option value="Trade" selected>Trade</option>
-							</select>
-						</div>-->
 					</div>
-				</div>
-				<div class="network-map"></div>
-				<div class="network-map-legend"></div>
-				<div class="disclaimer">
-					Only up to 50 scenarios are shown at a time.
 				</div>
 			</div>
 		</div>
