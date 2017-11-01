@@ -139,6 +139,7 @@
 						if (node['Route of Transmission'] === 'Foodborne' && node['Personal Protective Equipment'] === 'Containment Suit') pushIt = false;
 						if (node['Route of Transmission'] === 'Foodborne' && node['Personal Protective Equipment'] === 'Respirator') pushIt = false;
 						if (node['Outbreak Location'] === 'State controlled without access' && node['Stakeholders'] === 'Trade') pushIt = false;
+						if (node['Event Origin'] === 'Accidental' && node['Population Affected'] === 'Targeted Attack') pushIt = false;
 
 						// check provided blacklist
 						for (let param in blacklist) {
