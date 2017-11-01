@@ -50,19 +50,33 @@
 
 
 /* --- Figure Part --- */
+$height: 900px;
 .figure-container {
 	position: relative;
+	height: $height + 2;
 	margin: 20px 0;
 	border: $border;
-	text-align: center;
+	transition: height 0.8s;
+}
+.left-column {
+	float: left;
+	width: 800px;
+}
+.right-column {
+	float: right;
+	width: 200px;
 }
 .figure-content {
 	position: relative;
-	padding-bottom: 20px;
+	top: -10px;
+	height: $height;
+	padding-left: 20px;
+	transition: height 0.8s;
 	@include gradient(#fff, #e0e0e0);
 
 	.network-map {
 		position: relative;
+		left: 32px;
 		z-index: 1000;
 	}
 	.shuffle-button {
@@ -80,34 +94,35 @@
 }
 .filters-container {
 	position: relative;
-	padding: 15px 10px 0;
-	border-top: $border;
+	height: $height;
+	transition: height 0.8s;
+	padding: 10px 20px;
+	border-left: $border;
 	z-index: 10000;
 	@include gradient(#f0f0f0, #e0e0e0);
 
 	.dropdown-row:nth-child(n+2) {
-		margin-top: 20px;
+		margin-top: 0;
 	}
 	.dropdown-row.extra-dropdown-row {
 		display: none;
-		margin-top: 10px;
+		margin-top: 0;
 		padding-bottom: 20px;
 	}
 	.dropdown-box {
-		text-align: center;
-		width: 200px;
+		margin: 10px 0;
+		width: auto;
 	}
 	.show-more-filters-button {
-		margin: 20px -10px 0;
-		padding: 1px 0;
-		border-top: $light-border;
-		background-color: #f9f9f9;
-		cursor: pointer;
-
-		&:hover {
-			background-color: #f0f0f0;
-		}
+		margin-top: 30px;
 	}
+}
+
+$offset: 80;
+.figure-container.expanded {
+	height: $height + 2 + $offset;
+	.figure-content { height: $height + $offset; }
+	.filters-container { height: $height + $offset; }
 }
 
 

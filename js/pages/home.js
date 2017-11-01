@@ -66,8 +66,8 @@
 		const data = allData.filter((d, i) => indices.includes(i));
 		const extraData = allData.filter((d, i) => !indices.includes(i));
 
+		// build the chart
 		const chart = App.buildForceDiagram('.network-map', data, extraData);
-
 
 		// populate dropdowns
 		function populateDropdownRow(selector, dropdownData) {
@@ -176,6 +176,7 @@
 		$('.show-more-filters-button').click(() => {
 			$('.extra-dropdown-row').slideDown();
 			$('.show-more-filters-button').slideUp();
+			$('.figure-container').addClass('expanded');
 		});
 		$('.show-more-description-button').click(() => {
 			$('.extra-description').slideDown();
@@ -189,7 +190,7 @@
 			.attr('width', 800)
 			.attr('height', barHeight + 75)
 		const legend = legendContainer.append('g')
-			.attr('transform', `translate(40, 45)`);
+			.attr('transform', `translate(42, 45)`);
 
 		const defs = legendContainer.append('defs');
 		const legendGrad = defs.append('linearGradient')
