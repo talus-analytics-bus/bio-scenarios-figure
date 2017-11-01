@@ -1,6 +1,6 @@
 (() => {
 	App.initHome = () => {
-		const data = [
+		const allData = [
 			{
 				name: 'Spread Modality',
 				values: ['Communicable', 'Non-communicable'],
@@ -29,9 +29,6 @@
 				name: 'Policy Measures',
 				values: ['National', 'International', 'None'],
 			},
-		];
-
-		const extraData = [
 			{
 				name: 'Diagnostics',
 				values: ['Point of Care', 'BSL1', 'BSL2', 'BSL3', 'BSL4'],
@@ -52,16 +49,52 @@
 				name: 'Fatality Rate',
 				values: ['Very Low', 'Low', 'Medium', 'High', 'Very High'],
 			},
+		];
+		const noFilterData = [
 			{
 				name: 'Stakeholders',
 				values: ['Medical and Public Health', 'Law Enforcement', 'Logistics', 'Security/Military', 'Trade'],
 			}
 		];
 
+		// randomize to show 7 from the pool; include the rest as filters
+		const indices = [];
+		while (indices.length < 7) {
+			const randNum = Math.floor(allData.length * Math.random());
+			if (!indices.includes(randNum)) indices.push(randNum);
+		}
+		const data = allData.filter((d, i) => indices.includes(i));
+		const extraData = allData.filter((d, i) => !indices.includes(i));
+
 		const chart = App.buildForceDiagram('.network-map', data, extraData);
 
 
 		// populate dropdowns
+		function populateDropdownRow(selector, dropdownData) {
+			const boxes = d3.select(selector).selectAll('.dropdown-box')
+				.data(dropdownData)
+				.enter().append('div')
+					.attr('class', 'dropdown-box');
+			boxes.append('div')
+				.attr('class', 'dropdown-label')
+				.text(d => d.name);
+			const dropdown = boxes.append('select')
+				.attr('class', 'type-select form-control')
+				.attr('name', d => d.name)
+				.attr('multiple', 'multiple');
+			dropdown.selectAll('option')
+				.data(d => d.values)
+				.enter().append('option')
+					.attr('selected', true)
+					.attr('value', d => d)
+					.text(d => d);
+		}
+
+		populateDropdownRow('.filters-container .dropdown-row:first-child', data.slice(0, 5));
+		populateDropdownRow('.filters-container .dropdown-row:nth-child(2)', data.slice(5));
+		populateDropdownRow('.filters-container .extra-dropdown-row', extraData);
+
+		// initialize dropdown multiselect
 		$('select').multiselect({
 			//includeSelectAllOption: true,
 			numberDisplayed: 0,

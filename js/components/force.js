@@ -240,6 +240,12 @@
 			.padAngle(0)
 			.startAngle(d => d.theta0)
 			.endAngle(d => d.theta1);
+		const labelArc = d3.arc()
+			.innerRadius(innerRadius)
+			.outerRadius(outerRadius)
+			.padAngle(0)
+			.startAngle(d => (d.theta1 - d.theta0 > 1 ? d.theta0 : d.theta0 - 1))
+			.endAngle(d => (d.theta1 - d.theta0 > 1 ? d.theta1 : d.theta1 + 1));
 
 		const arcGroups = arcG.selectAll('.arc')
 			.data(arcData)
@@ -263,15 +269,16 @@
 			.data(initData)
 			.enter().append('path')
 				.attr('id', (d, i) => `arc-path-${i}`)
-				.attr('d', arc)
+				.attr('d', labelArc)
 				.style('fill', 'none')
 				.each(function(d) {
 					const firstArcSection = /(^.+?)L/;
 					let newArc = firstArcSection.exec(d3.select(this).attr('d'))[1];
-					newArc = newArc.replace(/,/g , " ");
+					newArc = newArc.replace(/,/g , ' ');
 
 					// flip if bottom half of circle
-					if (d.theta1 > Math.PI / 2 && d.theta0 < 5 * Math.PI / 4) {
+					const avgTheta = (d.theta0 + d.theta1) / 2;
+					if (avgTheta > Math.PI / 2 && avgTheta < 3 * Math.PI / 2) {
 						const startLoc = /M(.*?)A/;
 						const middleLoc = /A(.*?)0 0 1/;
 						const endLoc = /0 0 1 (.*?)$/;
@@ -288,7 +295,8 @@
 			.enter().append('text')
 				.attr('class', 'arc-label')
 				.attr('dy', (d) => {
-					if (d.theta1 > Math.PI / 2 && d.theta0 < 5 * Math.PI / 4) return 20;
+					const avgTheta = (d.theta0 + d.theta1) / 2;
+					if (avgTheta > Math.PI / 2 && avgTheta < 3 * Math.PI / 2) return 20;
 					return -8;
 				})
 				.append('textPath')
