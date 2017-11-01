@@ -39,7 +39,7 @@
 			},
 			{
 				name: 'Population Affected',
-				values: ['All', 'Pregnant Women', 'Children', 'Elderly', 'Targeted Attack'],
+				values: ['All', 'Pregnant Women', 'Children', 'Elderly', 'Targeted'],
 			},
 			{
 				name: 'Personal Protective Equipment',
