@@ -89,6 +89,7 @@
 
 						// set relative node size
 						if (node.type === 'Animal') node.size = Math.pow(10, 0.5 + 1.5 * Math.random());
+						else if (node.type === 'Zoonotic') node.size = Math.pow(10, 0.5 + 2 * Math.random());
 						else node.size = Math.pow(10, 0.5 + 2.5 * Math.random());
 
 						// populate links array for each node
@@ -399,7 +400,7 @@
 							.text(d.data.id);
 						content.append('div')
 							.attr('class', 'tooltip-line')
-							.html(`<b>Type:</b> ${d.data.type}`);
+							.html(`<b>Primary Spread Type:</b> ${d.data.type}`);
 						d.data.links.forEach((l) => {
 							content.append('div')
 								.attr('class', 'tooltip-line')
