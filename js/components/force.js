@@ -400,7 +400,7 @@
 							.text(d.data.id);
 						content.append('div')
 							.attr('class', 'tooltip-line')
-							.html(`<b>Primary Spread Type:</b> ${d.data.type}`);
+							.html(`<b>Primary Host Type:</b> ${d.data.type}`);
 						d.data.links.forEach((l) => {
 							content.append('div')
 								.attr('class', 'tooltip-line')
