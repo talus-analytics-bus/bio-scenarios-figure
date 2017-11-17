@@ -1,5 +1,5 @@
 (() => {
-	App.buildForceDiagram = (selector, initData, extraData, param = {}) => {
+	App.buildForceDiagram = (selector, initData, extraData, noFilterData, param = {}) => {
 		const margin = { top: 40, right: 20, bottom: 20, left: 20 };
 		const outerRadius = 350;
 		const innerRadius = outerRadius - 20;
@@ -105,7 +105,7 @@
 						});
 
 						// populate extra links (only shown in tooltip)
-						extraData.forEach((d) => {
+						extraData.concat(noFilterData).forEach((d) => {
 							const numValues = d.values.length;
 							const randInd = Math.floor(numValues * Math.random());
 							let value = d.values[randInd];

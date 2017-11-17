@@ -67,7 +67,7 @@
 		const extraData = allData.filter((d, i) => !indices.includes(i));
 
 		// build the chart
-		const chart = App.buildForceDiagram('.network-map', data, extraData);
+		const chart = App.buildForceDiagram('.network-map', data, extraData, noFilterData);
 
 		// populate dropdowns
 		function populateDropdownRow(selector, dropdownData) {
