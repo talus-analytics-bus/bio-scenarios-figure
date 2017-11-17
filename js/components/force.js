@@ -113,6 +113,9 @@
 								value = 'Medical and Public Health, Logistics';
 								if (node.Origin !== 'Natural') value += ', Law Enforcement';
 								if (node.Origin === 'Deliberate') value += ', Security/Military';
+								if (node.type === 'Animal' && Math.random() < 0.5) value += ', Trade';
+								if (node.type === 'Zoonotic' && Math.random() < 0.25) value += ', Trade';
+								if (node.type === 'Human' && Math.random() < 0.15) value += ', Trade'; 
 							}
 							node.extraLinks.push({
 								parameter: d.name,
