@@ -19,6 +19,10 @@
 		width: 10px;
 		height: 8px;
 		margin: 0 10px;
+		transition: transform 1s;
+	}
+	img.rotated {
+		transform: rotate(180deg);
 	}
 }
 
@@ -81,14 +85,14 @@ $height: 900px;
 	}
 	.shuffle-button {
 		position: absolute;
-		top: 20px;
-		right: 20px;
+		top: 15px;
+		right: 215px;
 		z-index: 10000;
 	}
 	.reset-button {
 		position: absolute;
-		top: 61px;
-		right: 20px;
+		top: 56px;
+		right: 215px;
 		z-index: 10000;
 	}
 }
@@ -114,11 +118,15 @@ $height: 900px;
 		width: auto;
 	}
 	.show-more-filters-button {
-		margin-top: 30px;
+		margin-top: 20px;
+	}
+	.hide-more-filters-button {
+		margin-top: 5px;
+		display: none;
 	}
 }
 
-$offset: 80;
+$offset: 145;
 .figure-container.expanded {
 	height: $height + 2 + $offset;
 	.figure-content { height: $height + $offset; }

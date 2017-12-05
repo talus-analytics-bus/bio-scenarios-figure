@@ -96,7 +96,7 @@
 
 		// initialize dropdown multiselect
 		$('select').multiselect({
-			//includeSelectAllOption: true,
+			includeSelectAllOption: true,
 			numberDisplayed: 0,
 			onChange: updateDisplay,
 			onSelectAll: updateDisplay,
@@ -176,11 +176,27 @@
 		$('.show-more-filters-button').click(() => {
 			$('.extra-dropdown-row').slideDown();
 			$('.show-more-filters-button').slideUp();
+			$('.hide-more-filters-button').slideDown();
 			$('.figure-container').addClass('expanded');
 		});
-		$('.show-more-description-button').click(() => {
-			$('.extra-description').slideDown();
-			$('.show-more-description-button').slideUp();
+		$('.hide-more-filters-button').click(() => {
+			$('.extra-dropdown-row').slideUp();
+			$('.show-more-filters-button').slideDown();
+			$('.hide-more-filters-button').slideUp();
+			$('.figure-container').removeClass('expanded');
+		});
+		$('.show-more-description-button').click(function toggleDisplay() {
+			const $this = $(this);
+			const isActive = $this.hasClass('active');
+			$this.toggleClass('active');
+			$this.find('img').toggleClass('rotated');
+			$this.find('span').text(`${isActive ? 'show' : 'hide'} full description`);
+
+			if (isActive) {
+				$('.extra-description').slideUp();
+			} else {
+				$('.extra-description').slideDown();
+			}
 		});
 
 		// create map legend
