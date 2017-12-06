@@ -165,7 +165,7 @@
 		$('.shuffle-button').click(updateDisplay);
 
 		// reset button
-		$('.reset-button').click(() => {
+		$('.reset-filters-button').click(() => {
 			$('select')
 				.multiselect('selectAll', false)
 				.multiselect('refresh');
