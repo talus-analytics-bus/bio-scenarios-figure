@@ -1,17 +1,45 @@
-#footer {
-  position: relative;
+$phone: "screen and (max-width : 812px)";
+$phone-narrow: "screen and (max-width : 500px)";
+.footer {
+  margin-top: 80px;
+  height: 90px;
   width: 100%;
-  padding: 10px;
-  font-weight: 600;
-  text-align: center;
-  border-top: $border;
-  border-bottom: $border;
-  color: #555;
-  @include gradient(#fcfcfc, #f0f0f0);
-
-  span { margin-right: 1px; }
-  img {
-    height: 70px;
-    margin: 0 20px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid $black;
+  .content {
+    display: flex;
+    flex-direction: row;
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:not(:last-child) {
+        border-right: 1px solid $black;
+      }
+    }
+    img {
+      height: 40px;
+      padding: 0px 40px;
+    }
+  }
+  @media #{$phone-narrow} {
+    height: unset;
+    margin-top: 40px;
+    padding: 10px 0px;
+    .content {
+      flex-direction: column;
+      a {
+        &:not(:last-child) {
+          border-right: 0px solid $black;
+        }
+      }
+      img {
+        height: 30px;
+        padding: 10px 0px;
+      }
+    }
   }
 }

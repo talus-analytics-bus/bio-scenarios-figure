@@ -1,174 +1,286 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-125646911-1"></script>
-	<script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-125646911-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-        gtag('config', 'UA-125646911-1');
-	</script>
+      gtag("config", "UA-125646911-1");
+    </script>
 
+    <meta charset="utf-8" />
+    <title>Complexity of Biological Events</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="img/favicon.ico" />
 
-	<meta charset="utf-8">
-	<title>Complexity of Biological Events</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="img/favicon.ico">
-		
-		<!-- Stylesheets -->
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:800,600,400,300' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Raleway:600,400' rel='stylesheet' type='text/css'>
-	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-	<link href="css/bootstrap-multiselect.css" rel="stylesheet" type="text/css">
-	<link href="css/tooltipster.bundle.min.css" rel="stylesheet" type="text/css">
-	<link href="css/tooltipster-sideTip-shadow.css" rel="stylesheet" type="text/css">
-	<link href="css/leaflet.css" rel="stylesheet" type="text/css">
-	<link href="css/nprogress.min.css" rel="stylesheet" type="text/css">
-	<link href="css/main.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-	<nav class="navbar navbar-default">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Complexity of Biological Events</a>
-			</div>
-			<div class="collapse navbar-collapse" id="navbar-collapse-1">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Home</a></li>
-					<li><a href="#background">Background</a></li>
-				</ul>
-			</div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
-	</nav>
-	<div id="page-content"></div>
-	<div id="footer">
-		<img
-			alt="Georgetown University"
-			class="logo-georgetown"
-			src="img/logo-georgetown.png"
-		/>
-		<img src="img/talus-logo.png" />
-	</div>
+    <!-- Stylesheets -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:800,600,400,300"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:600,400"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link
+      href="css/bootstrap-multiselect.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="css/tooltipster.bundle.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="css/tooltipster-sideTip-shadow.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="css/leaflet.css" rel="stylesheet" type="text/css" />
+    <link href="css/nprogress.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/main.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar-collapse-1"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Complexity of Biological Events</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Home</a></li>
+            <li><a href="#background">Background</a></li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+    <div id="page-content"></div>
+    <div class="footer">
+      <div class="content">
+        <a target="_blank" href="https://ghssidea.org">
+          <img
+            src="img/logo-title.png"
+            alt="International Disease and Events Analysis"
+        /></a>
+        <a target="_blank" href="https://ghss.georgetown.edu/">
+          <img
+            src="img/logo-georgetown.png"
+            alt="Georgetown University Center for Global Health Science and Security"
+        /></a>
+        <a target="_blank" href="http://talusanalytics.com/">
+          <img src="img/logo-talus.png" alt="Talus Analytics, LLC"
+        /></a>
+      </div>
+    </div>
 
-		
-	<!-- ----------- TEMPLATES ------------- -->
-	<script id="home-template" type="text/x-handlebars-template">
-		<div class="home-container container">
-			<div class="center">
-				<div class="text-container">
-					<h3>Biological Scenario Characteristics</h3>
-					<div class="description">
-						<p>
-							Preparing for and responding to biological events is complicated by the fact that no two events are the same. To demonstrate this complexity, we generated a series of approximately 22 million notional events based on 12 major dimensions across which events vary (see Background for additional details).
-						</p>
-						<p class="extra-description">
-							A randomized selection of 50 biological event scenarios is shown below. Each event is represented by a circular node sized in proportion to event fatality number and colored by relative effects to animal and human health. Hover over a scenario to view connections to event characteristics in the outer circle. To filter for events with specific characteristics, click the corresponding section on the outer circle or use dropdown menus below the figure.
-						</p>
-						<div class="show-more-description-button">
-							<img src="img/chevron_down.png" />
-							<span>show full description</span>
-							<img src="img/chevron_down.png" />
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="figure-container">
-				<div class="figure-content">
-					<div class="shuffle-button btn btn-default">Refresh Scenarios</div>
-					<div class="left-column">
-						<div class="network-map"></div>
-						<div class="network-map-legend"></div>
-					</div>
-					<div class="right-column">
-						<div class="filters-container">
-							<div class="dropdown-row"></div>
-							<div class="dropdown-row"></div>
-							<div class="extra-dropdown-row dropdown-row"></div>
-							<div class="center">
-								<div class="reset-filters-button btn btn-default">Reset All Filters</div>
-								<div class="show-more-filters-button btn btn-default">Show All Filters</div>
-								<div class="hide-more-filters-button btn btn-default">Show Select Filters</div>
-							</div>
-						</div>
-					</div>
-					<div class="disclaimer">
-						Only up to 50 scenarios are shown at a time.
-					</div>
-				</div>
-			</div>
-		</div>
-	</script>
+    <!-- ----------- TEMPLATES ------------- -->
+    <script id="home-template" type="text/x-handlebars-template">
+      <div class="home-container container">
+        <div class="center">
+          <div class="text-container">
+            <h3>
+              Biological Scenario Characteristics
+            </h3>
+            <div class="description">
+              <p>
+                Preparing for and responding to biological events is complicated by the fact that no two events are the same. To demonstrate this complexity, we generated a series of approximately 22 million notional events based on 12 major dimensions across which events vary (see Background for additional details).
+              </p>
+              <p class="extra-description">
+                A randomized selection of 50 biological event scenarios is shown below. Each event is represented by a circular node sized in proportion to event fatality number and colored by relative effects to animal and human health. Hover over a scenario to view connections to event characteristics in the outer circle. To filter for events with specific characteristics, click the corresponding section on the outer circle or use dropdown menus below the figure.
+              </p>
+              <div class="show-more-description-button">
+                <img src="img/chevron_down.png" />
+                <span>
+                  show full description
+                </span>
+                <img src="img/chevron_down.png" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="figure-container">
+          <div class="figure-content">
+            <div class="shuffle-button btn btn-default">
+              Refresh Scenarios
+            </div>
+            <div class="left-column">
+              <div class="network-map"></div>
+              <div class="network-map-legend"></div>
+            </div>
+            <div class="right-column">
+              <div class="filters-container">
+                <div class="dropdown-row"></div>
+                <div class="dropdown-row"></div>
+                <div class="extra-dropdown-row dropdown-row"></div>
+                <div class="center">
+                  <div class="reset-filters-button btn btn-default">
+                    Reset All Filters
+                  </div>
+                  <div class="show-more-filters-button btn btn-default">
+                    Show All Filters
+                  </div>
+                  <div class="hide-more-filters-button btn btn-default">
+                    Show Select Filters
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="disclaimer">
+              Only up to 50 scenarios are shown at a time.
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
 
-	<script id="background-template" type="text/x-handlebars-template">
-		<div class="background-page-container container container-text">
-			<h3>Background</h3>
-			<p class="description">
-				We developed a framework to categorize biological events based on the event characteristics that drive planning and response decision making. These 12 dimensions include:
-			</p>
-			<ul>
-				<li><b>event origin</b> (natural, accidental, or deliberate)</li>
-				<li><b>type</b> (animal, human, or zoonotic disease)</li>
-				<li><b>spread modality</b> (communicable or non-communicable)</li>
-				<li><b>route of transmission</b> (airborne, bloodborne, waterborne, foodborne, or vector-borne)</li>
-				<li><b>diagnostics</b> (point of care, BSL1, BSL2, BSL3, BSL4)</li>
-				<li><b>medical countermeasures</b> (antivirals, antibiotics, vaccine, post-exposure prophylaxis, or none)</li>
-				<li><b>outbreak location</b> (accessible to international community or not and whether conditions are non-permissive due to conflict or other instability)</li>
-				<li><b>affected populations</b> (all, pregnant women, children, elderly, or targeted attack)</li>
-				<li><b>personal protective equipment applicable </b> (respirator, containment suit, or mask/gloves/gown)</li>
-				<li><b>morbidity rate</b> (graded at 5 levels from very low to very high)</li>
-				<li><b>response level</b> (local, intermediate, national, regional, or global)</li>
-				<li><b>policy measures in place</b> (national, international, or none)</li>
-			</ul>
-			<p class="margin-top-20">
-				Using this framework, we generated a series of random combinations to demonstrate the complex range of scenarios possible for biological events. We then removed non-rational combinations, such as excluding targeted attack for a natural outbreak, excluding respirator as required personal protective equipment for foodborne events, and ensuring that vector-borne diseases are only communicable spread modality. After removing implausible combinations, the final set of notional events was approximately 22 million. We selected a subset of 7 major event characteristics and developed this interactive visualization to illustrate the range of possible event combinations. 
-			</p>
-			<p class="margin-top-20">
-				Finally, we tagged each event with a series of relevant stakeholders based on the origin of the event. Stakeholders in logistics and the public health and medical communities were included for all events. Law enforcement was included as a stakeholder for all accidental and deliberate events. In addition, all intentional events were tagged with security/military stakeholders as were a random subset of natural events (20%), reflecting that these groups respond to some naturally occurring outbreaks as well. Stakeholders in Trade (imports and exports) were included for a subset of all events, but concentrated in the events with primary impacts to animal health (to reflect agricultural trade).
-			</p>
-		</div>
-	</script>
-	
-	
-	<!-- General Libraries -->
-	<script src="lib/jquery-3.2.1.min.js"></script>
-	<script src="lib/d3.min.js"></script>
-	<script src="lib/popper.min.js"></script>
-	<script src="lib/bootstrap.min.js"></script>
-	<script src="lib/leaflet.min.js"></script>
+    <script id="background-template" type="text/x-handlebars-template">
+      <div class="background-page-container container container-text">
+        <h3>
+          Background
+        </h3>
+        <p class="description">
+          We developed a framework to categorize biological events based on the event characteristics that drive planning and response decision making. These 12 dimensions include:
+        </p>
+        <ul>
+          <li>
+            <b>
+              event origin
+            </b>
+            (natural, accidental, or deliberate)
+          </li>
+          <li>
+            <b>
+              type
+            </b>
+            (animal, human, or zoonotic disease)
+          </li>
+          <li>
+            <b>
+              spread modality
+            </b>
+            (communicable or non-communicable)
+          </li>
+          <li>
+            <b>
+              route of transmission
+            </b>
+            (airborne, bloodborne, waterborne, foodborne, or vector-borne)
+          </li>
+          <li>
+            <b>
+              diagnostics
+            </b>
+            (point of care, BSL1, BSL2, BSL3, BSL4)
+          </li>
+          <li>
+            <b>
+              medical countermeasures
+            </b>
+            (antivirals, antibiotics, vaccine, post-exposure prophylaxis, or none)
+          </li>
+          <li>
+            <b>
+              outbreak location
+            </b>
+            (accessible to international community or not and whether conditions are non-permissive due to conflict or other instability)
+          </li>
+          <li>
+            <b>
+              affected populations
+            </b>
+            (all, pregnant women, children, elderly, or targeted attack)
+          </li>
+          <li>
+            <b>
+              personal protective equipment applicable
+            </b>
+            (respirator, containment suit, or mask/gloves/gown)
+          </li>
+          <li>
+            <b>
+              morbidity rate
+            </b>
+            (graded at 5 levels from very low to very high)
+          </li>
+          <li>
+            <b>
+              response level
+            </b>
+            (local, intermediate, national, regional, or global)
+          </li>
+          <li>
+            <b>
+              policy measures in place
+            </b>
+            (national, international, or none)
+          </li>
+        </ul>
+        <p class="margin-top-20">
+          Using this framework, we generated a series of random combinations to demonstrate the complex range of scenarios possible for biological events. We then removed non-rational combinations, such as excluding targeted attack for a natural outbreak, excluding respirator as required personal protective equipment for foodborne events, and ensuring that vector-borne diseases are only communicable spread modality. After removing implausible combinations, the final set of notional events was approximately 22 million. We selected a subset of 7 major event characteristics and developed this interactive visualization to illustrate the range of possible event combinations.
+        </p>
+        <p class="margin-top-20">
+          Finally, we tagged each event with a series of relevant stakeholders based on the origin of the event. Stakeholders in logistics and the public health and medical communities were included for all events. Law enforcement was included as a stakeholder for all accidental and deliberate events. In addition, all intentional events were tagged with security/military stakeholders as were a random subset of natural events (20%), reflecting that these groups respond to some naturally occurring outbreaks as well. Stakeholders in Trade (imports and exports) were included for a subset of all events, but concentrated in the events with primary impacts to animal health (to reflect agricultural trade).
+        </p>
+      </div>
+    </script>
 
-	
-	<!-- Routing Libraries -->
-	<script src="lib/signals.min.js"></script>
-	<script src="lib/crossroads.min.js"></script>
-	<script src="lib/hasher.min.js"></script>
-	<script src="lib/handlebars-v3.0.0.js"></script>	
-	
-	<!-- Miscellaneous Libraries -->
-	<script src="lib/topojson.v2.min.js"></script>
-	<script src="lib/bootstrap-multiselect.js"></script>
-	<script src="lib/jquery.noty.packaged.min.js"></script>
-	<script src="lib/tooltipster.bundle.min.js"></script>
-	<script src="lib/nprogress.min.js"></script>
-	<script src="lib/sankey.js"></script>
+    <!-- General Libraries -->
+    <script src="lib/jquery-3.2.1.min.js"></script>
+    <script src="lib/d3.min.js"></script>
+    <script src="lib/popper.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+    <script src="lib/leaflet.min.js"></script>
 
-	<!--<script src="build/lib.min.js"></script>-->
-		
-	<!-- Project Specific Files -->
-	<script src="js/utility.js"></script>
-	<script src="js/routing.js"></script>
-	<script src="js/app.js"></script>
-	<script src="js/components/force.js"></script>
-	<script src="js/pages/home.js"></script>
-	<script src="js/init.js"></script>
+    <!-- Routing Libraries -->
+    <script src="lib/signals.min.js"></script>
+    <script src="lib/crossroads.min.js"></script>
+    <script src="lib/hasher.min.js"></script>
+    <script src="lib/handlebars-v3.0.0.js"></script>
 
-	<!--<script src="build/bundle.min.js"></script>-->
-</body>
+    <!-- Miscellaneous Libraries -->
+    <script src="lib/topojson.v2.min.js"></script>
+    <script src="lib/bootstrap-multiselect.js"></script>
+    <script src="lib/jquery.noty.packaged.min.js"></script>
+    <script src="lib/tooltipster.bundle.min.js"></script>
+    <script src="lib/nprogress.min.js"></script>
+    <script src="lib/sankey.js"></script>
+
+    <!--<script src="build/lib.min.js"></script>-->
+
+    <!-- Project Specific Files -->
+    <script src="js/utility.js"></script>
+    <script src="js/routing.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/components/force.js"></script>
+    <script src="js/pages/home.js"></script>
+    <script src="js/init.js"></script>
+
+    <!--<script src="build/bundle.min.js"></script>-->
+  </body>
 </html>
