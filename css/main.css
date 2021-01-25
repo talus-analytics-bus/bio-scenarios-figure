@@ -1,65 +1,52 @@
 /* --- Borders --- */
-/* line 1, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/helpers/_classes.scss */
 .hidden {
   display: none;
 }
 
-/* line 2, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/helpers/_classes.scss */
 .left {
   text-align: left;
 }
 
-/* line 3, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/helpers/_classes.scss */
 .center {
   text-align: center;
 }
 
-/* line 4, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/helpers/_classes.scss */
 .right {
   text-align: right;
 }
 
-/* line 5, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/helpers/_classes.scss */
 .inline-block {
   display: inline-block;
 }
 
-/* line 6, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/helpers/_classes.scss */
 .margin-top-10 {
   margin-top: 10px;
 }
 
-/* line 7, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/helpers/_classes.scss */
 .margin-top-20 {
   margin-top: 20px;
 }
 
-/* line 8, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/helpers/_classes.scss */
 .margin-top-30 {
   margin-top: 30px;
 }
 
-/* line 9, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/helpers/_classes.scss */
 .margin-bottom-10 {
   margin-bottom: 10px;
 }
 
-/* line 10, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/helpers/_classes.scss */
 .margin-bottom-15 {
   margin-bottom: 15px;
 }
 
-/* line 11, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/helpers/_classes.scss */
 .no-border-bottom {
   border-bottom: none;
 }
 
-/* line 12, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/helpers/_classes.scss */
 .bold {
   font-weight: 600;
 }
 
-/* line 13, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/helpers/_classes.scss */
 .no-hover:hover {
   background-color: transparent;
 }
@@ -68,13 +55,11 @@
 /* --- Chart Colors --- */
 /* --- Talus Logo Colors --- */
 /* --- Block Link Content --- */
-/* line 2, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .block-link-container {
   float: left;
   width: 365px;
 }
 
-/* line 6, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .block-link-capabilities-header {
   position: relative;
   color: black;
@@ -110,7 +95,6 @@
   user-select: none;
 }
 
-/* line 20, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .block-link-capabilities-header.active {
   background-color: white;
   background: -webkit-gradient(linear, left top, left bottom, from(white), to(lightsteelblue));
@@ -123,14 +107,12 @@
   box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
-/* line 24, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .block-link-capabilities-header .chevron {
   top: 3px;
   width: 24px;
   height: 19px;
 }
 
-/* line 30, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .block-link {
   display: flex;
   justify-content: space-between;
@@ -171,17 +153,14 @@
   user-select: none;
 }
 
-/* line 49, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .block-link:first-child {
   border-top: 1px solid #999;
 }
 
-/* line 50, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .block-link.hidden {
   display: none;
 }
 
-/* line 51, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .block-link.active {
   font-weight: bold;
   background-color: white;
@@ -195,7 +174,6 @@
   box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
-/* line 57, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .block-link-cover {
   position: absolute;
   top: 0px;
@@ -214,7 +192,6 @@
   background-color: transparent;
 }
 
-/* line 65, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .block-link-cover:hover {
   background-color: rgba(0, 0, 0, 0.1);
   background: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.1)), to(transparent));
@@ -224,7 +201,6 @@
   background: -o-linear-gradient(left, rgba(0, 0, 0, 0.1), transparent);
 }
 
-/* line 69, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .block-link-title {
   display: inline-block;
   font-size: 1.1em;
@@ -232,7 +208,6 @@
   margin-right: 15px;
 }
 
-/* line 75, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .block-link-subtitle {
   margin-left: auto;
   font-size: 0.9rem;
@@ -243,12 +218,10 @@
 }
 
 /* --- Block Content --- */
-/* line 86, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .block-container {
   border-top: 1px solid #ccc;
 }
 
-/* line 87, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .block {
   position: relative;
   padding: 30px 30px 30px 0px;
@@ -259,42 +232,35 @@
   box-sizing: border-box;
 }
 
-/* line 94, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .block-content {
   margin-top: 5px;
 }
 
-/* line 95, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .block-description {
   margin: 20px 0px 0px 0px;
   max-width: 750px;
   text-align: left;
 }
 
-/* line 100, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .input-block-container {
   margin-left: 350px;
   padding-left: 75px;
   width: 90%;
 }
 
-/* line 104, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .input-block-container .block {
   padding-bottom: 70px;
   border-bottom: none;
 }
 
-/* line 107, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .input-block-container .block.no-reset {
   padding-bottom: 30px;
 }
 
-/* line 109, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_blocks.scss */
 .input-block-container .block-description {
   font-style: italic;
 }
 
-/* line 1, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_buttons.scss */
 .alt-btn {
   padding: 5px 15px;
   -webkit-border-radius: 7.5px;
@@ -305,7 +271,6 @@
   background-clip: padding-box;
 }
 
-/* line 5, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_buttons.scss */
 .alt-btn-large {
   padding: 10px 25px;
   -webkit-border-radius: 7.5px;
@@ -316,55 +281,46 @@
   background-clip: padding-box;
 }
 
-/* line 1, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_containers.scss */
 .container-content {
   padding: 30px 30px 30px;
 }
 
-/* line 4, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_containers.scss */
 .background-container {
   max-width: 1120px;
   padding: 0px 20px;
   margin: 0 auto;
 }
 
-/* line 9, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_containers.scss */
 .background-container h3 {
   margin-bottom: 15px;
   margin-top: 30px;
 }
 
-/* line 13, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_containers.scss */
 .background-container p,
 .background-container ul {
   width: 600px;
   font-size: 16px;
 }
 
-/* line 1, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_dropdowns.scss */
 select.form-control {
   display: inline-block;
   width: auto;
 }
 
-/* line 5, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_dropdowns.scss */
 .btn b.caret {
   margin-left: 3px;
 }
 
-/* line 7, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_dropdowns.scss */
 .dropdown-box {
   display: inline-block;
   width: 200px;
 }
 
-/* line 11, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_dropdowns.scss */
 .dropdown-label {
   margin-bottom: 3px;
   font-weight: 600;
 }
 
-/* line 15, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_dropdowns.scss */
 .dropdown-label-inline {
   display: inline-block;
   margin-right: 7px;
@@ -372,12 +328,10 @@ select.form-control {
 }
 
 /* --- Bootstrap Multiselect --- */
-/* line 23, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_dropdowns.scss */
 .multiselect-container > li > a.multiselect-all label {
   font-weight: 600;
 }
 
-/* line 3, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_footer.scss */
 .footer {
   margin-top: 80px;
   height: 90px;
@@ -389,53 +343,44 @@ select.form-control {
   border-top: 1px solid #303434;
 }
 
-/* line 12, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_footer.scss */
 .footer .content {
   display: flex;
   flex-direction: row;
 }
 
-/* line 15, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_footer.scss */
 .footer .content a {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* line 19, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_footer.scss */
 .footer .content a:not(:last-child) {
   border-right: 1px solid #303434;
 }
 
-/* line 23, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_footer.scss */
 .footer .content img {
   height: 40px;
   padding: 0px 40px;
 }
 
-@media screen and (max-width: 500px) {
-  /* line 3, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_footer.scss */
+@media screen and (max-width: 550px) {
   .footer {
     height: unset;
     margin-top: 40px;
     padding: 10px 0px;
   }
-  /* line 32, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_footer.scss */
   .footer .content {
     flex-direction: column;
   }
-  /* line 35, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_footer.scss */
   .footer .content a:not(:last-child) {
     border-right: 0px solid #303434;
   }
-  /* line 39, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_footer.scss */
   .footer .content img {
-    height: 30px;
+    height: 70px;
     padding: 10px 0px;
   }
 }
 
-/* line 1, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_maps.scss */
 .states,
 .counties {
   fill: none;
@@ -443,31 +388,26 @@ select.form-control {
   stroke-linejoin: round;
 }
 
-/* line 7, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_maps.scss */
 .state,
 .county {
   fill: #ccc;
 }
 
 /* --- Map Legends --- */
-/* line 16, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_maps.scss */
 .legend-text {
   text-anchor: middle;
 }
 
-/* line 19, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_maps.scss */
 .legend-title {
   font-size: 1.1em;
   text-anchor: middle;
 }
 
-/* line 1, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_navbar.scss */
 .navbar {
   width: 100%;
   border-bottom: 1px solid #303434;
 }
 
-/* line 4, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_navbar.scss */
 .navbar .wrapper {
   max-width: 1120px;
   height: 90px;
@@ -480,24 +420,20 @@ select.form-control {
   padding: 0px 20px;
 }
 
-/* line 14, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_navbar.scss */
 .navbar .wrapper .nav-logo-container {
   height: 50px;
 }
 
-/* line 17, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_navbar.scss */
 .navbar .wrapper .nav-logo {
   max-width: 100%;
   max-height: 100%;
 }
 
-/* line 21, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_navbar.scss */
 .navbar .wrapper .nav-links {
   display: flex;
   flex-direction: row;
 }
 
-/* line 24, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_navbar.scss */
 .navbar .wrapper .nav-links > a {
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
@@ -506,77 +442,64 @@ select.form-control {
   text-decoration: none;
 }
 
-/* line 30, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_navbar.scss */
 .navbar .wrapper .nav-links > a:not(:last-child) {
   margin-right: 30px;
 }
 
-/* line 33, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_navbar.scss */
 .navbar .wrapper .nav-links > a:hover {
   color: #009bdf;
 }
 
-/* line 36, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_navbar.scss */
 .navbar .wrapper .nav-links > a .active {
   font-weight: bold;
 }
 
-/* line 2, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_sankey.scss */
 .sankey-chart .link {
   fill: none;
   stroke: black;
   stroke-opacity: 0.2;
 }
 
-/* line 7, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_sankey.scss */
 .sankey-chart .node {
   stroke: black;
 }
 
-/* line 10, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_sankey.scss */
 .sankey-chart .node-label {
   text-anchor: end;
 }
 
-/* line 1, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_sections.scss */
 .section {
   margin-bottom: 30px;
 }
 
-/* line 4, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_sections.scss */
 .section:nth-child(n+2) {
   border-top: 1px solid #ccc;
   padding-top: 10px;
 }
 
-/* line 2, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_sliders.scss */
 .slider .track,
 .slider .track-inset,
 .slider .track-overlay {
   stroke-linecap: round;
 }
 
-/* line 7, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_sliders.scss */
 .slider .track {
   stroke: #000;
   stroke-opacity: 0.3;
   stroke-width: 10px;
 }
 
-/* line 12, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_sliders.scss */
 .slider .track-inset {
   stroke: #ddd;
   stroke-width: 8px;
 }
 
-/* line 16, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_sliders.scss */
 .slider .track-overlay {
   pointer-events: stroke;
   stroke-width: 50px;
   cursor: pointer;
 }
 
-/* line 21, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_sliders.scss */
 .slider .handle {
   fill: #fff;
   stroke: #000;
@@ -584,18 +507,15 @@ select.form-control {
   stroke-width: 1.25px;
 }
 
-/* line 27, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_sliders.scss */
 .slider .ticks line {
   stroke: #333;
 }
 
-/* line 30, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_sliders.scss */
 .slider .ticks text {
   font-size: 0.95em;
   text-anchor: middle;
 }
 
-/* line 1, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_tabs.scss */
 .tab {
   display: inline-block;
   padding: 10px 20px 7.5px 20px;
@@ -621,7 +541,6 @@ select.form-control {
   background: -o-linear-gradient(top, white, #f9f9f9);
 }
 
-/* line 12, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_tabs.scss */
 .tab:hover {
   border-color: #adadad;
   background-color: #e6e6e6;
@@ -632,7 +551,6 @@ select.form-control {
   background: -o-linear-gradient(top, #e6e6e6, #eee);
 }
 
-/* line 16, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_tabs.scss */
 .tab.active {
   background-color: #e9e9e9;
   background: -webkit-gradient(linear, left top, left bottom, from(#e9e9e9), to(#f0f0f0));
@@ -645,126 +563,104 @@ select.form-control {
   box-shadow: inset 0 3.5px 5px rgba(0, 0, 0, 0.125);
 }
 
-/* line 20, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_tabs.scss */
 .tab-content-container {
   border: 1px solid #ccc;
   padding: 15px 25px;
 }
 
-/* line 24, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_tabs.scss */
 .tab-content {
   display: none;
 }
 
-/* line 1, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_tables.scss */
 .table {
   width: auto;
 }
 
-/* line 3, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_tables.scss */
 .table td:nth-child(n+2) {
   padding-left: 25px;
 }
 
-/* line 7, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_tables.scss */
 .table thead td {
   font-weight: 600;
   padding: 5px;
 }
 
-/* line 1, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_text.scss */
 h2 {
   font-weight: 600;
 }
 
-/* line 4, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_text.scss */
 h3 {
   font-weight: 600;
 }
 
-/* line 7, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_text.scss */
 b {
   font-weight: 600;
 }
 
-/* line 10, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_text.scss */
 light {
   font-weight: 300;
 }
 
-/* line 13, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_text.scss */
 .description {
   margin-top: 20px;
   width: 600px;
 }
 
-/* line 17, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_text.scss */
 .instructions {
   font-style: italic;
   max-width: 600px;
   margin-top: 20px;
 }
 
-/* line 1, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_tooltips.scss */
 .tooltip-title {
   font-size: 1.6em;
   margin-top: 8px;
 }
 
-/* line 5, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_tooltips.scss */
 .tooltip-subtitle {
   font-size: 1.1em;
   margin-top: 8px;
 }
 
-/* line 9, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_tooltips.scss */
 .tooltip-content {
   margin-top: 30px;
 }
 
-/* line 11, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_tooltips.scss */
 .tooltip-content .col-sm-6 {
   margin-left: 0;
   margin-right: 0;
 }
 
-/* line 16, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_tooltips.scss */
 .tooltip-big-number {
   font-size: 2.4em;
   font-weight: 600;
   text-align: center;
 }
 
-/* line 21, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_tooltips.scss */
 .tooltip-big-number-text {
   text-align: center;
   margin-top: 15px;
   margin-bottom: 5px;
 }
 
-/* line 26, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_tooltips.scss */
 .go-to-layer-btn {
   margin-top: 20px;
   margin-bottom: 10px;
 }
 
 /* --- Popup --- */
-/* line 34, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_tooltips.scss */
 .popup-content .tooltip-subtitle {
   margin-top: 2px;
 }
 
-/* line 37, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_tooltips.scss */
 .popup-content .tooltip-content {
   margin-top: 10px;
 }
 
-/* line 40, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/components/_tooltips.scss */
 .popup-content .tooltip-big-number-text {
   margin-top: -2px;
 }
 
-/* line 1, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .home-background {
   width: 100%;
   background-image: url("../img/boulder.jpg");
@@ -774,7 +670,6 @@ light {
   background-size: cover;
 }
 
-/* line 9, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .home-container {
   text-align: left;
   width: 100%;
@@ -782,7 +677,6 @@ light {
   padding: 10px 50px 20px;
 }
 
-/* line 14, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .home-container img {
   position: relative;
   top: -1px;
@@ -792,34 +686,28 @@ light {
   transition: transform 1s;
 }
 
-/* line 22, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .home-container img.rotated {
   transform: rotate(180deg);
 }
 
 /* --- Text Part --- */
-/* line 28, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .text-container {
   display: inline-block;
   text-align: left;
 }
 
-/* line 32, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .description {
   margin-top: 15px;
 }
 
-/* line 34, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .description p {
   margin-top: 15px;
 }
 
-/* line 38, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .extra-description {
   display: none;
 }
 
-/* line 41, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .show-more-description-button {
   margin: 20px -10px 0;
   padding: 1px 0;
@@ -829,13 +717,11 @@ light {
   cursor: pointer;
 }
 
-/* line 49, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .show-more-description-button:hover {
   background-color: #f0f0f0;
 }
 
 /* --- Figure Part --- */
-/* line 56, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .figure-container {
   position: relative;
   height: 902px;
@@ -844,19 +730,16 @@ light {
   transition: height 0.8s;
 }
 
-/* line 63, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .left-column {
   float: left;
   width: 800px;
 }
 
-/* line 67, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .right-column {
   float: right;
   width: 200px;
 }
 
-/* line 71, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .figure-content {
   position: relative;
   top: -10px;
@@ -871,14 +754,12 @@ light {
   background: -o-linear-gradient(top, #fff, #e0e0e0);
 }
 
-/* line 79, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .figure-content .network-map {
   position: relative;
   left: 32px;
   z-index: 1000;
 }
 
-/* line 84, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .figure-content .shuffle-button {
   position: absolute;
   top: 15px;
@@ -886,7 +767,6 @@ light {
   z-index: 10000;
 }
 
-/* line 91, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .filters-container {
   position: relative;
   height: 900px;
@@ -902,73 +782,60 @@ light {
   background: -o-linear-gradient(top, #f0f0f0, #e0e0e0);
 }
 
-/* line 100, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .filters-container .dropdown-row:nth-child(n + 2) {
   margin-top: 0;
 }
 
-/* line 103, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .filters-container .dropdown-row.extra-dropdown-row {
   display: none;
   margin-top: 0;
 }
 
-/* line 107, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .filters-container .dropdown-box {
   margin: 10px 0;
   width: auto;
 }
 
-/* line 111, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .filters-container .reset-filters-button {
   margin-top: 20px;
 }
 
-/* line 114, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .filters-container .show-more-filters-button {
   margin-top: 5px;
 }
 
-/* line 117, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .filters-container .hide-more-filters-button {
   margin-top: 5px;
   display: none;
 }
 
-/* line 124, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .figure-container.expanded {
   height: 1082px;
 }
 
-/* line 126, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .figure-container.expanded .figure-content {
   height: 1080px;
 }
 
-/* line 129, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .figure-container.expanded .filters-container {
   height: 1080px;
 }
 
 /* --- Chart Stuff --- */
-/* line 135, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .node {
   fill: steelblue;
 }
 
-/* line 138, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .node.node--root {
   fill: none;
 }
 
-/* line 141, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .link {
   display: none;
   stroke: #555;
   stroke-width: 1px;
 }
 
-/* line 146, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .arc {
   stroke: rgba(255, 255, 255, 0.5);
   -webkit-opacity: 0.9;
@@ -976,7 +843,6 @@ light {
   opacity: 0.9;
 }
 
-/* line 149, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .arc:hover {
   stroke: white;
   -webkit-opacity: 1;
@@ -984,38 +850,32 @@ light {
   opacity: 1;
 }
 
-/* line 154, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .ribbon {
   -webkit-opacity: 0.3;
   -moz-opacity: 0.3;
   opacity: 0.3;
 }
 
-/* line 157, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .ribbon:hover, .ribbon.active {
   -webkit-opacity: 0.5;
   -moz-opacity: 0.5;
   opacity: 0.5;
 }
 
-/* line 162, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .tooltipster-content {
   font-size: 1em !important;
 }
 
-/* line 165, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .tooltip-title {
   font-size: 1.1em;
   font-weight: 600;
   margin-bottom: 10px;
 }
 
-/* line 170, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .tooltip-line {
   margin: 2px 0 0 15px;
 }
 
-/* line 173, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .arc-label {
   text-anchor: middle;
   font-weight: 600;
@@ -1023,21 +883,18 @@ light {
   /*fill: white;*/
 }
 
-/* line 179, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .legend-text {
   text-anchor: middle;
   font-weight: 600;
   font-size: 1.1em;
 }
 
-/* line 184, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .no-scenario-text {
   display: none;
   font-size: 1.3em;
   font-style: italic;
 }
 
-/* line 189, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .disclaimer {
   font-size: 1.1em;
   font-style: italic;
@@ -1046,19 +903,16 @@ light {
   text-align: center;
 }
 
-/* line 196, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/pages/_home.scss */
 .network-map-legend circle {
   -webkit-opacity: 0.8;
   -moz-opacity: 0.8;
   opacity: 0.8;
 }
 
-/* line 23, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/main.scss */
 body {
   font-family: "Open Sans", sans-serif;
 }
 
-/* line 25, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/main.scss */
 body p,
 body h1,
 body h2,
@@ -1070,25 +924,19 @@ body div {
   color: #303434;
 }
 
-/* line 35, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/main.scss */
 body p {
   max-width: 600px;
   font-size: 16px;
 }
 
-/* line 39, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/main.scss */
 body h3 {
   font-family: "Raleway", sans-serif;
 }
 
-/* line 43, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/main.scss */
 #page-content {
   min-height: 100px;
 }
 
-/* line 46, ../../../../../../../../../../../../../Users/natebennett/Documents/Talus/Code/IDEA/Bioscenarios/bio-scenarios-figure/sass/main.scss */
 .navbar {
   margin-bottom: 0;
 }
-
-/*# sourceMappingURL=main.css.map */
