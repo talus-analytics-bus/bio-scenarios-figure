@@ -1,9 +1,18 @@
 .container-content {
-	padding: 10px 30px 30px;
+  padding: 30px 30px 30px;
 }
-.container-text {
-	max-width: 950px;
-	padding: 10px 50px 30px;
-	border-left: $light-border;
-	border-right: $light-border;
+.background-container {
+  max-width: 1120px;
+  padding: 0px 20px;
+  margin: 0 auto;
+
+  h3 {
+    margin-bottom: 15px;
+    margin-top: 30px;
+  }
+  p,
+  ul {
+    width: 600px;
+    font-size: 16px;
+  }
 }

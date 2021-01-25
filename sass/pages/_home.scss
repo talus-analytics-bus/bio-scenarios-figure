@@ -1,197 +1,198 @@
 .home-background {
-	width: 100%;
-	background-image: url('../img/boulder.jpg');
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-position: 0 60%;
-	background-size: cover;
+  width: 100%;
+  background-image: url("../img/boulder.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 0 60%;
+  background-size: cover;
 }
 .home-container {
-	border-left: $light-border;
-	border-right: $light-border;
-	text-align: left;
-	width: 100%;
-	max-width: 1150px;
-	padding: 10px 50px 20px;
-	img {
-		position: relative;
-		top: -1px;
-		width: 10px;
-		height: 8px;
-		margin: 0 10px;
-		transition: transform 1s;
-	}
-	img.rotated {
-		transform: rotate(180deg);
-	}
+  text-align: left;
+  width: 100%;
+  max-width: 1150px;
+  padding: 10px 50px 20px;
+  img {
+    position: relative;
+    top: -1px;
+    width: 10px;
+    height: 8px;
+    margin: 0 10px;
+    transition: transform 1s;
+  }
+  img.rotated {
+    transform: rotate(180deg);
+  }
 }
-
 
 /* --- Text Part --- */
 .text-container {
-	display: inline-block;
-	text-align: left;
+  display: inline-block;
+  text-align: left;
 }
 .description {
-	margin-top: 15px;
-	p { margin-top: 15px; }
+  margin-top: 15px;
+  p {
+    margin-top: 15px;
+  }
 }
 .extra-description {
-	display: none;
+  display: none;
 }
 .show-more-description-button {
-	margin: 20px -10px 0;
-	padding: 1px 0;
-	border: $light-border;
-	background-color: #f9f9f9;
-	text-align: center;
-	cursor: pointer;
+  margin: 20px -10px 0;
+  padding: 1px 0;
+  border: $light-border;
+  background-color: #f9f9f9;
+  text-align: center;
+  cursor: pointer;
 
-	&:hover {
-		background-color: #f0f0f0;
-	}
+  &:hover {
+    background-color: #f0f0f0;
+  }
 }
-
 
 /* --- Figure Part --- */
 $height: 900px;
 .figure-container {
-	position: relative;
-	height: $height + 2;
-	margin: 20px 0;
-	border: $border;
-	transition: height 0.8s;
+  position: relative;
+  height: $height + 2;
+  margin: 20px 0;
+  border: $border;
+  transition: height 0.8s;
 }
 .left-column {
-	float: left;
-	width: 800px;
+  float: left;
+  width: 800px;
 }
 .right-column {
-	float: right;
-	width: 200px;
+  float: right;
+  width: 200px;
 }
 .figure-content {
-	position: relative;
-	top: -10px;
-	height: $height;
-	padding-left: 20px;
-	transition: height 0.8s;
-	@include gradient(#fff, #e0e0e0);
+  position: relative;
+  top: -10px;
+  height: $height;
+  padding-left: 20px;
+  transition: height 0.8s;
+  @include gradient(#fff, #e0e0e0);
 
-	.network-map {
-		position: relative;
-		left: 32px;
-		z-index: 1000;
-	}
-	.shuffle-button {
-		position: absolute;
-		top: 15px;
-		right: 215px;
-		z-index: 10000;
-	}
+  .network-map {
+    position: relative;
+    left: 32px;
+    z-index: 1000;
+  }
+  .shuffle-button {
+    position: absolute;
+    top: 15px;
+    right: 215px;
+    z-index: 10000;
+  }
 }
 .filters-container {
-	position: relative;
-	height: $height;
-	transition: height 0.8s;
-	padding: 10px 20px;
-	border-left: $border;
-	z-index: 10000;
-	@include gradient(#f0f0f0, #e0e0e0);
+  position: relative;
+  height: $height;
+  transition: height 0.8s;
+  padding: 10px 20px;
+  border-left: $border;
+  z-index: 10000;
+  @include gradient(#f0f0f0, #e0e0e0);
 
-	.dropdown-row:nth-child(n+2) {
-		margin-top: 0;
-	}
-	.dropdown-row.extra-dropdown-row {
-		display: none;
-		margin-top: 0;
-	}
-	.dropdown-box {
-		margin: 10px 0;
-		width: auto;
-	}
-	.reset-filters-button {
-		margin-top: 20px;
-	}
-	.show-more-filters-button {
-		margin-top: 5px;
-	}
-	.hide-more-filters-button {
-		margin-top: 5px;
-		display: none;
-	}
+  .dropdown-row:nth-child(n + 2) {
+    margin-top: 0;
+  }
+  .dropdown-row.extra-dropdown-row {
+    display: none;
+    margin-top: 0;
+  }
+  .dropdown-box {
+    margin: 10px 0;
+    width: auto;
+  }
+  .reset-filters-button {
+    margin-top: 20px;
+  }
+  .show-more-filters-button {
+    margin-top: 5px;
+  }
+  .hide-more-filters-button {
+    margin-top: 5px;
+    display: none;
+  }
 }
 
 $offset: 180;
 .figure-container.expanded {
-	height: $height + 2 + $offset;
-	.figure-content { height: $height + $offset; }
-	.filters-container { height: $height + $offset; }
+  height: $height + 2 + $offset;
+  .figure-content {
+    height: $height + $offset;
+  }
+  .filters-container {
+    height: $height + $offset;
+  }
 }
-
 
 /* --- Chart Stuff --- */
 .node {
-	fill: steelblue;
+  fill: steelblue;
 }
 .node.node--root {
-	fill: none;
+  fill: none;
 }
 .link {
-	display: none;
+  display: none;
   stroke: #555;
   stroke-width: 1px;
 }
 .arc {
-	stroke: rgba(255,255,255,0.5);
-	@include opacity(0.9);
-	&:hover {
-		stroke: rgba(255,255,255,1);
-		@include opacity(1);
-	}
+  stroke: rgba(255, 255, 255, 0.5);
+  @include opacity(0.9);
+  &:hover {
+    stroke: rgba(255, 255, 255, 1);
+    @include opacity(1);
+  }
 }
 .ribbon {
-	@include opacity(0.3);
+  @include opacity(0.3);
 
-	&:hover,
-	&.active {
-		@include opacity(0.5);
-	}
+  &:hover,
+  &.active {
+    @include opacity(0.5);
+  }
 }
 .tooltipster-content {
-	font-size: 1em !important;
+  font-size: 1em !important;
 }
 .tooltip-title {
-	font-size: 1.1em;
-	font-weight: 600;
-	margin-bottom: 10px;
+  font-size: 1.1em;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 .tooltip-line {
-	margin: 2px 0 0 15px;
+  margin: 2px 0 0 15px;
 }
 .arc-label {
-	text-anchor: middle;
-	font-weight: 600;
-	font-size: 1.2em;
-	/*fill: white;*/
+  text-anchor: middle;
+  font-weight: 600;
+  font-size: 1.2em;
+  /*fill: white;*/
 }
 .legend-text {
-	text-anchor: middle;
-	font-weight: 600;
-	font-size: 1.1em;
+  text-anchor: middle;
+  font-weight: 600;
+  font-size: 1.1em;
 }
 .no-scenario-text {
-	display: none;
-	font-size: 1.3em;
-	font-style: italic;
+  display: none;
+  font-size: 1.3em;
+  font-style: italic;
 }
 .disclaimer {
-	font-size: 1.1em;
-	font-style: italic;
-	font-weight: 600;
-	margin-top: 10px;
-	text-align: center;
+  font-size: 1.1em;
+  font-style: italic;
+  font-weight: 600;
+  margin-top: 10px;
+  text-align: center;
 }
 .network-map-legend circle {
-	@include opacity(0.8);
+  @include opacity(0.8);
 }
