@@ -35,9 +35,21 @@ body {
   p {
     max-width: 600px;
     font-size: 16px;
+    &.justified {
+      text-align: justify;
+    }
   }
   h3 {
     font-family: "Raleway", sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+  }
+  h4 {
+    font-family: "Raleway", sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom: 20px;
   }
 }
 #page-content {
@@ -45,4 +57,10 @@ body {
 }
 .navbar {
   margin-bottom: 0;
+}
+
+.citation {
+  font-style: italic;
+  margin-left: 40px;
+  max-width: 560px;
 }
