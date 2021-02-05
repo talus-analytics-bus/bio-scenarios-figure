@@ -361,6 +361,10 @@ select.form-control {
   border-right: 1px solid #303434;
 }
 
+.footer .content a:nth-child(2) img {
+  height: 50px;
+}
+
 .footer .content img {
   height: 40px;
   padding: 0px 40px;
