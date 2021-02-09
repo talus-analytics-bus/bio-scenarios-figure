@@ -365,6 +365,32 @@ select.form-control {
   height: 50px;
 }
 
+.footer .content a.talus-logo {
+  position: relative;
+}
+
+.footer .content a.talus-logo .built-by {
+  font-family: "Raleway", sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  color: #404041;
+  position: absolute;
+  left: 40px;
+  top: 0px;
+}
+
+@media (max-width: 650px) {
+  .footer .content a.talus-logo .built-by {
+    left: 15%;
+  }
+}
+
+@media (max-width: 500px) {
+  .footer .content a.talus-logo .built-by {
+    display: none;
+  }
+}
+
 .footer .content img {
   height: 40px;
   padding: 0px 40px;
@@ -381,6 +407,9 @@ select.form-control {
   }
   .footer .content a:not(:last-child) {
     border-right: 0px solid #303434;
+  }
+  .footer .content a:nth-child(2) img {
+    height: 70px;
   }
   .footer .content img {
     height: 70px;
