@@ -82,7 +82,7 @@
             alt="Georgetown University Center for Global Health Science and Security"
         /></a>
         <a target="_blank" href="http://talusanalytics.com/" class="talus-logo">
-          <img src="img/logo-talus.png" alt="Talus Analytics, LLC"/>
+          <img src="img/logo-talus.png" alt="Talus Analytics, LLC" />
           <div class="built-by">Built by</div>
         </a>
       </div>
@@ -98,10 +98,21 @@
             </h3>
             <div class="description">
               <p class="justified">
-                Preparing for and responding to biological events is complicated by the fact that no two events are the same. To demonstrate this complexity, we generated a series of approximately 22 million notional events based on 12 major dimensions across which events vary (see Background for additional details).
+                Preparing for and responding to biological events is complicated
+                by the fact that no two events are the same. To demonstrate this
+                complexity, we generated a series of approximately 22 million
+                notional events based on 12 major dimensions across which events
+                vary (see Background for additional details).
               </p>
               <p class="justified">
-                A randomized selection of 50 biological event scenarios is shown below. Each event is represented by a circular node sized in proportion to event fatality number and colored by relative effects to animal and human health. Hover over a scenario to view connections to event characteristics in the outer circle. To filter for events with specific characteristics, click the corresponding section on the outer circle or use dropdown menus below the figure.
+                A randomized selection of 50 biological event scenarios is shown
+                below. Each event is represented by a circular node sized in
+                proportion to event fatality number and colored by relative
+                effects to animal and human health. Hover over a scenario to
+                view connections to event characteristics in the outer circle.
+                To filter for events with specific characteristics, click the
+                corresponding section on the outer circle or use dropdown menus
+                below the figure.
               </p>
             </div>
           </div>
@@ -144,115 +155,168 @@
     <script id="background-template" type="text/x-handlebars-template">
       <div class="background-container">
         <div>
-        <h3>
-          Background
-        </h3>
-        <h4>
-          Project overview
-        </h4>
-        <p>
-          We developed a framework to categorize biological events based on the event characteristics that drive planning and response decision making. These 12 dimensions include:
-        </p>
-        <ul>
-          <li>
-            <b>
-              event origin
-            </b>
-            (natural, accidental, or deliberate)
-          </li>
-          <li>
-            <b>
-              type
-            </b>
-            (animal, human, or zoonotic disease)
-          </li>
-          <li>
-            <b>
-              spread modality
-            </b>
-            (communicable or non-communicable)
-          </li>
-          <li>
-            <b>
-              route of transmission
-            </b>
-            (airborne, bloodborne, waterborne, foodborne, or vector-borne)
-          </li>
-          <li>
-            <b>
-              diagnostics
-            </b>
-            (point of care, BSL1, BSL2, BSL3, BSL4)
-          </li>
-          <li>
-            <b>
-              medical countermeasures
-            </b>
-            (antivirals, antibiotics, vaccine, post-exposure prophylaxis, or none)
-          </li>
-          <li>
-            <b>
-              outbreak location
-            </b>
-            (accessible to international community or not and whether conditions are non-permissive due to conflict or other instability)
-          </li>
-          <li>
-            <b>
-              affected populations
-            </b>
-            (all, pregnant women, children, elderly, or targeted attack)
-          </li>
-          <li>
-            <b>
-              personal protective equipment applicable
-            </b>
-            (respirator, containment suit, or mask/gloves/gown)
-          </li>
-          <li>
-            <b>
-              morbidity rate
-            </b>
-            (graded at 5 levels from very low to very high)
-          </li>
-          <li>
-            <b>
-              response level
-            </b>
-            (local, intermediate, national, regional, or global)
-          </li>
-          <li>
-            <b>
-              policy measures in place
-            </b>
-            (national, international, or none)
-          </li>
-        </ul>
-        <p class="margin-top-20">
-          Using this framework, we generated a series of random combinations to demonstrate the complex range of scenarios possible for biological events. We then removed non-rational combinations, such as excluding targeted attack for a natural outbreak, excluding respirator as required personal protective equipment for foodborne events, and ensuring that vector-borne diseases are only communicable spread modality. After removing implausible combinations, the final set of notional events was approximately 22 million. We selected a subset of 7 major event characteristics and developed this interactive visualization to illustrate the range of possible event combinations.
-        </p>
-        <p class="margin-top-20">
-          Finally, we tagged each event with a series of relevant stakeholders based on the origin of the event. Stakeholders in logistics and the public health and medical communities were included for all events. Law enforcement was included as a stakeholder for all accidental and deliberate events. In addition, all intentional events were tagged with security/military stakeholders as were a random subset of natural events (20%), reflecting that these groups respond to some naturally occurring outbreaks as well. Stakeholders in Trade (imports and exports) were included for a subset of all events, but concentrated in the events with primary impacts to animal health (to reflect agricultural trade).
-        </p>
-        <h4>
-          Citation and data use
-        </h4>
-        <p>A peer-reviewed paper describing this project is available <a href="https://www.thelancet.com/journals/langlo/article/PIIS2214-109X(17)30494-1/supplemental" target="_blank">here</a>, with the following suggested citation:</p>
-        <p class="citation margin-top-20">Katz R, Graeden E, Kerr J. (2018). The complexity of biological events. The Lancet Global Health. 6-2: 136-137. DOI: 10.1016/S2214-109X(17)30494-1.</p>
-        <p class="margin-top-20">
-          The Georgetown University Center for Global Health Science and Security, working with Talus Analytics, has created and maintains this site for use by researchers, decision-makers and other interested parties. We encourage you to use the data from this site. If you do, though, please use the following citation:
-        </p>
-        <p class="citation margin-top-20">
-          Georgetown University Center for Global Health Science & Security. Georgetown Bioscenarios. Washington, DC: Georgetown University. Available at https://bioscenarios.talusanalytics.com/        </p>
-        <p class="margin-top-20">
-          We ask that you let us know if you publish anything using data from this site, so we can link to it. Contact us at <a href="mailto:outbreaks@georgetown.edu" target="_blank">outbreaks@georgetown.edu</a>.
-        </p>
-        <p class="margin-top-20">
-          This tool and the underlying dataset are available for use under the Creative Commons Attribution By License agreement 
-          (<a
-            href="https://creativecommons.org/licenses/by/4.0/"
-            target="_blank"
-          >https://creativecommons.org/licenses/by/4.0/</a>), with appropriate reference and acknowledgement of the original research team.
-        </p>
+          <h3>
+            Background
+          </h3>
+          <div class="accessibility">
+            <p>
+              If you have any accessibility issues using this site, please
+              contact us directly at
+              <a
+                href="mailto:accessibility@talusanalytics.com"
+              >accessibility@talusanalytics.com</a>.
+            </p>
+          </div>
+          <h4>
+            Project overview
+          </h4>
+          <p>
+            We developed a framework to categorize biological events based on
+            the event characteristics that drive planning and response decision
+            making. These 12 dimensions include:
+          </p>
+          <ul>
+            <li>
+              <b>
+                event origin
+              </b>
+              (natural, accidental, or deliberate)
+            </li>
+            <li>
+              <b>
+                type
+              </b>
+              (animal, human, or zoonotic disease)
+            </li>
+            <li>
+              <b>
+                spread modality
+              </b>
+              (communicable or non-communicable)
+            </li>
+            <li>
+              <b>
+                route of transmission
+              </b>
+              (airborne, bloodborne, waterborne, foodborne, or vector-borne)
+            </li>
+            <li>
+              <b>
+                diagnostics
+              </b>
+              (point of care, BSL1, BSL2, BSL3, BSL4)
+            </li>
+            <li>
+              <b>
+                medical countermeasures
+              </b>
+              (antivirals, antibiotics, vaccine, post-exposure prophylaxis, or
+              none)
+            </li>
+            <li>
+              <b>
+                outbreak location
+              </b>
+              (accessible to international community or not and whether
+              conditions are non-permissive due to conflict or other
+              instability)
+            </li>
+            <li>
+              <b>
+                affected populations
+              </b>
+              (all, pregnant women, children, elderly, or targeted attack)
+            </li>
+            <li>
+              <b>
+                personal protective equipment applicable
+              </b>
+              (respirator, containment suit, or mask/gloves/gown)
+            </li>
+            <li>
+              <b>
+                morbidity rate
+              </b>
+              (graded at 5 levels from very low to very high)
+            </li>
+            <li>
+              <b>
+                response level
+              </b>
+              (local, intermediate, national, regional, or global)
+            </li>
+            <li>
+              <b>
+                policy measures in place
+              </b>
+              (national, international, or none)
+            </li>
+          </ul>
+          <p class="margin-top-20">
+            Using this framework, we generated a series of random combinations
+            to demonstrate the complex range of scenarios possible for
+            biological events. We then removed non-rational combinations, such
+            as excluding targeted attack for a natural outbreak, excluding
+            respirator as required personal protective equipment for foodborne
+            events, and ensuring that vector-borne diseases are only
+            communicable spread modality. After removing implausible
+            combinations, the final set of notional events was approximately 22
+            million. We selected a subset of 7 major event characteristics and
+            developed this interactive visualization to illustrate the range of
+            possible event combinations.
+          </p>
+          <p class="margin-top-20">
+            Finally, we tagged each event with a series of relevant stakeholders
+            based on the origin of the event. Stakeholders in logistics and the
+            public health and medical communities were included for all events.
+            Law enforcement was included as a stakeholder for all accidental and
+            deliberate events. In addition, all intentional events were tagged
+            with security/military stakeholders as were a random subset of
+            natural events (20%), reflecting that these groups respond to some
+            naturally occurring outbreaks as well. Stakeholders in Trade
+            (imports and exports) were included for a subset of all events, but
+            concentrated in the events with primary impacts to animal health (to
+            reflect agricultural trade).
+          </p>
+          <h4>
+            Citation and data use
+          </h4>
+          <p>A peer-reviewed paper describing this project is available
+            <a
+              href="https://www.thelancet.com/journals/langlo/article/PIIS2214-109X(17)30494-1/supplemental"
+              target="_blank"
+            >here</a>, with the following suggested citation:</p>
+          <p class="citation margin-top-20">Katz R, Graeden E, Kerr J. (2018).
+            The complexity of biological events. The Lancet Global Health. 6-2:
+            136-137. DOI: 10.1016/S2214-109X(17)30494-1.</p>
+          <p class="margin-top-20">
+            The Georgetown University Center for Global Health Science and
+            Security, working with Talus Analytics, has created and maintains
+            this site for use by researchers, decision-makers and other
+            interested parties. We encourage you to use the data from this site.
+            If you do, though, please use the following citation:
+          </p>
+          <p class="citation margin-top-20">
+            Georgetown University Center for Global Health Science & Security.
+            Georgetown Bioscenarios. Washington, DC: Georgetown University.
+            Available at https://bioscenarios.talusanalytics.com/
+          </p>
+          <p class="margin-top-20">
+            We ask that you let us know if you publish anything using data from
+            this site, so we can link to it. Contact us at
+            <a
+              href="mailto:outbreaks@georgetown.edu"
+              target="_blank"
+            >outbreaks@georgetown.edu</a>.
+          </p>
+          <p class="margin-top-20">
+            This tool and the underlying dataset are available for use under the
+            Creative Commons Attribution By License agreement (<a
+              href="https://creativecommons.org/licenses/by/4.0/"
+              target="_blank"
+            >https://creativecommons.org/licenses/by/4.0/</a>), with appropriate
+            reference and acknowledgement of the original research team.
+          </p>
         </div>
       </div>
     </script>
